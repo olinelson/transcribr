@@ -7,8 +7,23 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 // components
 import NavBar from './components/NavBar'
+import Player from './components/Player'
 
 class App extends Component {
+  state = {
+    podcasts: [],
+    episodes: [],
+
+  }
+
+  componentDidMount() {
+    fetch("")
+  }
+
+
+
+
+
   render() {
     return (
       <Router>
@@ -22,7 +37,12 @@ class App extends Component {
     );
   }
    Home() {
-  return <h2>Home</h2>;
+  return (
+    <div className="home-container">
+      <h2>Home</h2>
+      <Player/>
+    </div>
+  )
 }
 
 
