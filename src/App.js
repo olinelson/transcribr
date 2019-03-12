@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 // react router
@@ -17,7 +16,11 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch("")
+    fetch("http://localhost:3000/api/v1/episodes")
+    .then( r => r.json())
+   
+    .then(r => this.setState({episodes: r}))
+    
   }
 
 
@@ -25,6 +28,7 @@ class App extends Component {
 
 
   render() {
+    console.log(this.state)
     return (
       <Router>
         <div>
@@ -36,11 +40,17 @@ class App extends Component {
       </Router>
     );
   }
-   Home() {
+
+
+   Home = () => {
   return (
     <div className="home-container">
       <h2>Home</h2>
-      <Player/>
+      {this.state.episodes.length > 0 ? 
+        <Player episode={this.state.episodes[0]} />
+        : "loading"
+      }
+      
     </div>
   )
 }
