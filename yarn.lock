@@ -7731,7 +7731,7 @@ prompts@^0.1.9:
     kleur "^2.0.1"
     sisteransi "^0.1.1"
 
-prop-types@^15.6.1, prop-types@^15.6.2:
+prop-types@^15.5.8, prop-types@^15.6.1, prop-types@^15.6.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -7913,6 +7913,13 @@ react-app-polyfill@^0.2.2:
     promise "8.0.2"
     raf "3.4.1"
     whatwg-fetch "3.0.0"
+
+react-audio-player@^0.11.0:
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/react-audio-player/-/react-audio-player-0.11.0.tgz#6bf84b74dcb073936fb8f1bf9781e2535b0bcf05"
+  integrity sha512-SSQEvgUXYCdf11mjC75st1VFW8/3IKXKjbse41AiUON2KrNu9w7VvlejfUwoE3W96zXRw/J/9QbsIpKAv5O0/A==
+  dependencies:
+    prop-types "^15.5.8"
 
 react-dev-utils@^8.0.0:
   version "8.0.0"
@@ -9612,6 +9619,11 @@ uuid@^3.0.1, uuid@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.2.tgz#1b4af4955eb3077c501c23872fc6513811587131"
   integrity sha512-yXJmeNaw3DnnKAOKJE51sL/ZaYfWJRl1pK9dr19YFCu0ObS231AB1/LbqTKRAQ5kw8A90rA6fr4riOUpTZvQZA==
+
+uuidv1@^1.6.14:
+  version "1.6.14"
+  resolved "https://registry.yarnpkg.com/uuidv1/-/uuidv1-1.6.14.tgz#cbd3b6f5e3d0348a2635911ecfd04484a91b851d"
+  integrity sha512-34FVVCDDHzzcOglmrKbZP99+8/6StEzo3VU3MuKw0Mo0B/YBQ1bWNQU8s79ofNnrPlfI+7A9pkAdhmQ6CyLHFg==
 
 validate-npm-package-license@^3.0.1:
   version "3.0.4"
