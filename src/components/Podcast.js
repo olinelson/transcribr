@@ -1,31 +1,29 @@
-import React, { Component, Fragment } from 'react'
+import React, { Fragment } from 'react'
 import Episode from "./Episode"
 import ReactAudioPlayer from 'react-audio-player';
 
+const uuidv1 = require('uuid/v1');
+
 const Podcast = (props) => {
-    console.log("this is props", props)
+
+
+   
+    
 
     const renderPodcast = () => {
         return(
         <Fragment>
-            <h4>{props.podcast.name}</h4>
-                <ReactAudioPlayer
-                    // ref={this.audio}
-                    // src={`http://localhost:3000${this.props.episode.audio_file_url}#t=${this.state.player_position}`}
-                    autoPlay
-                    controls
-                />
-
+            
+           
             <h4>Episodes</h4>
             {props.podcast.episodes.map(e => 
-            <Episode episode={e}/>
+            <Episode selectEpisodeToPlay={props.selectEpisodeToPlay} key={uuidv1()} episode={e}/>
             )}
 
         </Fragment>
 
         )
     }
-
 
 
     return (
@@ -43,3 +41,23 @@ const Podcast = (props) => {
 }
 
 export default Podcast
+
+
+
+
+
+
+//     < h4 > { props.podcast.name }</h4 >
+//         <ReactAudioPlayer
+//             // ref={this.audio}
+//             // src={`http://localhost:3000${this.props.episode.audio_file_url}#t=${this.state.player_position}`}
+//             autoPlay
+//             controls
+//         />
+
+//         <h4>Episodes</h4>
+//             {
+//     props.podcast.episodes.map(e =>
+//         <Episode selectEpisodeToPlay={props.selectEpisodeToPlay} key={uuidv1()} episode={e} />
+//     )
+// }
