@@ -57,7 +57,9 @@ class App extends Component {
           <NavBar />
 
           <Route exact path="/" component={this.Home} />
+          <Route exact path="/podcasts" component={this.PodcastIndex} />
           <Route path="/podcasts/:id" component={this.PodcastShow} />
+          
           
         </div>
       </Router>
@@ -71,15 +73,26 @@ class App extends Component {
 
       {/* this should contain index of all podcasts and upload button */}
 
-      {/* <h2>Home</h2>
-      {this.state.episodes.length > 0 ? 
-        <Player episode={this.state.episodes[0]} />
-        : "loading"
-      } */}
+      <h2>Home</h2>
+      
       
     </div>
   )
 } //end of Home
+
+
+  PodcastIndex = () => {
+    return (
+      <Fragment>
+        <h4>Podcast Index</h4>
+        {this.state.podcasts.map(p => 
+        <Link to={`podcasts/${p.id}`}>{p.name}</Link>
+        )} 
+      </Fragment>
+    )
+  }
+
+
 
   PodcastShow = ({ match }) => {
     let found =  this.state.podcasts.find(p => p.id == match.params.id)
