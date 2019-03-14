@@ -39,8 +39,9 @@ class App extends Component {
   }
 
   selectEpisodeToPlay = (e)=> {
+    let foundEpisode = this.state.episodes.find( e => e.id == e.id)
 
-    this.setState({playingEpisode: e})
+    this.setState({playingEpisode: foundEpisode})
    
   }
 

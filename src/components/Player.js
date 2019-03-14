@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react'
 import ReactAudioPlayer from 'react-audio-player';
+import Words from "./Words"
 
-const uuidv1 = require('uuid/v1');
+
 
 
 
@@ -13,20 +14,24 @@ class Player extends Component {
     }
 
 
-onClickHandler = (e) => {
-    this.audio.current.audioEl.currentTime = 3
-     console.log("react player", this.audio.current.audioEl.currentTime) 
+setPlayerPosition = (e) => {
+    this.audio.current.audioEl.currentTime = e.start_time
+  
 }
 
     ifEpisodeSelected = () => {
         if (this.props.episode) {
             return(
+                <Fragment>
                 <ReactAudioPlayer
                     ref={this.audio}
                     src={`http://localhost:3000${this.props.episode.audio_file_url}`}
                     autoPlay
                     controls
                 />
+
+                    <Words setPlayerPosition={this.setPlayerPosition} words={this.props.episode.words} />
+                </Fragment>
             )
             
         } else {

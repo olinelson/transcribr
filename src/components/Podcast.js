@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import Episode from "./Episode"
-import ReactAudioPlayer from 'react-audio-player';
+
 
 const uuidv1 = require('uuid/v1');
 

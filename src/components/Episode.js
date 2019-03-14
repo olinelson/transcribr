@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react'
-import Words from './Words'
+import React from 'react'
+
 
 const Episode = (props) => {
 
@@ -11,7 +11,7 @@ const clickHandler = () => {
 return (
     <div onClick={clickHandler}  className="episode-cell">
     <h4>{props.episode.name}</h4>
-    <Words setTrackToPosition={props.setTrackToPosition} words={props.episode.words}/>
+    
     </div>
 )
 }

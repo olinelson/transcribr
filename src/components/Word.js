@@ -4,7 +4,7 @@ import React from 'react'
 
     const clickHandler = () => {
 
-        props.setEpisodeToPosition(props.word)
+        props.setPlayerPosition(props.word)
     }
 
   return (
