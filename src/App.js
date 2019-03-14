@@ -9,8 +9,6 @@ import NavBar from './components/NavBar'
 import Player from './components/Player'
 import Podcast from './components/Podcast'
 
-//audio player
-import ReactAudioPlayer from 'react-audio-player';
 
 class App extends Component {
   state = {
@@ -38,9 +36,9 @@ class App extends Component {
       .then(r => this.setState({ podcasts: r }))
   }
 
-  selectEpisodeToPlay = (e)=> {
-    let foundEpisode = this.state.episodes.find( e => e.id == e.id)
-
+  selectEpisodeToPlay = (id)=> {
+    let foundEpisode = this.state.episodes.find( e => e.id == id)
+    
     this.setState({playingEpisode: foundEpisode})
    
   }
@@ -100,7 +98,7 @@ class App extends Component {
       <Fragment>
       
       <Player episode={this.state.playingEpisode}/>
-      <Podcast selectEpisodeToPlay={this.selectEpisodeToPlay} podcast={found}/>
+      <Podcast createEpisode={this.createEpisode} selectEpisodeToPlay={this.selectEpisodeToPlay} podcast={found}/>
       </Fragment>
   
   );

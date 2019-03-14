@@ -5,7 +5,7 @@ const Episode = (props) => {
 
 const clickHandler = () => {
 
-    props.selectEpisodeToPlay(props.episode)
+    props.selectEpisodeToPlay(props.episode.id)
 }
 
 return (

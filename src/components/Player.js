@@ -51,7 +51,7 @@ render(){
     return (
 
         <Fragment>
-            {console.log(this.props)}
+        
             <div className="player-container">
 
                 
@@ -59,7 +59,7 @@ render(){
                 {this.ifEpisodeSelected()}
          
 
-                <button onClick={this.onClickHandler}> Set Start </button>
+               
                 
             </div>
             
