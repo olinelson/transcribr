@@ -29,7 +29,7 @@ import React from 'react'
 
 
   return (
-    <div className="add-clip-form">
+    <div className="add-clip-form-container">
           <h4>create episode</h4>
           <form onSubmit={submitHandler}>
               <label>Name</label>

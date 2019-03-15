@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import NavBar from './components/NavBar'
 import Clip from './components/Clip'
 import AddClipForm from './components/AddClipForm'
+import ClipsContainer from './components/ClipsContainer'
 
 // uuid
 const uuidv1 = require('uuid/v1');
@@ -17,6 +18,7 @@ class App extends Component {
   state = {
     
     clips: [],
+    selectedClip: []
     
 
   }
@@ -65,14 +67,15 @@ class App extends Component {
 
    Home = () => {
   return (
-    <div className="home-container">
+    
 
-      {/* this should contain index of all podcasts and upload button */}
-
-      <h2>Home</h2>
+      <Fragment>
+      <ClipsContainer clips={this.state.clips} />
+      <AddClipForm />
       
+      </Fragment>
       
-    </div>
+    
   )
 } //end of Home
 
@@ -80,11 +83,7 @@ class App extends Component {
   ClipsIndex = () => {
     return (
       <Fragment>
-        <h4>Clips Index</h4>
-        {this.state.clips.map(c => 
-        <Link key={uuidv1()} to={`clips/${c.id}`}>{c.name}</Link>
-        )} 
-        <hr></hr>
+        <ClipsContainer clips={this.state.clips}/>
         <AddClipForm/>
 
       </Fragment>
@@ -98,7 +97,7 @@ class App extends Component {
   return (
       <Fragment>
       <Clip clip={found}/>
-      {/* <Podcast createEpisode={this.createEpisode} selectEpisodeToPlay={this.selectEpisodeToPlay} clip={found}/> */}
+      <ClipsContainer clips={this.state.clips} />
       </Fragment>
   
   );
