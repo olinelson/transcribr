@@ -1,18 +1,34 @@
-import React from 'react'
+import React, { Component } from 'react'
 
- function Word(props) {
+ class Word extends Component {
 
-    const clickHandler = () => {
-
-        props.setPlayerPosition(props.word)
+    state = {
+        clicked: false
     }
 
-  return (
-      <div onClick={clickHandler}  className="word-cell">
-      <p>{props.word.word}</p>
-      <p>{props.word.start_time}</p>
-    </div>
-  )
+
+    clickHandler = () => {
+
+        this.props.setPlayerPosition(this.props.word)
+        this.setState({clicked: true})
+        setTimeout(() => this.setState({clicked: false}), 500)
+    }
+
+
+
+    render(){
+        return (
+            <div onClick={this.clickHandler} className="word-cell">
+
+                <p>{this.props.word.word}</p>
+                {this.state.clicked === true ? 
+                    <p>{this.props.word.start_time}</p>
+                : null}
+                
+            </div>
+        )
+    }
+  
 }
 
 export default Word

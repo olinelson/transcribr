@@ -6,38 +6,36 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 // components
 import NavBar from './components/NavBar'
-import Player from './components/Player'
-import Podcast from './components/Podcast'
+import Clip from './components/Clip'
+import AddClipForm from './components/AddClipForm'
+
+// uuid
+const uuidv1 = require('uuid/v1');
 
 
 class App extends Component {
   state = {
-    podcasts: [],
-    episodes: [],
-    playingEpisode: null
+    
+    clips: [],
+    
 
   }
 
   componentDidMount() {
-    this.getAllEpisodes()
-    this.getAllPodcasts()
+    this.getAllclips()
+    
     
   }
 
-  getAllEpisodes= ()=> {
-    fetch("http://localhost:3000/api/v1/episodes")
+  getAllclips= ()=> {
+    fetch("http://localhost:3000/api/v1/clips")
       .then(r => r.json())
-      .then(r => this.setState({ episodes: r }))
+      .then(r => this.setState({ clips: r }))
   }
 
-  getAllPodcasts= () => {
-    fetch("http://localhost:3000/api/v1/podcasts")
-      .then(r => r.json())
-      .then(r => this.setState({ podcasts: r }))
-  }
 
   selectEpisodeToPlay = (id)=> {
-    let foundEpisode = this.state.episodes.find( e => e.id == id)
+    let foundEpisode = this.state.clips.find( e => e.id == id)
     
     this.setState({playingEpisode: foundEpisode})
    
@@ -55,8 +53,8 @@ class App extends Component {
           <NavBar />
 
           <Route exact path="/" component={this.Home} />
-          <Route exact path="/podcasts" component={this.PodcastIndex} />
-          <Route path="/podcasts/:id" component={this.PodcastShow} />
+          <Route exact path="/clips" component={this.ClipsIndex} />
+          <Route path="/clips/:id" component={this.ClipShow} />
           
           
         </div>
@@ -79,26 +77,28 @@ class App extends Component {
 } //end of Home
 
 
-  PodcastIndex = () => {
+  ClipsIndex = () => {
     return (
       <Fragment>
-        <h4>Podcast Index</h4>
-        {this.state.podcasts.map(p => 
-        <Link to={`podcasts/${p.id}`}>{p.name}</Link>
+        <h4>Clips Index</h4>
+        {this.state.clips.map(c => 
+        <Link key={uuidv1()} to={`clips/${c.id}`}>{c.name}</Link>
         )} 
+        <hr></hr>
+        <AddClipForm/>
+
       </Fragment>
     )
   }
 
 
 
-  PodcastShow = ({ match }) => {
-    let found =  this.state.podcasts.find(p => p.id == match.params.id)
+  ClipShow = ({ match }) => {
+    let found =  this.state.clips.find(c => c.id == match.params.id)
   return (
       <Fragment>
-      
-      <Player episode={this.state.playingEpisode}/>
-      <Podcast createEpisode={this.createEpisode} selectEpisodeToPlay={this.selectEpisodeToPlay} podcast={found}/>
+      <Clip clip={found}/>
+      {/* <Podcast createEpisode={this.createEpisode} selectEpisodeToPlay={this.selectEpisodeToPlay} clip={found}/> */}
       </Fragment>
   
   );
