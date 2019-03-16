@@ -1,25 +1,29 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 const uuidv1 = require('uuid/v1');
 
- class ClipsContainer extends Component {
 
-    constructor(props){
-        super(props)
-        this.state = {
-            clips: props.clips,
-            filteredClips: props.clips
-        }
-    }
 
-  render(){
-      console.log(this.state)
+ const ClipsContainer = (props) => {
+
+   const filteredClips = (e) => {
+     let clips = [...props.clips]
+     console.log("filtered clips", e.target.value)
+    //  let filteredClips = clips.filter(f =)
+   }
+   
+      
     return (
         <div className="clips-container">
+        
           <h4>Clips Index</h4>
+        <div className="search-container">
+          <h4>Search:</h4>
+          <input onChange={filteredClips}></input>
+        </div>
         {
-          this.state.filteredClips.map(c =>
+          props.clips.map(c =>
               <Link key={uuidv1()} to={`clips/${c.id}`}>{c.name}</Link>
           )
       }
@@ -27,6 +31,6 @@ const uuidv1 = require('uuid/v1');
       
     )
   }
-}
+
 
 export default ClipsContainer

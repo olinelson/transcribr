@@ -48,7 +48,7 @@ class App extends Component {
 
 
   render() {
-    
+    console.log("app",this.state)
     return (
       <Router>
         <div>
