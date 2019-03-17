@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import './App.css';
 
 // react router
@@ -6,21 +6,41 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 // components
 import NavBar from './components/NavBar'
-import Player from './components/Player'
+import Clip from './components/Clip'
+import AddClipForm from './components/AddClipForm'
+import ClipsContainer from './components/ClipsContainer'
+
+// uuid
+const uuidv1 = require('uuid/v1');
+
 
 class App extends Component {
   state = {
-    podcasts: [],
-    episodes: [],
+    
+    clips: [],
+    selectedClip: []
+    
 
   }
 
   componentDidMount() {
-    fetch("http://localhost:3000/api/v1/episodes")
-    .then( r => r.json())
-   
-    .then(r => this.setState({episodes: r}))
+    this.getAllclips()
     
+    
+  }
+
+  getAllclips= ()=> {
+    fetch("http://localhost:3000/api/v1/clips")
+      .then(r => r.json())
+      .then(r => this.setState({ clips: r }))
+  }
+
+
+  selectEpisodeToPlay = (id)=> {
+    let foundEpisode = this.state.clips.find( e => e.id == id)
+    
+    this.setState({playingEpisode: foundEpisode})
+   
   }
 
 
@@ -28,13 +48,16 @@ class App extends Component {
 
 
   render() {
-    
+    console.log("app",this.state)
     return (
       <Router>
         <div>
           <NavBar />
 
           <Route exact path="/" component={this.Home} />
+          <Route exact path="/clips" component={this.ClipsIndex} />
+          <Route path="/clips/:id" component={this.ClipShow} />
+          
           
         </div>
       </Router>
@@ -44,15 +67,40 @@ class App extends Component {
 
    Home = () => {
   return (
-    <div className="home-container">
-      <h2>Home</h2>
-      {this.state.episodes.length > 0 ? 
-        <Player episode={this.state.episodes[0]} />
-        : "loading"
-      }
+    
+
+      <Fragment>
+      <ClipsContainer clips={this.state.clips} />
+      <AddClipForm />
       
-    </div>
+      </Fragment>
+      
+    
   )
+} //end of Home
+
+
+  ClipsIndex = () => {
+    return (
+      <Fragment>
+        <ClipsContainer clips={this.state.clips}/>
+        <AddClipForm/>
+
+      </Fragment>
+    )
+  }
+
+
+
+  ClipShow = ({ match }) => {
+    let found =  this.state.clips.find(c => c.id == match.params.id)
+  return (
+      <Fragment>
+      <Clip clip={found}/>
+      <ClipsContainer clips={this.state.clips} />
+      </Fragment>
+  
+  );
 }
 
 
