@@ -32,7 +32,7 @@ const uuidv1 = require('uuid/v1');
 
  searchInputHandler = (e) => {
      let input = e.target.value
-    
+    //  console.log(e.target.value)
      let oldWords = [...this.state.words]
      let newWords = oldWords.filter(w => w.word.includes(input))
      this.setState({filteredWords: newWords})
@@ -44,8 +44,8 @@ const uuidv1 = require('uuid/v1');
          <Fragment>
          
          <div className="search-container">
-             <h4>Search:</h4>
-             <input onChange={this.searchInputHandler}></input>
+             {/* <h4>Search:</h4> */}
+             <input label="search words" placeholder="search words..." onChange={this.searchInputHandler}></input>
          </div>
          <div className="words-container">
          

@@ -87,13 +87,9 @@ class App extends Component {
   ClipShow = ({ match }) => {
     let found = this.state.clips.find(c => c.id == match.params.id);
     return (
-      <div className="clip-show">
-        {/* <ClipsContainer
-          filterClips={this.filterClips}
-          clips={this.state.filteredClips}
-        /> */}
+     
         <Clip clip={found} />
-      </div>
+     
     );
   };
 

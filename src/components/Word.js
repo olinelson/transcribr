@@ -1,34 +1,33 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
- class Word extends Component {
+class Word extends Component {
+  state = {
+    clicked: false
+  };
 
-    state = {
-        clicked: false
-    }
+  onClickHandler = () => {
+    this.props.setPlayerPosition(this.props.word);
+  }
 
+  showTimeStamp = () => {
+    this.setState({ clicked: true });
 
-    clickHandler = () => {
+  };
 
-        this.props.setPlayerPosition(this.props.word)
-        this.setState({clicked: true})
-        setTimeout(() => this.setState({clicked: false}), 500)
-    }
+    hideTimeStamp = () => {
+        this.setState({ clicked: false });
+    };
 
-
-
-    render(){
-        return (
-            <div onClick={this.clickHandler} className="word-cell">
-
-                <p>{this.props.word.word}</p>
-                {this.state.clicked === true ? 
-                    <p>{this.props.word.start_time}</p>
-                : null}
-                
-            </div>
-        )
-    }
-  
+  render() {
+    return (
+        <div onClick={this.onClickHandler} onMouseOver={this.showTimeStamp} onMouseOut={this.hideTimeStamp} className="word">
+        <p>{this.props.word.word}</p>
+        {this.state.clicked === true ? (
+          <p className="word-stamp">{this.props.word.start_time}</p>
+        ) : null}
+      </div>
+    );
+  }
 }
 
-export default Word
+export default Word;

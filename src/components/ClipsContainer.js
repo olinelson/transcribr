@@ -6,10 +6,9 @@ const uuidv1 = require("uuid/v1");
 const ClipsContainer = props => {
   return (
     <div className="clips-container">
-      <h4>Clips Index</h4>
-      <div className="clips-search-box">
-        <h4>Search:</h4>
-        <input onChange={props.filterClips} />
+      <h1>Clips Index</h1>
+      <div className="search-container">
+        <input placeholder="search clips..." onChange={props.filterClips} />
       </div>
       <div className="clips-grid">
         {props.clips.map(c => (
