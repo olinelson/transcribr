@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import ReactAudioPlayer from 'react-audio-player';
 import Words from "./Words"
-import Transcription from "./Transcription"
+
 
 
 
@@ -20,19 +20,27 @@ setPlayerPosition = (e) => {
   
 }
 
+    renderWords = () => {
+        if (this.props.clip.words){
+            return <Words setPlayerPosition={this.setPlayerPosition} words={this.props.clip.words} /> 
+            }else {
+                return <p>processing clip...</p>
+            }
+        
+    }
+
     ifClipSelected = () => {
         if (this.props.clip) {
             return(
                 <Fragment>
                 <ReactAudioPlayer
                     ref={this.audio}
-                    src={`http://localhost:3000${this.props.clip.audio_file_url}`}
+                    src={this.props.clip.gcloud_media_link}
                     autoPlay
                     controls
                 />
 
-                    <Words setPlayerPosition={this.setPlayerPosition} words={this.props.clip.words} />
-                    {/* <Transcription transcript={this.props.clip.transcript}/> */}
+                    {this.renderWords()}
                 </Fragment>
             )
             
@@ -53,6 +61,7 @@ render(){
     return (
 
         <Fragment>
+            {console.log(this.props.clip)}
         
             <div className="player-container">
                 

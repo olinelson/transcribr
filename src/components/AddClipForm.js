@@ -9,7 +9,7 @@ import React from 'react'
 
          
 
-         let formData = new FormData
+         let formData = new FormData()
 
         
          formData.append('audio_file', e.target.fileInput.files[0])

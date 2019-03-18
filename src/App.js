@@ -18,6 +18,7 @@ class App extends Component {
   state = {
     
     clips: [],
+    filtedClips: [],
     selectedClip: []
     
 
@@ -32,7 +33,7 @@ class App extends Component {
   getAllclips= ()=> {
     fetch("http://localhost:3000/api/v1/clips")
       .then(r => r.json())
-      .then(r => this.setState({ clips: r }))
+      .then(r => this.setState({ clips: r , filtedClips: r,}))
   }
 
 
@@ -48,7 +49,7 @@ class App extends Component {
 
 
   render() {
-    console.log("app",this.state)
+   
     return (
       <Router>
         <div>
