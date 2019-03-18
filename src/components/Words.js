@@ -32,7 +32,7 @@ const uuidv1 = require('uuid/v1');
 
  searchInputHandler = (e) => {
      let input = e.target.value
-    //  console.log(e.target.value)
+    
      let oldWords = [...this.state.words]
      let newWords = oldWords.filter(w => w.word.includes(input))
      this.setState({filteredWords: newWords})

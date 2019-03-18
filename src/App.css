@@ -1,5 +1,32 @@
+
+
+body{
+ 
+  display: grid;
+  grid-template-columns: 1fr;
+}
+#root {
+  
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.site-container {
+  margin: 1rem;
+}
+
+a {
+  color: inherit;
+}
+
 nav {
   border-bottom: 1px solid black;
+  background-color: black;
+  height: auto;
+  color: white;
+  padding: 0 1rem;
 }
 
 .word-card{
@@ -7,6 +34,29 @@ nav {
 }
 
 .words-container{
-  display:grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  display:flex;
+  
 }
+
+.clips-container {
+  grid-area: body;
+  border: 1px solid green;
+  
+}
+
+.clip-show {
+  background-color: beige;
+}
+
+.clips-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 1rem;
+  
+}
+
+.clip-card {
+  border: 1px solid black;
+}
+
+
