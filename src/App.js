@@ -9,6 +9,7 @@ import NavBar from "./components/NavBar";
 import Clip from "./components/Clip";
 import AddClipForm from "./components/AddClipForm";
 import ClipsContainer from "./components/ClipsContainer";
+import SignUpForm from "./components/SignUpForm";
 
 
 
@@ -52,6 +53,7 @@ class App extends Component {
             <Route exact path="/clips" component={this.ClipsIndex} />
             <Route path="/clips/:id" component={this.ClipShow} />
             <Route path="/upload" component={this.Upload} />
+            <Route path="/users/signup" component={this.SignUp} />
           </div>
         </Fragment>
       </Router>
@@ -99,6 +101,19 @@ class App extends Component {
       </Fragment>
     );
   };
+  SignUp = () => {
+    return (
+      <Fragment>
+        <SignUpForm />
+      </Fragment>
+    );
+  };
+
+
+
 }
+
+
+
 
 export default App;
