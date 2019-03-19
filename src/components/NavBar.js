@@ -9,7 +9,7 @@ const NavBar = props => {
       <Link to="/upload">Upload Clip</Link>
       <Link to="/">Home</Link>
       <Link to="/signup">Sign Up</Link>
-      <Link to="/">Sign In</Link>
+      <Link to="/login">Login</Link>
     </nav>
   );
 };

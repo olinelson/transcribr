@@ -10,7 +10,7 @@ import Clip from "./components/Clip";
 import AddClipForm from "./components/AddClipForm";
 import ClipsContainer from "./components/ClipsContainer";
 import SignUpForm from "./components/SignUpForm";
-
+import LoginForm from "./components/LoginForm"
 
 
 class App extends Component {
@@ -54,6 +54,7 @@ class App extends Component {
             <Route path="/clips/:id" component={this.ClipShow} />
             <Route path="/upload" component={this.Upload} />
             <Route path="/signup" component={this.SignUp} />
+            <Route path="/login" component={this.Login} />
           </div>
         </Fragment>
       </Router>
@@ -108,6 +109,12 @@ class App extends Component {
       </Fragment>
     );
   };
+
+   Login = () => {
+     return ( <LoginForm / >
+       
+     );
+   };
 
 
 
