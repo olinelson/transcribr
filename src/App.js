@@ -53,7 +53,7 @@ class App extends Component {
             <Route exact path="/clips" component={this.ClipsIndex} />
             <Route path="/clips/:id" component={this.ClipShow} />
             <Route path="/upload" component={this.Upload} />
-            <Route path="/users/signup" component={this.SignUp} />
+            <Route path="/signup" component={this.SignUp} />
           </div>
         </Fragment>
       </Router>

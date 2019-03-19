@@ -8,7 +8,7 @@ const NavBar = props => {
       <h4>PodSearcher</h4>
       <Link to="/upload">Upload Clip</Link>
       <Link to="/">Home</Link>
-      <Link to="/">Sign Up</Link>
+      <Link to="/signup">Sign Up</Link>
       <Link to="/">Sign In</Link>
     </nav>
   );

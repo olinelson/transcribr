@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 
+import {
+    withRouter
+} from "react-router-dom";
+
 class SignUpForm extends Component {
   state = {
     email: "",
@@ -10,10 +14,31 @@ class SignUpForm extends Component {
   };
 
   submitHandler = e => {
+    let email = this.state.email
+    let password = this.state.password
     e.preventDefault();
-    let email = e.target;
-    console.log(email);
-  };
+
+  
+    fetch("http://localhost:3000/api/v1/users", {
+        method: 'POST', // or 'PUT'
+        body: JSON.stringify({
+            email: email,
+            password: password
+        }), // data can be `string` or {object}!
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then((r) => r.json())
+    .then((r) => {
+        if (r.errors){
+            alert(r.errors)
+        }else{
+          this.props.history.push(`users/${r.id}`)
+        }
+    })
+    
+  }
 
   passwordCheck = () => {
     if (this.state.password === this.state.password_confirm && this.state.password.length > 3) {
@@ -35,7 +60,7 @@ class SignUpForm extends Component {
 
 
   render() {
-    console.log(this.state);
+   
     return (
       <form onSubmit={this.submitHandler}>
         <label>Email</label>
@@ -66,4 +91,4 @@ class SignUpForm extends Component {
   }
 }
 
-export default SignUpForm;
+export default withRouter(SignUpForm);
