@@ -10,8 +10,7 @@ import Clip from "./components/Clip";
 import AddClipForm from "./components/AddClipForm";
 import ClipsContainer from "./components/ClipsContainer";
 
-// uuid
-const uuidv1 = require("uuid/v1");
+
 
 class App extends Component {
   state = {

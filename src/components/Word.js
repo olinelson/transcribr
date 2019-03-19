@@ -20,7 +20,7 @@ class Word extends Component {
 
   render() {
     return (
-        <div onClick={this.onClickHandler} onMouseOver={this.showTimeStamp} onMouseOut={this.hideTimeStamp} className="word">
+        <div onClick={this.onClickHandler} onMouseEnter={this.showTimeStamp} onMouseLeave={this.hideTimeStamp} className="word">
         <p>{this.props.word.word}</p>
         {this.state.clicked === true ? (
           <p className="word-stamp">{this.props.word.start_time}</p>
