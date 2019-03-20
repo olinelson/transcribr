@@ -1,6 +1,9 @@
 import React, { Component, Fragment } from "react";
 import Word from "./Word";
 
+import { DebounceInput } from 'react-debounce-input';
+
+
 
 
 const uuidv1 = require("uuid/v1");
@@ -30,27 +33,54 @@ class Words extends Component {
     ));
   };
 
-  searchInputHandler = e => {
-    // debounce((e) => console.log(e.target.value), 100);
+    // searchInputHandler = e =>{
+        
+    //     let input = e.target.value;
+       
+    // debounce(() => {
+        
+    //        let oldWords = [...this.state.words];
+    //        let newWords = oldWords.filter(w => w.word.includes(input));
 
-      let input = e.target.value;
-      //  console.log(e.target.value)
-      let oldWords = [...this.state.words];
-      let newWords = oldWords.filter(w => w.word.includes(input));
-      this.setState({ filteredWords: newWords });
-  };
+
+    //        this.setState({ filteredWords: newWords });
+    // }, 600)()
+    
+    // }
+
+     searchInputHandler = e => {
+         let input = e.target.value;
+         let oldWords = [...this.state.words];
+
+        //  if (input === ""){
+        //      this.setState({filteredWords: oldWords})
+        //      return
+        //  }
+
+        let newWords = oldWords.filter(w => w.word.includes(input));
+
+
+        this.setState({
+            filteredWords: newWords
+        });
+
+     }
 
   render() {
     return (
       <Fragment>
         <div className="search-container">
           {/* <h4>Search:</h4> */}
-
-          <input
+        
+          <DebounceInput
             label="search words"
             placeholder="search words..."
+            minLength = { 2 }
+            debounceTimeout = { 200 }
             onChange={this.searchInputHandler}
+
           />
+          
         </div>
         <div className="words-container">
           {this.props.words ? this.showWords() : "no transcribed words yet"}

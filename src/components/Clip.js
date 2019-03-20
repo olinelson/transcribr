@@ -34,7 +34,7 @@ class Clip extends Component {
             className="audio-player"
             ref={this.audio}
             src={this.props.clip.gcloud_media_link}
-            autoPlay
+            // autoPlay
             controls
           />
 
@@ -49,7 +49,7 @@ class Clip extends Component {
   render() {
     return (
       <Fragment>
-        {console.log(this.props.clip)}
+
 
         <div className="player-container">{this.ifClipSelected()}</div>
       </Fragment>
