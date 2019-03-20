@@ -23,13 +23,13 @@ class App extends Component {
 
   componentDidMount() {
     this.getAllclips();
-    let userId = localStorage.getItem("user_id")
-    if (userId){
+    let token = localStorage.getItem("token")
+    if (token){
       console.log("doing fetch")
       fetch("http://localhost:3000/api/v1/auto_login", {
         method: "GET",
         headers: {
-          "Authorization": userId
+          "Authorization": token
         }
       })
       .then(r => r.json())
@@ -39,6 +39,7 @@ class App extends Component {
   }
 
   setCurrentUser = (response) => {
+    // console.log(response)
     this.setState({
       currentUser: response.user
     })
@@ -46,6 +47,7 @@ class App extends Component {
   }
 
   logout = () => {
+    localStorage.removeItem("token")
     this.setState({currentUser: null})
     this.props.history.push("/")
   }
