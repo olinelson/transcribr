@@ -23,12 +23,17 @@ class App extends Component {
 
   componentDidMount() {
     this.getAllclips();
+    let userId = localStorage.getItem("user_id")
+    if (userId){
+      
+    }
   }
 
   setCurrentUser = (user) => {
     this.setState({
       currentUser: user
     })
+    localStorage.setItem("user_id", user.id)
   }
 
   logout = () => {
