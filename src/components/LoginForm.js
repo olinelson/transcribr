@@ -27,10 +27,11 @@ import { withRouter } from "react-router-dom";
         })
         .then((r) => r.json())
         .then(r => {
+            console.log(r)
             if (r.errors){
                 alert(r.errors)
             }else{
-                this.props.history.push(`users/${r.id}`)
+                this.props.history.push(`users/${r.user.id}`)
                 this.props.setCurrentUser(r)
                 }
             

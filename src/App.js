@@ -25,15 +25,24 @@ class App extends Component {
     this.getAllclips();
     let userId = localStorage.getItem("user_id")
     if (userId){
+      console.log("doing fetch")
+      fetch("http://localhost:3000/api/v1/auto_login", {
+        method: "GET",
+        headers: {
+          "Authorization": userId
+        }
+      })
+      .then(r => r.json())
+      .then(r => this.setState({currentUser: r}))
       
     }
   }
 
-  setCurrentUser = (user) => {
+  setCurrentUser = (response) => {
     this.setState({
-      currentUser: user
+      currentUser: response.user
     })
-    localStorage.setItem("user_id", user.id)
+    localStorage.setItem("token", response.jwt)
   }
 
   logout = () => {
