@@ -12,7 +12,7 @@ const ClipsContainer = props => {
       </div>
       <div className="clips-grid">
         {props.clips.map(c => (
-          <div className="clip-card">
+          <div key={uuidv1()} className="clip-card">
             <Link key={uuidv1()} to={`clips/${c.id}`}>
               {c.name}
             </Link>

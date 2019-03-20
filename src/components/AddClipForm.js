@@ -26,7 +26,7 @@ class AddClipForm extends Component {
   }; // end of submitHandler
 
   render() {
-    console.log(this.props);
+    
     return (
       <Fragment>
         <LoadingBar loading={this.state.fileUploading} />

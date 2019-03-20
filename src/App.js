@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import "./App.css";
 
 // react router
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, withRouter } from "react-router-dom";
 
 // components
 import NavBar from "./components/NavBar";
@@ -17,11 +17,23 @@ class App extends Component {
   state = {
     clips: [],
     filteredClips: [],
-    selectedClip: []
+    selectedClip: [],
+    currentUser: null
   };
 
   componentDidMount() {
     this.getAllclips();
+  }
+
+  setCurrentUser = (user) => {
+    this.setState({
+      currentUser: user
+    })
+  }
+
+  logout = () => {
+    this.setState({currentUser: null})
+    this.props.history.push("/")
   }
 
   getAllclips = () => {
@@ -44,20 +56,20 @@ class App extends Component {
   };
 
   render() {
+
     return (
-      <Router>
         <Fragment>
-          <NavBar />
+          <NavBar logout={this.logout} currentUser={this.state.currentUser} />
           <div className="site-container">
             <Route exact path="/" component={this.Home} />
             <Route exact path="/clips" component={this.ClipsIndex} />
             <Route path="/clips/:id" component={this.ClipShow} />
             <Route path="/upload" component={this.Upload} />
             <Route path="/signup" component={this.SignUp} />
-            <Route path="/login" component={this.Login} />
+            <Route path="/login" render={(routerProps) => <LoginForm {...routerProps} setCurrentUser={this.setCurrentUser}/> } />
           </div>
         </Fragment>
-      </Router>
+      
     );
   }
 
@@ -110,11 +122,11 @@ class App extends Component {
     );
   };
 
-   Login = () => {
-     return ( <LoginForm / >
+  //  Login = () => {
+  //    return ( <LoginForm / >
        
-     );
-   };
+  //    );
+  //  };
 
 
 
@@ -123,4 +135,4 @@ class App extends Component {
 
 
 
-export default App;
+export default withRouter(App);

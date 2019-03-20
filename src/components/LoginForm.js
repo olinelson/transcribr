@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import { withRouter } from "react-router-dom";
+
  class LoginForm extends Component {
 
     state = {
@@ -24,10 +26,19 @@ import React, { Component } from 'react'
             }
         })
         .then((r) => r.json())
-        .then(console.log)
+        .then(r => {
+            if (r.errors){
+                alert(r.errors)
+            }else{
+                this.props.history.push(`users/${r.id}`)
+                this.props.setCurrentUser(r)
+                }
+            
+        })
     }
 
     render(){
+       
         return (
     <div>
       <form onSubmit={this.submitHandler}>
@@ -57,5 +68,5 @@ import React, { Component } from 'react'
   
 }
 
-export default LoginForm
+export default withRouter(LoginForm)
 
