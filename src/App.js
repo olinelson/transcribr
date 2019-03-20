@@ -25,7 +25,7 @@ class App extends Component {
     this.getAllclips();
     let token = localStorage.getItem("token")
     if (token){
-      console.log("doing fetch")
+      
       fetch("http://localhost:3000/api/v1/auto_login", {
         method: "GET",
         headers: {
@@ -39,7 +39,7 @@ class App extends Component {
   }
 
   setCurrentUser = (response) => {
-    // console.log(response)
+  
     this.setState({
       currentUser: response.user
     })
@@ -72,6 +72,7 @@ class App extends Component {
   };
 
   render() {
+    console.log("current user",this.state.currentUser)
 
     return (
         <Fragment>
