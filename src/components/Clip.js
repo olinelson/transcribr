@@ -32,6 +32,7 @@ class Clip extends Component {
       return (
         <div className="clip-show">
           <h1>{this.props.clip.name}</h1>
+          <img alt={this.props.clip.name} src={this.props.clip.gcloud_image_link}/>
           <ReactAudioPlayer
             className="audio-player"
             ref={this.audio}
@@ -49,6 +50,7 @@ class Clip extends Component {
   };
 
   render() {
+      console.log(this.props.clip)
     return (
       <Fragment>
 

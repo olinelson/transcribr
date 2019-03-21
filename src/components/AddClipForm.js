@@ -14,7 +14,8 @@ class AddClipForm extends Component {
 
     let formData = new FormData();
 
-    formData.append("audio_file", e.target.fileInput.files[0]);
+    formData.append("audio_file", e.target.audioFileInput.files[0]);
+    formData.append("image", e.target.imageInput.files[0]);
     formData.append("name", e.target.name.value);
    
      let token = localStorage.getItem("token")
@@ -42,8 +43,10 @@ class AddClipForm extends Component {
           <form onSubmit={this.submitHandler}>
             <label>Name</label>
             <input name="name" />
-            <label>File Upload</label>
-            <input name="fileInput" type="file" />
+            <label>Audio File</label>
+            <input name="audioFileInput" type="file" />
+            <label>Image</label>
+            <input name="imageInput" type="file" />
             <button disabled={this.state.fileUploading}>submit</button>
           </form>
         </div>

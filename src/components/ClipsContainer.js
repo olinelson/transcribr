@@ -14,6 +14,7 @@ const ClipsContainer = props => {
       <div className="clips-grid">
         {props.clips.map(c => (
           <div key={uuidv1()} className="clip-card">
+            <img src={c.gcloud_image_link}/>
             <Link key={uuidv1()} to={`clips/${c.id}`}>
               {c.name}
             </Link>
