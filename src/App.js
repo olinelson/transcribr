@@ -25,7 +25,7 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.getAllclips();
+    this.getAllClips();
     this.getAllUsers();
     let token = localStorage.getItem("token")
     if (token){
@@ -58,16 +58,21 @@ class App extends Component {
 
   saveClip = (clip) => {
     let token = localStorage.getItem("token")
-    console.log(clip)
-    fetch("http://localhost:3000/api/v1/user_clips",{
+    let id = clip.id
+    fetch("http://localhost:3000/api/v1/user_clips", {
       method: "POST",
-      headers: {
-        "Authorization": token
-      }
+      body: JSON.stringify({
+         clip_id: id,
+       }),
+       headers: {
+         "Authorization": token,
+         'Content-Type': 'application/json'
+       },
     })
+    .then(() => this.getAllClips)
   }
 
-  getAllclips = () => {
+  getAllClips = () => {
     fetch("http://localhost:3000/api/v1/clips")
       .then(r => r.json())
       .then(r => this.setState({ clips: r, filteredClips: r }));
@@ -95,7 +100,7 @@ class App extends Component {
   };
 
   render() {
-    console.log("current user",this.state.currentUser)
+
 
     return (
         <Fragment>
@@ -156,7 +161,7 @@ class App extends Component {
 
   UserShow = ({match}) => {
     let user = this.state.users.find(u => u.id == match.params.id);
-    console.log(user)
+
     return (
       <User user={user}/>
     );
@@ -165,7 +170,7 @@ class App extends Component {
   Upload = () => {
     return (
       <Fragment>
-        <AddClipForm currentUser={this.state.currentUser} />
+        <AddClipForm getAllClips={this.getAllClips} currentUser={this.state.currentUser} />
       </Fragment>
     );
   };
