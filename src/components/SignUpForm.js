@@ -7,6 +7,7 @@ import {
 class SignUpForm extends Component {
   state = {
     email: "",
+    username: "",
     password: "",
     password_confirm: "",
     password_error: true,
@@ -16,6 +17,7 @@ class SignUpForm extends Component {
   submitHandler = e => {
     let email = this.state.email
     let password = this.state.password
+    let username = this.state.username
     e.preventDefault();
 
   
@@ -23,7 +25,8 @@ class SignUpForm extends Component {
         method: 'POST', // or 'PUT'
         body: JSON.stringify({
             email: email,
-            password: password
+            password: password,
+            user_name: username,
         }), // data can be `string` or {object}!
         headers: {
             'Content-Type': 'application/json'
@@ -63,6 +66,16 @@ class SignUpForm extends Component {
    
     return (
       <form onSubmit={this.submitHandler}>
+        <label>Username</label>
+        <input
+          name="username"
+          type="username"
+          value = {this.state.username}
+          placeholder = {"OlafThePowerful"}
+          onChange = { e => this.setState({ username: e.target.value})}
+        />
+        
+        
         <label>Email</label>
         <input
           name="email"
@@ -71,6 +84,7 @@ class SignUpForm extends Component {
           onChange={e => this.setState({ email: e.target.value }, () => this.emailCheck())}
           type="email"
         />
+        
         <label>Password</label>
         <input
           name="password"
