@@ -10,16 +10,22 @@ class AddClipForm extends Component {
 
   submitHandler = e => {
     e.preventDefault();
+    
 
     let formData = new FormData();
 
     formData.append("audio_file", e.target.fileInput.files[0]);
     formData.append("name", e.target.name.value);
-
+   
+     let token = localStorage.getItem("token")
+     
     this.setState({ fileUploading: true });
 
     fetch("http://localhost:3000/api/v1/clips", {
       method: "POST",
+      headers: {
+          "Authorization": token
+      },
       body: formData
     }).then(() => this.setState({ fileUploading: false }))
     .then(() => this.props.history.push("/"))

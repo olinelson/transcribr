@@ -11,11 +11,14 @@ import AddClipForm from "./components/AddClipForm";
 import ClipsContainer from "./components/ClipsContainer";
 import SignUpForm from "./components/SignUpForm";
 import LoginForm from "./components/LoginForm"
+import User from "./components/User"
+
 
 
 class App extends Component {
   state = {
     clips: [],
+    users: [],
     filteredClips: [],
     selectedClip: [],
     currentUser: null
@@ -23,6 +26,7 @@ class App extends Component {
 
   componentDidMount() {
     this.getAllclips();
+    this.getAllUsers();
     let token = localStorage.getItem("token")
     if (token){
       
@@ -58,6 +62,14 @@ class App extends Component {
       .then(r => this.setState({ clips: r, filteredClips: r }));
   };
 
+   getAllUsers = () => {
+     fetch("http://localhost:3000/api/v1/users")
+       .then(r => r.json())
+       .then(r => this.setState({
+         users: r
+       }));
+   };
+
   selectEpisodeToPlay = id => {
     let foundEpisode = this.state.clips.find(e => e.id == id);
 
@@ -83,7 +95,10 @@ class App extends Component {
             <Route path="/clips/:id" component={this.ClipShow} />
             <Route path="/upload" component={this.Upload} />
             <Route path="/signup" component={this.SignUp} />
+            <Route path="/users/:id" component={this.UserShow}/>
             <Route path="/login" render={(routerProps) => <LoginForm {...routerProps} setCurrentUser={this.setCurrentUser}/> } />
+
+
           </div>
         </Fragment>
       
@@ -124,10 +139,18 @@ class App extends Component {
     );
   };
 
+  UserShow = ({match}) => {
+    let user = this.state.users.find(u => u.id == match.params.id);
+    console.log(user)
+    return (
+      <User user={user}/>
+    );
+  };
+
   Upload = () => {
     return (
       <Fragment>
-        <AddClipForm />
+        <AddClipForm currentUser={this.state.currentUser} />
       </Fragment>
     );
   };
