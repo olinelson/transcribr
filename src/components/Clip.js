@@ -18,6 +18,7 @@ class Clip extends Component {
     if (this.props.clip.words) {
       return (
         <Words
+          
           setPlayerPosition={this.setPlayerPosition}
           words={this.props.clip.words}
         />
@@ -31,8 +32,10 @@ class Clip extends Component {
     if (this.props.clip) {
       return (
         <div className="clip-show">
+         
+          <img className="clip-show-image" alt={this.props.clip.name} src={this.props.clip.gcloud_image_link}/>
           <h1>{this.props.clip.name}</h1>
-          <img alt={this.props.clip.name} src={this.props.clip.gcloud_image_link}/>
+          
           <ReactAudioPlayer
             className="audio-player"
             ref={this.audio}

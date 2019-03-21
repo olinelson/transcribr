@@ -14,12 +14,21 @@ const ClipsContainer = props => {
       <div className="clips-grid">
         {props.clips.map(c => (
           <div key={uuidv1()} className="clip-card">
+            
             <img className="clip-image" src={c.gcloud_image_link}/>
-            <Link key={uuidv1()} to={`clips/${c.id}`}>
-              {c.name}
-            </Link>
-            {c.author ? <p> Uploaded By : {c.author.email} </p> : null}
-            <a onClick={() => props.saveClip(c)}> Save Clip </a>
+
+            
+              <Link 
+              className = "clip-card-title"
+              key = {uuidv1()}
+              to = {`clips/${c.id}`} > {c.name} 
+              </Link> 
+              <small> Uploaded By: {c.author.email} </small>
+              
+              
+           
+            {/* {c.author ? <p> Uploaded By : {c.author.email} </p> : null} */}
+            <button className="button" onClick={() => props.saveClip(c)}> Save </button>
           </div>
         ))}
       </div>

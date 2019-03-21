@@ -6,11 +6,27 @@ body{
   grid-template-columns: 1fr;
 }
 
+button {
+  background-color: black;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2rem;
+  align-self: center;
+  color: white;
+  font-weight: bold;
+}
+button:hover {
+  cursor: pointer;
+}
+
 
 
 .audio-player {
   width: 100%;
   margin: 0 0 1rem 0;
+  grid-area: player;
 }
 
 #root {
@@ -84,16 +100,24 @@ nav a {
   grid-template-columns: 1fr;
   grid-gap: 1rem;
   margin-top: 2rem;
-  grid-template-rows: 4rem;
+  grid-template-rows: auto;
+  max-width: 100vw;
   
 }
 
 .clip-card {
-  border: 1px solid red;
+   display: grid;
+   height: auto;
+   grid-template-columns: 1fr 1fr 7fr 1fr;
+
+   align-items: center;
+   grid-gap: 1rem;
+   
 }
 
 .clip-image {
-  height: 100%;
+  height: auto;
+  width: 100%;
 }
 .search-container {
 
@@ -119,7 +143,31 @@ nav a {
   max-width: 100rem;
   display: grid;
   justify-items: center;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-areas: 
+  "image heading . . "
+  "player player player player "
+  "search search search search "
+  "words words words words"
+  ;
+  grid-gap: 1rem;
 }
 .clip-show h1 {
   justify-self: left;
+  grid-area: heading;
+}
+
+.clip-show-image {
+  grid-area: image;
+  width: 100%;
+  height: auto;
+}
+
+.search-container {
+  grid-area: search;
+  
+}
+
+.words-container {
+  grid-area: words;
 }
