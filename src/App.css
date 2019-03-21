@@ -81,9 +81,10 @@ nav a {
 
 .clips-grid{
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr;
   grid-gap: 1rem;
   margin-top: 2rem;
+  grid-template-rows: 4rem;
   
 }
 
@@ -91,6 +92,9 @@ nav a {
   border: 1px solid red;
 }
 
+.clip-image {
+  height: 100%;
+}
 .search-container {
 
   display: flex;

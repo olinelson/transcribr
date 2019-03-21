@@ -7,14 +7,14 @@ import ClipsContainer from './ClipsContainer'
    const showUserName = (props) => {
     return(
         <div className="user-container">
-        <h1>{props.user.email}</h1>
+        <h1>{props.user.user_name}</h1>
          {props.user.clips ? < ClipsContainer clips = {props.user.clips}/> : null}
         </div>
     )
     }
 
 
-console.log(props.user)
+console.log("in user",props.user)
   return (
       <Fragment>
    {props.user ? showUserName(props) : null}
