@@ -18,6 +18,7 @@ const ClipsContainer = props => {
             <Link key={uuidv1()} to={`clips/${c.id}`}>
               {c.name}
             </Link>
+            {c.author ? <p> Uploaded By : {c.author.email} </p> : null}
             <a onClick={() => props.saveClip(c)}> Save Clip </a>
           </div>
         ))}
