@@ -72,6 +72,10 @@ class App extends Component {
     .then(() => this.getAllClips)
   }
 
+  deleteClip = () => {
+    console.log("deleting clip")
+  }
+
   getAllClips = () => {
     fetch("http://localhost:3000/api/v1/clips")
       .then(r => r.json())
@@ -160,10 +164,10 @@ class App extends Component {
   };
 
   UserShow = ({match}) => {
-    let user = this.state.users.find(u => u.id == match.params.id);
+
 
     return (
-      <User user={user}/>
+      <User deleteClip={this.deleteClip} user={this.state} users={this.state.users}/>
     );
   };
 

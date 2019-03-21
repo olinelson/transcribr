@@ -53,7 +53,7 @@ class Clip extends Component {
   };
 
   render() {
-      console.log(this.props.clip)
+
     return (
       <Fragment>
 

@@ -1,9 +1,11 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Link, withRouter } from "react-router-dom"
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 const uuidv1 = require("uuid/v1");
 
 const ClipsContainer = props => {
+
+  console.log(props)
 
   return (
     <div className="clips-container">
@@ -17,16 +19,20 @@ const ClipsContainer = props => {
             
             <img className="clip-image" src={c.gcloud_image_link}/>
 
-           
-              {/* <Link 
+            
+              <Link 
               className = "clip-card-title"
               key = {uuidv1()}
               to = {`clips/${c.id}`} > {c.name} 
-              </Link>  */}
-              <small> Uploaded By: {c.author.email} </small>
+              </Link> 
+              {c.author ? <small> Uploaded By: {c.author.email} </small> : null }
               
-             
-          
+              
+              
+           
+            {/* {c.author ? <p> Uploaded By : {c.author.email} </p> : null} */}
+
+            {}
             <button className="button" onClick={() => props.saveClip(c)}> Save </button>
           </div>
         ))}

@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 
-import ClipsContainer from './ClipsContainer'
+// import ClipsContainer from './ClipsContainer'
+import UserClipsContainer from "./UserClipsContainer"
 
  function User(props) {
 
@@ -8,13 +9,13 @@ import ClipsContainer from './ClipsContainer'
     return(
         <div className="user-container">
         <h1>{props.user.user_name}</h1>
-         {props.user.clips ? < ClipsContainer clips = {props.user.clips}/> : null}
+         {props.user.clips ? < UserClipsContainer deleteClip={props.deleteClip} user = {props.user}/> : null}
         </div>
     )
     }
 
 
-console.log("in user",props.user)
+
   return (
       <Fragment>
    {props.user ? showUserName(props) : null}
