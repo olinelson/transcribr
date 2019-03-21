@@ -56,6 +56,17 @@ class App extends Component {
     this.props.history.push("/")
   }
 
+  saveClip = (clip) => {
+    let token = localStorage.getItem("token")
+    console.log(clip)
+    fetch("http://localhost:3000/api/v1/user_clips",{
+      method: "POST",
+      headers: {
+        "Authorization": token
+      }
+    })
+  }
+
   getAllclips = () => {
     fetch("http://localhost:3000/api/v1/clips")
       .then(r => r.json())
@@ -111,6 +122,9 @@ class App extends Component {
         <ClipsContainer
           filterClips={this.filterClips}
           clips={this.state.filteredClips}
+          saveClip = {
+            this.saveClip
+          }
         />
 
         {/* <AddClipForm /> */}
@@ -122,6 +136,7 @@ class App extends Component {
     return (
       <Fragment>
         <ClipsContainer
+          
           filterClips={this.filterClips}
           clips={this.state.filteredClips}
         />

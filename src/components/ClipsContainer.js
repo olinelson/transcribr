@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 const uuidv1 = require("uuid/v1");
 
 const ClipsContainer = props => {
+  console.log("clips container", props)
   return (
     <div className="clips-container">
       <h1>Clips Index</h1>
@@ -16,6 +17,7 @@ const ClipsContainer = props => {
             <Link key={uuidv1()} to={`clips/${c.id}`}>
               {c.name}
             </Link>
+            <a onClick={() => props.saveClip(c)}> Save Clip </a>
           </div>
         ))}
       </div>

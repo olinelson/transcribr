@@ -7,8 +7,8 @@ const NavBar = props => {
     const showCurrentUserLinks = () => {
         return (
             <Fragment>
-             <p>{`logged in as ${props.currentUser.email}` }</p>
-             <p onClick = {props.logout}> logout </p>
+             <a>{`logged in as ${props.currentUser.email}` }</a>
+             <a onClick = {props.logout}> logout </a>
              <Link to={`/users/${props.currentUser.id}`}>My Clips</Link>
              </Fragment >
         )
