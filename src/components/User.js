@@ -9,7 +9,7 @@ import UserClipsContainer from "./UserClipsContainer"
     return(
         <div className="user-container">
         <h1>{props.user.user_name}</h1>
-         {props.user.clips ? < UserClipsContainer deleteClip={props.deleteClip} user = {props.user}/> : null}
+         {props.user.clips ? < UserClipsContainer unSaveClip={props.unSaveClip} user = {props.user}/> : null}
         </div>
     )
     }

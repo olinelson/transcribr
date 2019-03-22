@@ -72,8 +72,21 @@ class App extends Component {
     .then(() => this.getAllClips)
   }
 
-  deleteClip = () => {
-    console.log("deleting clip")
+  unSaveClip = (clip) => {
+    console.log("unsaving clip")
+    let token = localStorage.getItem("token")
+    let id = clip.id
+    fetch("http://localhost:3000/api/v1/user_clips/unsave", {
+        method: "POST",
+        body: JSON.stringify({
+          clip_id: id,
+        }),
+        headers: {
+          "Authorization": token,
+          'Content-Type': 'application/json'
+        },
+      })
+      .then(() => this.getAllClips)
   }
 
   getAllClips = () => {
@@ -105,7 +118,7 @@ class App extends Component {
 
   render() {
 
-
+    console.log(this.state.currentUser)
     return (
         <Fragment>
           <NavBar logout={this.logout} currentUser={this.state.currentUser} />
@@ -167,7 +180,7 @@ class App extends Component {
 
 
     return (
-      <User deleteClip={this.deleteClip} user={this.state} users={this.state.users}/>
+      <User unSaveClip={this.unSaveClip} user={this.state.currentUser} users={this.state.users}/>
     );
   };
 

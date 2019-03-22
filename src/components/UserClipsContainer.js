@@ -5,7 +5,7 @@ const uuidv1 = require("uuid/v1");
 
 const ClipsContainer = props => {
 
-  console.log(props)
+
 
   return (
     <div className="clips-container">
@@ -33,7 +33,7 @@ const ClipsContainer = props => {
             {/* {c.author ? <p> Uploaded By : {c.author.email} </p> : null} */}
 
             {}
-            <button className="button" onClick={() => props.saveClip(c)}> Save </button>
+            <button className="button" onClick={() => props.unSaveClip(c)}> Save </button>
           </div>
         ))}
       </div>
