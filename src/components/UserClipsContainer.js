@@ -5,11 +5,39 @@ const uuidv1 = require("uuid/v1");
 
 const ClipsContainer = props => {
 
+   const unSaveClip = (clip) => {
+        console.log("unsaving clip")
+        let token = localStorage.getItem("token")
+        let id = clip.id
+        fetch("http://localhost:3000/api/v1/user_clips/unsave", {
+                method: "POST",
+                body: JSON.stringify({
+                    clip_id: id,
+                }),
+                headers: {
+                    "Authorization": token,
+                    'Content-Type': 'application/json'
+                },
+            })
 
+    }
+
+      const deleteClip = (clip) => {
+          console.log("deleting clip")
+          let token = localStorage.getItem("token")
+
+          fetch(`http://localhost:3000/api/v1/clips/${clip.id}`, {
+                  method: "DELETE",
+                  headers: {
+                      "Authorization": token,
+                  },
+              })
+
+      }
 
   return (
     <div className="clips-container">
-      <h1>My Clips</h1>
+      <h1>Saved Clips</h1>
       <div className="search-container">
         <input placeholder="search clips..." onChange={props.filterClips} />
       </div>
@@ -26,17 +54,22 @@ const ClipsContainer = props => {
               to = {`clips/${c.id}`} > {c.name} 
               </Link> 
               {c.author ? <small> Uploaded By: {c.author.email} </small> : null }
+              {c.author_id === props.user.id ? 
+                <button className="button" onClick={() => deleteClip(c)}> Delete </button>
+                :
+                <button className="button" onClick={() => unSaveClip(c)}> Remove </button>
+                }
               
               
               
            
-            {/* {c.author ? <p> Uploaded By : {c.author.email} </p> : null} */}
-
-            {}
-            <button className="button" onClick={() => props.unSaveClip(c)}> Save </button>
+           
+            
           </div>
         ))}
       </div>
+
+    
     </div>
   );
 };

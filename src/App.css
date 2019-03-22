@@ -17,10 +17,13 @@ button {
   color: white;
   font-weight: bold;
 }
-button:hover {
+/* button:hover {
   cursor: pointer;
-}
+} */
 
+button:disabled {
+  border: 3px solid pink;
+}
 
 
 .audio-player {

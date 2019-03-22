@@ -5,6 +5,8 @@ const uuidv1 = require("uuid/v1");
 
 const ClipsContainer = props => {
 
+  console.log("in clips container",props)
+
   return (
     <div className="clips-container">
       <h1>Clips Index</h1>
@@ -25,9 +27,13 @@ const ClipsContainer = props => {
               </Link> 
               <small> Uploaded By: {c.author.email} </small>
               
-             
+            {c.author.id === props.currentUser.id ? 
+              <button disabled className="button" onClick={() => props.saveClip(c)}> My Clip </button>
+              :
+               <button className="button" onClick={() => props.saveClip(c)}> Save </button>
+               }
           
-            <button className="button" onClick={() => props.saveClip(c)}> Save </button>
+            {/* <button className="button" onClick={() => props.saveClip(c)}> Save </button> */}
           </div>
         ))}
       </div>

@@ -72,22 +72,6 @@ class App extends Component {
     .then(() => this.getAllClips)
   }
 
-  unSaveClip = (clip) => {
-    console.log("unsaving clip")
-    let token = localStorage.getItem("token")
-    let id = clip.id
-    fetch("http://localhost:3000/api/v1/user_clips/unsave", {
-        method: "POST",
-        body: JSON.stringify({
-          clip_id: id,
-        }),
-        headers: {
-          "Authorization": token,
-          'Content-Type': 'application/json'
-        },
-      })
-      .then(() => this.getAllClips)
-  }
 
   getAllClips = () => {
     fetch("http://localhost:3000/api/v1/clips")
@@ -118,7 +102,7 @@ class App extends Component {
 
   render() {
 
-    console.log(this.state.currentUser)
+
     return (
         <Fragment>
           <NavBar logout={this.logout} currentUser={this.state.currentUser} />
@@ -142,11 +126,11 @@ class App extends Component {
     return (
       <Fragment>
         <ClipsContainer
+           currentUser = {
+             this.state.currentUser
+           }
           filterClips={this.filterClips}
           clips={this.state.filteredClips}
-          saveClip = {
-            this.saveClip
-          }
         />
 
         {/* <AddClipForm /> */}
@@ -154,18 +138,18 @@ class App extends Component {
     );
   }; //end of Home
 
-  ClipsIndex = () => {
-    return (
-      <Fragment>
-        <ClipsContainer
-          
-          filterClips={this.filterClips}
-          clips={this.state.filteredClips}
-        />
-        <AddClipForm />
-      </Fragment>
-    );
-  };
+  // ClipsIndex = () => {
+  //   return (
+  //     <Fragment>
+  //       <ClipsContainer
+  //         currentUser={this.state.currentUser}
+  //         filterClips={this.filterClips}
+  //         clips={this.state.filteredClips}
+  //       />
+  //       <AddClipForm />
+  //     </Fragment>
+  //   );
+  // };
 
   ClipShow = ({ match }) => {
     let found = this.state.clips.find(c => c.id == match.params.id);
@@ -180,7 +164,7 @@ class App extends Component {
 
 
     return (
-      <User unSaveClip={this.unSaveClip} user={this.state.currentUser} users={this.state.users}/>
+      <User  user={this.state.currentUser} users={this.state.users}/>
     );
   };
 
