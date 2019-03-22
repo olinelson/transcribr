@@ -5,6 +5,22 @@ const uuidv1 = require("uuid/v1");
 
 const ClipsContainer = props => {
 
+  const saveButton = (c) => {
+    if (props.currentUser) {
+    //  return <button className="button clip-card-button" onClick={() => props.saveClip(c)}> Save </button>
+
+     for (let userClip of props.currentUser.user_clips){
+       console.log(userClip.clip_id, c.id)
+       if (userClip.clip_id === c.id){
+         return <button disabled className="button clip-card-button" > Saved </button>
+       }
+     }
+     return <button className="button clip-card-button" onClick={() => props.saveClip(c)}> Save </button>
+    }else{
+     return null
+    }            
+  }
+
   console.log("in clips container",props)
 
   return (
@@ -27,11 +43,7 @@ const ClipsContainer = props => {
               </Link> 
               <small> Uploaded By: {c.author.email} </small>
               
-            {c.author.id === props.currentUser.id ? 
-              <button disabled className="button" onClick={() => props.saveClip(c)}> My Clip </button>
-              :
-               <button className="button" onClick={() => props.saveClip(c)}> Save </button>
-               }
+               {saveButton(c)}
           
             {/* <button className="button" onClick={() => props.saveClip(c)}> Save </button> */}
           </div>

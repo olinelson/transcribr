@@ -129,6 +129,7 @@ class App extends Component {
            currentUser = {
              this.state.currentUser
            }
+           saveClip={this.saveClip}
           filterClips={this.filterClips}
           clips={this.state.filteredClips}
         />

@@ -22,7 +22,7 @@ button {
 } */
 
 button:disabled {
-  border: 3px solid pink;
+  color: grey;
 }
 
 
@@ -112,16 +112,29 @@ nav a {
    display: grid;
    height: auto;
    grid-template-columns: 1fr 1fr 7fr 1fr;
-
    align-items: center;
    grid-gap: 1rem;
+   grid-template-areas:
+   "image title . button"
+   ;
    
 }
 
 .clip-image {
   height: auto;
   width: 100%;
+  grid-area: image;
 }
+
+.clip-card-title {
+  grid-area: title;
+}
+
+.clip-card-button {
+  grid-area: button;
+
+}
+
 .search-container {
 
   display: flex;
