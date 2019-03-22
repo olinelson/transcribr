@@ -1,36 +1,74 @@
-import React from "react";
+import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link, withRouter } from "react-router-dom"
+
+import { DebounceInput } from 'react-debounce-input';
 
 const uuidv1 = require("uuid/v1");
 
-const ClipsContainer = props => {
+class ClipsContainer extends Component {
 
-  const saveButton = (c) => {
-    if (props.currentUser) {
-    //  return <button className="button clip-card-button" onClick={() => props.saveClip(c)}> Save </button>
+    state = {
+      clips: [],
+      filteredClips: []
+    }
 
-     for (let userClip of props.currentUser.user_clips){
-       console.log(userClip.clip_id, c.id)
+    componentDidMount = () => {
+      this.getAllClips()
+    }
+  
+
+    getAllClips = () => {
+      fetch("http://localhost:3000/api/v1/clips")
+        .then(r => r.json())
+        .then(r => this.setState({
+          clips: r,
+          filteredClips: r
+        }));
+    };
+
+     searchInputHandler = e => {
+       let input = e.target.value;
+       let result = [...this.state.clips].filter(c => c.name.includes(input));
+
+       this.setState({
+         filteredClips: result
+       });
+     };
+
+  saveButton = (c) => {
+    if (this.props.currentUser) {
+    //  return <button className="button clip-card-button" onClick={() => this.props.saveClip(c)}> Save </button>
+
+     for (let userClip of this.props.currentUser.user_clips){
+
        if (userClip.clip_id === c.id){
          return <button disabled className="button clip-card-button" > Saved </button>
        }
      }
-     return <button className="button clip-card-button" onClick={() => props.saveClip(c)}> Save </button>
+     return <button className="button clip-card-button" onClick={() => this.props.saveClip(c)}> Save </button>
     }else{
      return null
     }            
   }
 
-  console.log("in clips container",props)
-
-  return (
+render(){
+  console.log("clip cont",this.state)
+return (
     <div className="clips-container">
       <h1>Clips Index</h1>
       <div className="search-container">
-        <input placeholder="search clips..." onChange={props.filterClips} />
+
+        <DebounceInput
+            label="search clips"
+            placeholder="search clips..."
+            minLength = { 2 }
+            debounceTimeout = { 200 }
+            onChange={this.searchInputHandler}
+
+          />
       </div>
       <div className="clips-grid">
-        {props.clips.map(c => (
+        {this.state.filteredClips.map(c => (
           <div key={uuidv1()} className="clip-card">
             
             <img className="clip-image" src={c.gcloud_image_link}/>
@@ -43,14 +81,17 @@ const ClipsContainer = props => {
               </Link> 
               <small> Uploaded By: {c.author.email} </small>
               
-               {saveButton(c)}
+               {this.saveButton(c)}
           
-            {/* <button className="button" onClick={() => props.saveClip(c)}> Save </button> */}
+            {/* <button className="button" onClick={() => this.props.saveClip(c)}> Save </button> */}
           </div>
         ))}
       </div>
     </div>
   );
+}
+
+  
 };
 
 export default ClipsContainer;

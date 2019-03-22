@@ -20,7 +20,7 @@ class App extends Component {
     clips: [],
     users: [],
     filteredClips: [],
-    selectedClip: [],
+   
     currentUser: null
   };
 
@@ -45,7 +45,8 @@ class App extends Component {
   setCurrentUser = (response) => {
   
     this.setState({
-      currentUser: response.user
+      currentUser: response.user,
+   
     })
     localStorage.setItem("token", response.jwt)
   }
@@ -101,7 +102,7 @@ class App extends Component {
   };
 
   render() {
-
+    console.log("in app",this.state.clips)
 
     return (
         <Fragment>
@@ -130,8 +131,8 @@ class App extends Component {
              this.state.currentUser
            }
            saveClip={this.saveClip}
-          filterClips={this.filterClips}
-          clips={this.state.filteredClips}
+          // filterClips={this.filterClips}
+          clips={this.state.clips}
         />
 
         {/* <AddClipForm /> */}
@@ -165,7 +166,7 @@ class App extends Component {
 
 
     return (
-      <User  user={this.state.currentUser} users={this.state.users}/>
+      <User  currentUser={this.state.currentUser} users={this.state.users}/>
     );
   };
 

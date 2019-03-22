@@ -1,9 +1,31 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
+import { DebounceInput } from 'react-debounce-input';
+
 const uuidv1 = require("uuid/v1");
 
 class UserClipsContainer extends Component {
+
+  constructor(props){
+    super(props)
+    this.state= {
+      clips: props.currentUser.clips,
+      filteredClips: props.currentUser.clips,
+    }
+  }
+  
+
+  getAllClips = () => {
+    fetch("http://localhost:3000/api/v1/clips")
+      .then(r => r.json())
+      .then(r => this.setState({
+        clips: r,
+        filteredClips: r
+      }));
+  };
+
+ 
 
    unSaveClip = (clip) => {
         console.log("unsaving clip")
@@ -22,6 +44,12 @@ class UserClipsContainer extends Component {
 
     }
 
+    searchInputHandler = (e) => {
+      let query = e.target.value
+      let results = [...this.state.clips].filter(c => c.name.includes(query))
+      this.setState({filteredClips: results})
+    }
+
    deleteClip = (clip) => {
         console.log("deleting clip")
         let token = localStorage.getItem("token")
@@ -36,14 +64,23 @@ class UserClipsContainer extends Component {
     }
 
       render(){
+        console.log(this.state)
         return(
         <div className="clips-container">
           <h1>Saved Clips</h1>
           <div className="search-container">
-            <input placeholder="search clips..." onChange={this.props.filterClips} />
+            {/* <input placeholder="search clips..." onChange={this.searchInputHandler} /> */}
+            <DebounceInput
+            label="search clips"
+            placeholder="search words..."
+            minLength = { 2 }
+            debounceTimeout = { 200 }
+            onChange={this.searchInputHandler}
+
+          />
           </div>
           <div className="clips-grid">
-            {this.props.user.clips.map(c => (
+            {this.state.filteredClips.map(c => (
               <div key={uuidv1()} className="clip-card">
                 
                 <img className="clip-image" src={c.gcloud_image_link}/>
@@ -52,7 +89,7 @@ class UserClipsContainer extends Component {
                   <Link className = "clip-card-title" key = {uuidv1()} to = {`clips/${c.id}`} > {c.name}</Link> 
 
                   {c.author ? <small> Uploaded By: {c.author.email} </small> : null }
-                  {c.author_id === this.props.user.id ? 
+                  {c.author_id === this.props.currentUser.id ? 
                     < button className = "button clip-card-button" onClick = { () => this.deleteClip(c)} > Delete </button>
                     :
                     < button className = "button clip-card-button" onClick = {() => this.unSaveClip(c)} > Remove </button>
