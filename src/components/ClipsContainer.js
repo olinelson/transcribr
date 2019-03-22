@@ -49,7 +49,7 @@ class ClipsContainer extends Component {
     }else{
      return null
     }            
-  }
+  } 
 
 render(){
   console.log("clip cont",this.state)
@@ -95,3 +95,5 @@ return (
 };
 
 export default ClipsContainer;
+
+// changes
