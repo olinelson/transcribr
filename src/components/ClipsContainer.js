@@ -18,11 +18,11 @@ const ClipsContainer = props => {
             <img className="clip-image" src={c.gcloud_image_link}/>
 
            
-              {/* <Link 
+              <Link 
               className = "clip-card-title"
               key = {uuidv1()}
               to = {`clips/${c.id}`} > {c.name} 
-              </Link>  */}
+              </Link> 
               <small> Uploaded By: {c.author.email} </small>
               
              

@@ -9,12 +9,12 @@ const ClipsContainer = props => {
 
   return (
     <div className="clips-container">
-      <h1>Clips Index</h1>
+      <h1>My Clips</h1>
       <div className="search-container">
         <input placeholder="search clips..." onChange={props.filterClips} />
       </div>
       <div className="clips-grid">
-        {props.clips.map(c => (
+        {props.user.clips.map(c => (
           <div key={uuidv1()} className="clip-card">
             
             <img className="clip-image" src={c.gcloud_image_link}/>
