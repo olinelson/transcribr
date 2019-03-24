@@ -81,7 +81,7 @@ class UserClipsContainer extends Component {
     }
 
       render(){
-        console.log(this.state)
+
         return(
         <div className="clips-container">
           <h1>Saved Clips</h1>

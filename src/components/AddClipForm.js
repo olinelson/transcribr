@@ -38,9 +38,12 @@ class AddClipForm extends Component {
   
     return (
       <Fragment>
+        {this.props.currentUser ? 
+        
+      
 
         <div className="add-clip-form">
-          <h4>create episode</h4>
+          <h4>Upload Clip</h4>
           <form onSubmit={this.submitHandler}>
             <label>Name</label>
             <input name="name" />
@@ -58,6 +61,8 @@ class AddClipForm extends Component {
         />
           </form>
         </div>
+        : this.props.history.push(`/login`)
+        }
       </Fragment>
     );
   }

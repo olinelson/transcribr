@@ -21,7 +21,7 @@ class App extends Component {
     filteredClips: [],
    
     currentUser: null,
-    
+    currentUserClips: null
   };
 
   componentDidMount() {
@@ -40,7 +40,8 @@ class App extends Component {
         })
         .then(r => r.json())
         .then(r => this.setState({
-          currentUser: r
+          currentUser: r,
+          currentUserClips: r.clips
         }))
 
     }
@@ -61,36 +62,29 @@ class App extends Component {
     this.props.history.push("/")
   }
 
-  saveClip = (clip) => {
-    let token = localStorage.getItem("token")
-    let id = clip.id
-    fetch("http://localhost:3000/api/v1/user_clips", {
-      method: "POST",
-      body: JSON.stringify({
-         clip_id: id,
-       }),
-       headers: {
-         "Authorization": token,
-         'Content-Type': 'application/json'
-       },
-    })
-    .then(() => this.getAllClips)
-  }
+  // updateLocalClip = (clip) => {
+  //   let newUserClips = [...this.state.currentUserClips, clip]
 
+  //   this.setState({currentUserClips: newUserClips})
+  // }
 
-  // getAllClips = () => {
-  //   fetch("http://localhost:3000/api/v1/clips")
-  //     .then(r => r.json())
-  //     .then(r => this.setState({ clips: r, filteredClips: r }));
-  // };
+  // saveClip = (clip) => {
+  //   this.updateLocalClip(clip)
+  //   let token = localStorage.getItem("token")
+  //   let id = clip.id
+  //   fetch("http://localhost:3000/api/v1/user_clips", {
+  //     method: "POST",
+  //     body: JSON.stringify({
+  //        clip_id: id,
+  //      }),
+  //      headers: {
+  //        "Authorization": token,
+  //        'Content-Type': 'application/json'
+  //      },
+  //   })
+  //   // .then(() => this.getAllClips)
+  // }
 
-  //  getAllUsers = () => {
-  //    fetch("http://localhost:3000/api/v1/users")
-  //      .then(r => r.json())
-  //      .then(r => this.setState({
-  //        users: r
-  //      }));
-  //  };
 
   selectEpisodeToPlay = id => {
     let foundEpisode = this.state.clips.find(e => e.id == id);
@@ -131,10 +125,11 @@ class App extends Component {
     return (
       <Fragment>
         <ClipsContainer
-         
-           currentUser = {
-             this.state.currentUser
-           }
+          updateLocalClip={this.updateLocalClip}
+          //  currentUser = {
+          //    this.state.currentUser
+          //  }
+           currentUserClips={this.state.currentUserClips}
            saveClip={this.saveClip}
           // filterClips={this.filterClips}
           clips={this.state.clips}
@@ -163,7 +158,7 @@ class App extends Component {
     let id = match.params.id
     return (
      
-        <Clip id={id} />
+        <Clip currentUser={this.state.currentUser} id={id} />
      
     );
   };

@@ -35,24 +35,10 @@ class ClipsContainer extends Component {
        });
      };
 
-  saveButton = (c) => {
-    if (this.props.currentUser) {
-    //  return <button className="button clip-card-button" onClick={() => this.props.saveClip(c)}> Save </button>
 
-     for (let userClip of this.props.currentUser.user_clips){
-
-       if (userClip.clip_id === c.id){
-         return <button disabled className="button clip-card-button" > Saved </button>
-       }
-     }
-     return <button className="button clip-card-button" onClick={() => this.props.saveClip(c)}> Save </button>
-    }else{
-     return null
-    }            
-  } 
 
 render(){
-
+  console.log(this.state.clips)
 return (
 
     <div className="clips-container">
@@ -83,7 +69,7 @@ return (
               </Link> 
               <small> Uploaded By: {c.author.email} </small>
               
-               {this.saveButton(c)}
+               {/* {this.saveButton(c)} */}
           
             {/* <button className="button" onClick={() => this.props.saveClip(c)}> Save </button> */}
           </div>

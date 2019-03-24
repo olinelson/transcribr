@@ -4,6 +4,10 @@ import Words from "./Words";
 
 import { BeatLoader } from 'react-spinners';
 
+import {
+    withRouter
+} from "react-router-dom";
+
 
 
 class Clip extends Component {
@@ -12,6 +16,7 @@ class Clip extends Component {
     this.audio = React.createRef();
     this.state = {
         clip: null,
+        
         
     }
   }
@@ -27,7 +32,26 @@ class Clip extends Component {
       .then(r => r.json())
       
       .then(r => this.setState({clip: r,}))
+      
   }
+
+//   saveClip = () => {
+      
+//       let token = localStorage.getItem("token")
+//       let id = this.state.clip.id
+//       fetch("http://localhost:3000/api/v1/user_clips", {
+//           method: "POST",
+//           body: JSON.stringify({
+//               clip_id: id,
+//           }),
+//           headers: {
+//               "Authorization": token,
+//               'Content-Type': 'application/json'
+//           },
+//       })
+//     //   .then(this.props.history.push(`/users/${this.props.currentUser.id}`))
+
+//   }
 
 
 
@@ -44,6 +68,10 @@ class Clip extends Component {
       return <p>processing clip...</p>;
     }
   };
+
+
+
+
 
   showClip = () => {
       return (
@@ -62,6 +90,8 @@ class Clip extends Component {
             // autoPlay
             controls
           />
+          {/* {this.props.currentUser ? this.showSaveButton(): null } */}
+           
 
           {this.renderWords()}
         </div>
@@ -95,4 +125,5 @@ class Clip extends Component {
   }
 }
 
-export default Clip;
+export default withRouter(Clip);
+
