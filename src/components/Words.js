@@ -3,6 +3,7 @@ import Word from "./Word";
 
 import { DebounceInput } from 'react-debounce-input';
 
+import LoadingBar from "./LoadingBar";
 
 
 
@@ -19,7 +20,8 @@ class Words extends Component {
     super(props);
     this.state = {
       words: words,
-      filteredWords: words
+      filteredWords: words,
+      loading: true
     };
   }
 
@@ -49,6 +51,7 @@ class Words extends Component {
     // }
 
      searchInputHandler = e => {
+        this.setState({loading: true})
          let input = e.target.value;
          let oldWords = [...this.state.words];
 
@@ -61,7 +64,8 @@ class Words extends Component {
 
 
         this.setState({
-            filteredWords: newWords
+            filteredWords: newWords,
+            loading: false
         });
 
      }
@@ -69,13 +73,14 @@ class Words extends Component {
   render() {
     return (
       <Fragment>
+        
         <div className="search-container">
           {/* <h4>Search:</h4> */}
-        
+       
           <DebounceInput
             label="search words"
             placeholder="search words..."
-            minLength = { 2 }
+
             debounceTimeout = { 200 }
             onChange={this.searchInputHandler}
 
@@ -83,6 +88,7 @@ class Words extends Component {
           
         </div>
         <div className="words-container">
+
           {this.props.words ? this.showWords() : "no transcribed words yet"}
         </div>
       </Fragment>

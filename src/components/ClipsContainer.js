@@ -52,7 +52,7 @@ class ClipsContainer extends Component {
   } 
 
 render(){
-  console.log("clip cont",this.state)
+
 return (
     <div className="clips-container">
       <h1>Clips Index</h1>

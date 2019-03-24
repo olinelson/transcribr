@@ -10,24 +10,29 @@ class UserClipsContainer extends Component {
   constructor(props){
     super(props)
     this.state= {
-      clips: props.currentUser.clips,
-      filteredClips: props.currentUser.clips,
+      clips: [],
+      filteredClips: []
     }
+  }
+
+  componentDidMount= () => {
+    this.getUsersClips()
   }
   
 
-  getAllClips = () => {
-    fetch("http://localhost:3000/api/v1/clips")
+  getUsersClips = () => {
+    fetch(`http://localhost:3000/api/v1/users/${this.props.currentUser.id}`)
       .then(r => r.json())
       .then(r => this.setState({
-        clips: r,
-        filteredClips: r
+        clips: r.clips,
+        filteredClips: r.clips
       }));
   };
 
  
 
    unSaveClip = (clip) => {
+        this.deleteClipFromDom(clip.id)
         console.log("unsaving clip")
         let token = localStorage.getItem("token")
         let id = clip.id
@@ -44,6 +49,13 @@ class UserClipsContainer extends Component {
 
     }
 
+    deleteClipFromDom= (clipId) => {
+      let clips = [...this.state.filteredClips]
+      let newClips =  clips.filter(c => c.id != clipId)
+      console.log(newClips)
+      this.setState({filteredClips: newClips, clips: newClips})
+    }
+
     searchInputHandler = (e) => {
       let query = e.target.value
       let results = [...this.state.clips].filter(c => c.name.includes(query))
@@ -51,6 +63,7 @@ class UserClipsContainer extends Component {
     }
 
    deleteClip = (clip) => {
+        this.deleteClipFromDom(clip.id)
         console.log("deleting clip")
         let token = localStorage.getItem("token")
 
@@ -60,6 +73,10 @@ class UserClipsContainer extends Component {
                     "Authorization": token,
                 },
             })
+
+        
+
+
 
     }
 
@@ -72,7 +89,7 @@ class UserClipsContainer extends Component {
             {/* <input placeholder="search clips..." onChange={this.searchInputHandler} /> */}
             <DebounceInput
             label="search clips"
-            placeholder="search words..."
+            placeholder="search clips..."
             minLength = { 2 }
             debounceTimeout = { 200 }
             onChange={this.searchInputHandler}

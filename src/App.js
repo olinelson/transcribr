@@ -25,20 +25,24 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.getAllClips();
-    this.getAllUsers();
+    this.getCurrentUser()
+  }
+
+  getCurrentUser(){
     let token = localStorage.getItem("token")
-    if (token){
-      
+    if (token) {
+
       fetch("http://localhost:3000/api/v1/auto_login", {
-        method: "GET",
-        headers: {
-          "Authorization": token
-        }
-      })
-      .then(r => r.json())
-      .then(r => this.setState({currentUser: r}))
-      
+          method: "GET",
+          headers: {
+            "Authorization": token
+          }
+        })
+        .then(r => r.json())
+        .then(r => this.setState({
+          currentUser: r
+        }))
+
     }
   }
 
@@ -74,19 +78,19 @@ class App extends Component {
   }
 
 
-  getAllClips = () => {
-    fetch("http://localhost:3000/api/v1/clips")
-      .then(r => r.json())
-      .then(r => this.setState({ clips: r, filteredClips: r }));
-  };
+  // getAllClips = () => {
+  //   fetch("http://localhost:3000/api/v1/clips")
+  //     .then(r => r.json())
+  //     .then(r => this.setState({ clips: r, filteredClips: r }));
+  // };
 
-   getAllUsers = () => {
-     fetch("http://localhost:3000/api/v1/users")
-       .then(r => r.json())
-       .then(r => this.setState({
-         users: r
-       }));
-   };
+  //  getAllUsers = () => {
+  //    fetch("http://localhost:3000/api/v1/users")
+  //      .then(r => r.json())
+  //      .then(r => this.setState({
+  //        users: r
+  //      }));
+  //  };
 
   selectEpisodeToPlay = id => {
     let foundEpisode = this.state.clips.find(e => e.id == id);
@@ -102,12 +106,12 @@ class App extends Component {
   };
 
   render() {
-    console.log("in app",this.state.clips)
+
 
     return (
-        <Fragment>
+        <Fragment >
           <NavBar logout={this.logout} currentUser={this.state.currentUser} />
-          <div className="site-container">
+          <div className="site-container" >
             <Route exact path="/" component={this.Home} />
             <Route exact path="/clips" component={this.ClipsIndex} />
             <Route path="/clips/:id" component={this.ClipShow} />
@@ -127,6 +131,7 @@ class App extends Component {
     return (
       <Fragment>
         <ClipsContainer
+         
            currentUser = {
              this.state.currentUser
            }
@@ -155,9 +160,10 @@ class App extends Component {
 
   ClipShow = ({ match }) => {
     let found = this.state.clips.find(c => c.id == match.params.id);
+    let id = match.params.id
     return (
      
-        <Clip clip={found} />
+        <Clip id={id} />
      
     );
   };
@@ -173,7 +179,7 @@ class App extends Component {
   Upload = () => {
     return (
       <Fragment>
-        <AddClipForm getAllClips={this.getAllClips} currentUser={this.state.currentUser} />
+        <AddClipForm getCurrentUser={this.getCurrentUser} getAllClips={this.getAllClips} currentUser={this.state.currentUser} />
       </Fragment>
     );
   };

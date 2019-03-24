@@ -29,8 +29,8 @@ class AddClipForm extends Component {
       },
       body: formData
     }).then(() => this.setState({ fileUploading: false }))
-    .then(() => this.props.history.push("/"))
-     .then(() => this.props.getAllClips())
+    .then(() => this.props.history.push(`/users/${this.props.currentUser.id}`))
+     .then(() => this.props.getCurrentUser())
   }; // end of submitHandler
 
   render() {
