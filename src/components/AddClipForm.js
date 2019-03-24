@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
-import LoadingBar from "./LoadingBar";
+
+import { ClipLoader } from 'react-spinners';
 
 import { withRouter } from "react-router-dom";
 
@@ -28,16 +29,16 @@ class AddClipForm extends Component {
           "Authorization": token
       },
       body: formData
-    }).then(() => this.props.loaded())
+    }).then(() => this.setState({ fileUploading: false }))
     .then(() => this.props.history.push(`/users/${this.props.currentUser.id}`))
      .then(() => this.props.getCurrentUser())
   }; // end of submitHandler
 
   render() {
-    
+  
     return (
       <Fragment>
-        <LoadingBar loading={this.props.loading} />
+
         <div className="add-clip-form">
           <h4>create episode</h4>
           <form onSubmit={this.submitHandler}>
@@ -48,6 +49,13 @@ class AddClipForm extends Component {
             <label>Image</label>
             <input name="imageInput" type="file" />
             <button disabled={this.state.fileUploading}>submit</button>
+            <ClipLoader
+          // css={override}
+          sizeUnit={"px"}
+          size={150}
+          color={'#123abc'}
+          loading={this.state.fileUploading}
+        />
           </form>
         </div>
       </Fragment>

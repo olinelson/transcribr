@@ -3,7 +3,7 @@ import Word from "./Word";
 
 import { DebounceInput } from 'react-debounce-input';
 
-import LoadingBar from "./LoadingBar";
+import { BeatLoader } from 'react-spinners';
 
 
 
@@ -21,7 +21,7 @@ class Words extends Component {
     this.state = {
       words: words,
       filteredWords: words,
-      loading: true
+
     };
   }
 
@@ -36,40 +36,59 @@ class Words extends Component {
   };
 
      searchInputHandler = e => {
-        this.setState({loading: true})
-         let input = e.target.value;
-         let oldWords = [...this.state.words];
+       this.setState({loading: true})
 
-        let newWords = oldWords.filter(w => w.word.includes(input));
+       const query = e.target.value
+      console.log(e.target.value)
+      this.filterWords(query)
+        // this.setState(({loading: true})[this.filterWords(query)])
+         
+
+     }
+
+     filterWords = (query) => {
+       
+       
+        let oldWords = [...this.state.words];
+
+        let newWords = oldWords.filter(w => w.word.includes(query));
 
 
         this.setState({
-            filteredWords: newWords,
-            loading: false
-        });
+          filteredWords: newWords,
 
+        });
      }
 
   render() {
     return (
       <Fragment>
-        <LoadingBar  />
+        
         <div className="search-container">
           {/* <h4>Search:</h4> */}
        
-          <DebounceInput
+         <DebounceInput
             label="search words"
             placeholder="search words..."
             minLength = { 2 }
-            debounceTimeout = { 100 }
+            debounceTimeout = { 300 }
             onChange={this.searchInputHandler}
+        
+          /> 
+         
 
-          />
           
         </div>
         <div className="words-container">
 
-          {this.props.words ? this.showWords() : "no transcribed words yet"}
+          {this.props.words ? this.showWords() : 
+          <BeatLoader
+          // css={override}
+          sizeUnit={"px"}
+          size={150}
+          color={'#123abc'}
+          loading={true}
+        />}
         </div>
       </Fragment>
     );

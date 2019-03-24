@@ -21,7 +21,7 @@ class App extends Component {
     filteredClips: [],
    
     currentUser: null,
-    loading: true
+    
   };
 
   componentDidMount() {
@@ -179,7 +179,7 @@ class App extends Component {
   Upload = () => {
     return (
       <Fragment>
-        <AddClipForm loading={this.state.loading} getCurrentUser={this.getCurrentUser} getAllClips={this.getAllClips} currentUser={this.state.currentUser} />
+        <AddClipForm  getCurrentUser={this.getCurrentUser} getAllClips={this.getAllClips} currentUser={this.state.currentUser} />
       </Fragment>
     );
   };

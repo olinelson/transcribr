@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import ReactAudioPlayer from "react-audio-player";
 import Words from "./Words";
 
-import LoadingBar from "./LoadingBar";
+import { BeatLoader } from 'react-spinners';
 
 
 
@@ -12,6 +12,7 @@ class Clip extends Component {
     this.audio = React.createRef();
     this.state = {
         clip: null,
+        
     }
   }
 
@@ -25,7 +26,7 @@ class Clip extends Component {
       })
       .then(r => r.json())
       
-      .then(r => this.setState({clip: r}))
+      .then(r => this.setState({clip: r,}))
   }
 
 
@@ -46,6 +47,8 @@ class Clip extends Component {
 
   showClip = () => {
       return (
+     
+           
         <div className="clip-show"  >
         
           <img className="clip-show-image" alt={this.state.clip.name} src={this.state.clip.gcloud_image_link}/>
@@ -62,6 +65,7 @@ class Clip extends Component {
 
           {this.renderWords()}
         </div>
+       
       );
     
   };
@@ -74,7 +78,16 @@ class Clip extends Component {
 
         <div className="player-container"  >
 
-        {this.state.clip === null ? "loading" : this.showClip()  }
+        {this.state.clip === null ? 
+            <BeatLoader
+          // css={override}
+          sizeUnit={"px"}
+          size={150}
+          color={'#123abc'}
+          loading={true}
+        />
+            
+            : this.showClip()  }
         </div>
 
       </Fragment>
