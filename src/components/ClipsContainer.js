@@ -54,7 +54,9 @@ class ClipsContainer extends Component {
 render(){
 
 return (
+
     <div className="clips-container">
+
       <h1>Clips Index</h1>
       <div className="search-container">
 

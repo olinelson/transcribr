@@ -187,3 +187,7 @@ nav a {
 .words-container {
   grid-area: words;
 }
+
+.special {
+  background-color: red;
+}

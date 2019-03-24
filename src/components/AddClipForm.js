@@ -28,7 +28,7 @@ class AddClipForm extends Component {
           "Authorization": token
       },
       body: formData
-    }).then(() => this.setState({ fileUploading: false }))
+    }).then(() => this.props.loaded())
     .then(() => this.props.history.push(`/users/${this.props.currentUser.id}`))
      .then(() => this.props.getCurrentUser())
   }; // end of submitHandler
@@ -37,7 +37,7 @@ class AddClipForm extends Component {
     
     return (
       <Fragment>
-        <LoadingBar loading={this.state.fileUploading} />
+        <LoadingBar loading={this.props.loading} />
         <div className="add-clip-form">
           <h4>create episode</h4>
           <form onSubmit={this.submitHandler}>

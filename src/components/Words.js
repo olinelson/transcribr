@@ -35,30 +35,10 @@ class Words extends Component {
     ));
   };
 
-    // searchInputHandler = e =>{
-        
-    //     let input = e.target.value;
-       
-    // debounce(() => {
-        
-    //        let oldWords = [...this.state.words];
-    //        let newWords = oldWords.filter(w => w.word.includes(input));
-
-
-    //        this.setState({ filteredWords: newWords });
-    // }, 600)()
-    
-    // }
-
      searchInputHandler = e => {
         this.setState({loading: true})
          let input = e.target.value;
          let oldWords = [...this.state.words];
-
-        //  if (input === ""){
-        //      this.setState({filteredWords: oldWords})
-        //      return
-        //  }
 
         let newWords = oldWords.filter(w => w.word.includes(input));
 
@@ -73,15 +53,15 @@ class Words extends Component {
   render() {
     return (
       <Fragment>
-        
+        <LoadingBar  />
         <div className="search-container">
           {/* <h4>Search:</h4> */}
        
           <DebounceInput
             label="search words"
             placeholder="search words..."
-
-            debounceTimeout = { 200 }
+            minLength = { 2 }
+            debounceTimeout = { 100 }
             onChange={this.searchInputHandler}
 
           />

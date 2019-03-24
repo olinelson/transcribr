@@ -18,10 +18,10 @@ import User from "./components/User"
 class App extends Component {
   state = {
     clips: [],
-    users: [],
     filteredClips: [],
    
-    currentUser: null
+    currentUser: null,
+    loading: true
   };
 
   componentDidMount() {
@@ -179,7 +179,7 @@ class App extends Component {
   Upload = () => {
     return (
       <Fragment>
-        <AddClipForm getCurrentUser={this.getCurrentUser} getAllClips={this.getAllClips} currentUser={this.state.currentUser} />
+        <AddClipForm loading={this.state.loading} getCurrentUser={this.getCurrentUser} getAllClips={this.getAllClips} currentUser={this.state.currentUser} />
       </Fragment>
     );
   };
