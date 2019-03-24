@@ -103,7 +103,7 @@ class UserClipsContainer extends Component {
                 <img className="clip-image" src={c.gcloud_image_link}/>
 
                 
-                  <Link className = "clip-card-title" key = {uuidv1()} to = {`clips/${c.id}`} > {c.name}</Link> 
+                  <Link className = "clip-card-title" key = {uuidv1()} to = {`/clips/${c.id}`} > {c.name}</Link> 
 
                   {c.author ? <small> Uploaded By: {c.author.email} </small> : null }
                   {c.author_id === this.props.currentUser.id ? 
