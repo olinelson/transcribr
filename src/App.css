@@ -17,9 +17,7 @@ button {
   color: white;
   font-weight: bold;
 }
-/* button:hover {
-  cursor: pointer;
-} */
+
 
 button:disabled {
   color: grey;
@@ -111,7 +109,7 @@ nav a {
 .clip-card {
    display: grid;
    height: auto;
-   grid-template-columns: 1fr 1fr 7fr 1fr;
+   grid-template-columns: 1fr 7fr 1fr ;
    align-items: center;
    grid-gap: 1rem;
    grid-template-areas:
@@ -121,8 +119,8 @@ nav a {
 }
 
 .clip-image {
-  height: auto;
-  width: 100%;
+  max-height: 5rem;
+  justify-self: center;
   grid-area: image;
 }
 
@@ -159,7 +157,8 @@ nav a {
   max-width: 100rem;
   display: grid;
   justify-items: center;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: auto 1fr 1fr 1fr;
+  
   grid-template-areas: 
   "image heading . . "
   "player player player player "
@@ -175,8 +174,10 @@ nav a {
 
 .clip-show-image {
   grid-area: image;
-  width: 100%;
-  height: auto;
+  width: auto;
+  height: 100%;
+  max-height: 10rem;
+  justify-self: left;
 }
 
 .search-container {

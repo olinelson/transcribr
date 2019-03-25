@@ -140,18 +140,7 @@ class App extends Component {
     );
   }; //end of Home
 
-  // ClipsIndex = () => {
-  //   return (
-  //     <Fragment>
-  //       <ClipsContainer
-  //         currentUser={this.state.currentUser}
-  //         filterClips={this.filterClips}
-  //         clips={this.state.filteredClips}
-  //       />
-  //       <AddClipForm />
-  //     </Fragment>
-  //   );
-  // };
+
 
   ClipShow = ({ match }) => {
     let found = this.state.clips.find(c => c.id == match.params.id);
@@ -186,11 +175,6 @@ class App extends Component {
     );
   };
 
-  //  Login = () => {
-  //    return ( <LoginForm / >
-       
-  //    );
-  //  };
 
 
 
