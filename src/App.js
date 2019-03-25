@@ -27,7 +27,6 @@ class App extends Component {
     this.getAllClips()
   }
 
-
   // auto login method that sets current user if one has already logged in
   getCurrentUser(){
     let token = localStorage.getItem("token")
@@ -47,8 +46,9 @@ class App extends Component {
     }
   }
 
-  // gests all clips and adds them to state for use in clips container
+  // gests all clips and adds them to state for use in clips container...
   getAllClips(){
+    console.log('getting allclips')
     fetch("http://localhost:3000/api/v1/clips", {
       method: "GET"
     })
@@ -60,15 +60,19 @@ class App extends Component {
   }
 
 
-
+  // for use with the login form component
   setCurrentUser = (response) => {
+    console.log("setting current user")
   
     this.setState({
       currentUser: response.user,
    
     })
     localStorage.setItem("token", response.jwt)
+
+
   }
+
 
   logout = () => {
     localStorage.removeItem("token")
@@ -84,19 +88,6 @@ class App extends Component {
    }
 
 
-
-  selectEpisodeToPlay = id => {
-    let foundEpisode = this.state.clips.find(e => e.id == id);
-
-    this.setState({ playingEpisode: foundEpisode });
-  };
-
-  filterClips = e => {
-    let input = e.target.value;
-    let result = [...this.state.clips].filter(c => c.name.includes(input));
-
-    this.setState({ filteredClips: result });
-  };
 
   render() {
 
@@ -142,18 +133,14 @@ class App extends Component {
 
 
   ClipShow = ({ match }) => {
-    // let found = this.state.clips.find(c => c.id == match.params.id);
+    // id used to find clip in clip component with its own fetch request
     let id = match.params.id
     return (
-     
         <Clip currentUser={this.state.currentUser}  id={id}/>
-     
     );
   };
 
   UserShow = ({match}) => {
-
-
     return (
       <User getCurrentUser={this.getCurrentUser}  currentUser={this.state.currentUser} />
     );
@@ -166,6 +153,7 @@ class App extends Component {
       </Fragment>
     );
   };
+
   SignUp = () => {
     return (
       <Fragment>

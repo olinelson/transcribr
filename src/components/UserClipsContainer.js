@@ -8,6 +8,7 @@ const uuidv1 = require("uuid/v1");
 class UserClipsContainer extends Component {
 
   constructor(props){
+  
     super(props)
     this.state= {
       clips: [],
@@ -21,6 +22,7 @@ class UserClipsContainer extends Component {
   
 
   getUsersClips = () => {
+    console.log('getting users clips')
     fetch(`http://localhost:3000/api/v1/users/${this.props.currentUser.id}`)
       .then(r => r.json())
       .then(r => this.setState({

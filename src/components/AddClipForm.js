@@ -39,10 +39,8 @@ class AddClipForm extends Component {
     return (
       <Fragment>
         {this.props.currentUser ? 
-        
-      
 
-        <div className="add-clip-form">
+        <div className="add-clip-form-container">
           <h4>Upload Clip</h4>
           <form onSubmit={this.submitHandler}>
             <label>Name</label>

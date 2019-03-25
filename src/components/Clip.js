@@ -89,46 +89,51 @@ class Clip extends Component {
       return (
      
            
-        <div className="clip-show"  >
+        <div className="clip-show">
         
           <img className="clip-show-image" alt={this.state.clip.name} src={this.state.clip.gcloud_image_link}/>
-          <h1>{this.state.clip.name}</h1>
+          <div className="clip-show-info">
+            <h1>{this.state.clip.name}</h1>
+            {
+            this.state.saved === true ? 
+            < button className = "clip-show-save-button" disabled > saved </button> 
+            : <button className="clip-show-save-button" onClick={this.saveClip}> save </button>
+          }
+          </div>
+          
           
           <ReactAudioPlayer
           
             className="audio-player"
             ref={this.audio}
             src={this.state.clip.gcloud_media_link}
-            // autoPlay
             controls
           />
-          {/* {this.props.currentUser ? this.showSaveButton(): null } */}
-          {this.state.saved === true ? <button disabled > saved </button> : <button onClick={this.saveClip}> save </button>}
+
+          
            
 
           {this.renderWords()}
         </div>
        
       );
+        
     
   };
 
-  render() {
-    console.log("in clip",this.state)
+  render(){
 
-    return (
+
+    return(
       <Fragment >
-
-
         <div className="player-container"  >
 
         {this.state.clip === null ? 
             <BeatLoader
-          // css={override}
-          sizeUnit={"px"}
-          size={150}
-          color={'#123abc'}
-          loading={true}
+            sizeUnit={"px"}
+            size={150}
+            color={'#123abc'}
+            loading={true}
         />
             
             : this.showClip()  }

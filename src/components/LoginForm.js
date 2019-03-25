@@ -29,22 +29,28 @@ import { withRouter } from "react-router-dom";
         .then(r => {
 
             if (r.errors){
-                alert(r.errors)
+               return alert(r.errors)
             }else{
-                this.props.history.push(`users/${r.user.id}`)
+                
                 this.props.setCurrentUser(r)
                 }
             
         })
+        // .then(r => this.props.history.push(`/`))
     }
+
+
+    
 
     render(){
        
         return (
-    <div>
-      <form onSubmit={this.submitHandler}>
-          <label>Email</label>
+    <div className="login-container">
+        <h1>Login</h1>
+      <form className="login-form" onSubmit={this.submitHandler}>
+
           <input 
+            className="email-input"
             type="email" 
             placeholder="olaf@olafson.com" 
             value={this.state.email}
@@ -52,16 +58,19 @@ import { withRouter } from "react-router-dom";
             >
           </input>
 
-          < label>Password</label>
+
 
           <input 
+            className = "password-input"
             type="password"
             placeholder="your password" 
             value={this.state.password} 
             onChange={(e)=> this.setState({password: e.target.value})}
             >
           </input>
-          <button> Login </button>
+          <button className="login-button"> Login </button>
+          <button className="signup-button"> Sign Up </button>
+
       </form>
     </div>
   )
