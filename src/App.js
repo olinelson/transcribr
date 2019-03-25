@@ -73,28 +73,6 @@ class App extends Component {
     this.props.history.push("/")
   }
 
-  // updateLocalClip = (clip) => {
-  //   let newUserClips = [...this.state.currentUserClips, clip]
-
-  //   this.setState({currentUserClips: newUserClips})
-  // }
-
-  // saveClip = (clip) => {
-  //   this.updateLocalClip(clip)
-  //   let token = localStorage.getItem("token")
-  //   let id = clip.id
-  //   fetch("http://localhost:3000/api/v1/user_clips", {
-  //     method: "POST",
-  //     body: JSON.stringify({
-  //        clip_id: id,
-  //      }),
-  //      headers: {
-  //        "Authorization": token,
-  //        'Content-Type': 'application/json'
-  //      },
-  //   })
-  //   // .then(() => this.getAllClips)
-  // }
 
 
   selectEpisodeToPlay = id => {
@@ -167,7 +145,7 @@ class App extends Component {
 
 
     return (
-      <User  currentUser={this.state.currentUser} />
+      <User getCurrentUser={this.getCurrentUser}  currentUser={this.state.currentUser} />
     );
   };
 

@@ -16,7 +16,7 @@ class Clip extends Component {
     this.audio = React.createRef();
     this.state = {
         clip: null,
-        
+        saved: false
         
     }
   }
@@ -61,7 +61,7 @@ class Clip extends Component {
               'Content-Type': 'application/json'
           },
       })
-      .then(this.props.history.push(`/users/${this.props.currentUser.id}`))
+      .then(() => this.setState({saved: true}))
 
   }
 

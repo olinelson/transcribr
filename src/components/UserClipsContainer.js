@@ -45,7 +45,7 @@ class UserClipsContainer extends Component {
                     "Authorization": token,
                     'Content-Type': 'application/json'
                 },
-            })
+            }).then(() => this.props.getCurrentUser())
 
     }
 
