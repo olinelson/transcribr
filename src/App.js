@@ -19,13 +19,12 @@ class App extends Component {
   state = {
     clips: [],
     filteredClips: [],
-   
     currentUser: null,
-    currentUserClips: null
   };
 
   componentDidMount() {
     this.getCurrentUser()
+    this.getAllClips()
   }
 
   getCurrentUser(){
@@ -41,11 +40,23 @@ class App extends Component {
         .then(r => r.json())
         .then(r => this.setState({
           currentUser: r,
-          currentUserClips: r.clips
+          
         }))
 
     }
   }
+
+  getAllClips(){
+    fetch("http://localhost:3000/api/v1/clips", {
+      method: "GET"
+    })
+    .then( r => r.json())
+    .then(r => this.setState({
+      clips: r
+    }))
+  }
+
+
 
   setCurrentUser = (response) => {
   
@@ -101,7 +112,7 @@ class App extends Component {
 
   render() {
 
-
+    console.log("in app", this.state)
     return (
         <Fragment >
           <NavBar logout={this.logout} currentUser={this.state.currentUser} />
@@ -143,11 +154,11 @@ class App extends Component {
 
 
   ClipShow = ({ match }) => {
-    let found = this.state.clips.find(c => c.id == match.params.id);
+    // let found = this.state.clips.find(c => c.id == match.params.id);
     let id = match.params.id
     return (
      
-        <Clip currentUser={this.state.currentUser} id={id} />
+        <Clip currentUser={this.state.currentUser}  id={id}/>
      
     );
   };
@@ -156,7 +167,7 @@ class App extends Component {
 
 
     return (
-      <User  currentUser={this.state.currentUser} users={this.state.users}/>
+      <User  currentUser={this.state.currentUser} />
     );
   };
 

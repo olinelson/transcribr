@@ -32,26 +32,38 @@ class Clip extends Component {
       .then(r => r.json())
       
       .then(r => this.setState({clip: r,}))
+
+      .then(() => this.isClipSaved())
       
   }
 
-//   saveClip = () => {
-      
-//       let token = localStorage.getItem("token")
-//       let id = this.state.clip.id
-//       fetch("http://localhost:3000/api/v1/user_clips", {
-//           method: "POST",
-//           body: JSON.stringify({
-//               clip_id: id,
-//           }),
-//           headers: {
-//               "Authorization": token,
-//               'Content-Type': 'application/json'
-//           },
-//       })
-//     //   .then(this.props.history.push(`/users/${this.props.currentUser.id}`))
+  isClipSaved = () => {
+    let currentUserClips = this.props.currentUser.clips 
+    for( let clip of currentUserClips){
+      if (clip.id === this.state.clip.id){
+        this.setState({saved: true})
+      }
+    }
+    
+  }
 
-//   }
+  saveClip = () => {
+      
+      let token = localStorage.getItem("token")
+      let id = this.state.clip.id
+      fetch("http://localhost:3000/api/v1/user_clips", {
+          method: "POST",
+          body: JSON.stringify({
+              clip_id: id,
+          }),
+          headers: {
+              "Authorization": token,
+              'Content-Type': 'application/json'
+          },
+      })
+      .then(this.props.history.push(`/users/${this.props.currentUser.id}`))
+
+  }
 
 
 
@@ -91,6 +103,7 @@ class Clip extends Component {
             controls
           />
           {/* {this.props.currentUser ? this.showSaveButton(): null } */}
+          {this.state.saved === true ? <button disabled > saved </button> : <button onClick={this.saveClip}> save </button>}
            
 
           {this.renderWords()}
@@ -101,6 +114,7 @@ class Clip extends Component {
   };
 
   render() {
+    console.log("in clip",this.state)
 
     return (
       <Fragment >

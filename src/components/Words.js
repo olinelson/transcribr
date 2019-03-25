@@ -49,7 +49,7 @@ class Words extends Component {
 
      filterWords = (e) => {
         const query = e.target.value
-        console.log(e)
+
         let oldWords = [...this.state.words];
 
         let newWords = oldWords.filter(w => w.word.includes(query));
@@ -76,7 +76,7 @@ class Words extends Component {
 
      previousPageHandler = () => {
        if (this.state.wordSelectionStart <= 0) {
-         console.log("you are back to the beginning")
+
 
        } else {
          this.setState({
@@ -88,7 +88,7 @@ class Words extends Component {
      }
 
   render() {
-    console.log(this.state)
+
     return (
       <Fragment>
         
