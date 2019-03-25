@@ -14,7 +14,7 @@ import LoginForm from "./components/LoginForm"
 import User from "./components/User"
 
 
-
+// filtered clips and clips used for results in clips container
 class App extends Component {
   state = {
     clips: [],
@@ -27,6 +27,8 @@ class App extends Component {
     this.getAllClips()
   }
 
+
+  // auto login method that sets current user if one has already logged in
   getCurrentUser(){
     let token = localStorage.getItem("token")
     if (token) {
@@ -40,19 +42,20 @@ class App extends Component {
         .then(r => r.json())
         .then(r => this.setState({
           currentUser: r,
-          
         }))
 
     }
   }
 
+  // gests all clips and adds them to state for use in clips container
   getAllClips(){
     fetch("http://localhost:3000/api/v1/clips", {
       method: "GET"
     })
     .then( r => r.json())
     .then(r => this.setState({
-      clips: r
+      clips: r,
+      filteredClips: r
     }))
   }
 
@@ -72,6 +75,13 @@ class App extends Component {
     this.setState({currentUser: null})
     this.props.history.push("/")
   }
+
+  // this gets called by clips container to filter the clips shown as a result of the search bar
+   filterClips = (result) => {
+     this.setState({
+       filteredClips: result
+     })
+   }
 
 
 
@@ -110,17 +120,17 @@ class App extends Component {
     );
   }
 
+ 
+
+
+
   Home = () => {
     return (
       <Fragment>
         <ClipsContainer
-          updateLocalClip={this.updateLocalClip}
-          //  currentUser = {
-          //    this.state.currentUser
-          //  }
-           currentUserClips={this.state.currentUserClips}
-           saveClip={this.saveClip}
-          // filterClips={this.filterClips}
+          filterClips={this.filterClips}
+
+          filteredClips={this.state.filteredClips}
           clips={this.state.clips}
         />
 

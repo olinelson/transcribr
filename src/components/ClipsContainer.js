@@ -5,40 +5,16 @@ import { DebounceInput } from 'react-debounce-input';
 
 const uuidv1 = require("uuid/v1");
 
-class ClipsContainer extends Component {
+const ClipsContainer = (props) => {
 
-    state = {
-      clips: [],
-      filteredClips: []
-    }
-
-    componentDidMount = () => {
-      this.getAllClips()
-    }
-  
-
-    getAllClips = () => {
-      fetch("http://localhost:3000/api/v1/clips")
-        .then(r => r.json())
-        .then(r => this.setState({
-          clips: r,
-          filteredClips: r
-        }));
-    };
-
-     searchInputHandler = e => {
+    const searchInputHandler = e => {
        let input = e.target.value;
-       let result = [...this.state.clips].filter(c => c.name.includes(input));
+       let result = [...props.clips].filter(c => c.name.includes(input));
 
-       this.setState({
-         filteredClips: result
-       });
+       props.filterClips(result)
      };
 
 
-
-render(){
-  console.log(this.state.clips)
 return (
 
     <div className="clips-container">
@@ -50,13 +26,13 @@ return (
             label="search clips"
             placeholder="search clips..."
             minLength = { 2 }
-            debounceTimeout = { 200 }
-            onChange={this.searchInputHandler}
+            debounceTimeout = { 300 }
+            onChange={searchInputHandler}
 
           />
       </div>
       <div className="clips-grid">
-        {this.state.filteredClips.map(c => (
+        {props.filteredClips.map(c => (
           <div key={uuidv1()} className="clip-card">
             
             <img className="clip-image" src={c.gcloud_image_link}/>
@@ -68,16 +44,13 @@ return (
               to = {`clips/${c.id}`} > {c.name} 
               </Link> 
               <small> Uploaded By: {c.author.email} </small>
-              
-               {/* {this.saveButton(c)} */}
+            
           
-            {/* <button className="button" onClick={() => this.props.saveClip(c)}> Save </button> */}
           </div>
         ))}
       </div>
     </div>
   );
-}
 
   
 };
