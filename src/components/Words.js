@@ -107,7 +107,7 @@ class Words extends Component {
         />
 
        
-          {this.state.words.length >= 0 ? null :
+          {this.state.words.length >= 0 ? 
           <DebounceInput
             label="search words"
             placeholder="search words..."
@@ -117,7 +117,7 @@ class Words extends Component {
             value={this.state.searchInput}
         
           /> 
-          
+          : null
           }
          
 
@@ -132,6 +132,7 @@ class Words extends Component {
 
           {this.state.searchInput === "" ?
           <Fragment>
+          
             <button className="word-page-button word-page-back-button" onClick={this.previousPageHandler}> previous page </button>
           <button className="word-page-button word-page-forward-button" onClick={this.nextPageHandler}> next page </button>
          </Fragment>
@@ -140,7 +141,7 @@ class Words extends Component {
 
         <div className="words-container">
 
-          {this.props.words ? this.showWords() : 
+          {this.state.words ? this.showWords() : 
           <BeatLoader
           // css={override}
           sizeUnit={"px"}
