@@ -118,13 +118,7 @@ class Words extends Component {
         
           /> 
 
-          {this.state.searchInput === "" ?
-          <div>
-            <button onClick={this.previousPageHandler}> previous page </button>
-          <button onClick={this.nextPageHandler}> next page </button>
-          </div>
-          : null
-        }
+        
 
           
           
@@ -132,6 +126,15 @@ class Words extends Component {
 
           
         </div>
+
+          {this.state.searchInput === "" ?
+          <Fragment>
+            <button className="word-page-button word-page-back-button" onClick={this.previousPageHandler}> previous page </button>
+          <button className="word-page-button word-page-forward-button" onClick={this.nextPageHandler}> next page </button>
+         </Fragment>
+          : null
+        }
+
         <div className="words-container">
 
           {this.props.words ? this.showWords() : 

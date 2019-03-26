@@ -92,11 +92,8 @@ nav a {
 }
 
 .words-container{
-  margin-top: 2rem;
-  max-width: 70rem;
   display: flex;
   flex-wrap: wrap;
-  
 }
 
 .word{
@@ -157,7 +154,11 @@ nav a {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  flex-direction: column;
+  width: 100%;
 }
+
 
  input {
   height: 2rem;
@@ -177,17 +178,36 @@ nav a {
   max-width: 100rem;
   display: grid;
   justify-items: center;
-  grid-template-columns: auto 1fr 1fr 1fr;
+  grid-template-columns: 1fr 3fr 3fr 1fr;
 
   grid-template-areas: 
   "image info info . "
+
   "player player player player "
   "search search search search "
-  "words words words words"
+  "back-button words words forward-button"
   ;
   grid-gap:1rem ;
 
 }
+.word-page-back-button {
+  grid-area: back-button;
+
+}
+
+.word-page-forward-button {
+  grid-area: forward-button;
+
+}
+
+.word-page-button {
+height: 100%;
+width: 100%;
+background-color: white;
+color: black;
+border: 1px solid #4747475d;
+}
+
 .clip-show-info {
   grid-area: info;
   height: 100%;
@@ -218,11 +238,13 @@ nav a {
 
 .search-container {
   grid-area: search;
+
   
 }
 
 .words-container {
   grid-area: words;
+
 }
 
 .special {
