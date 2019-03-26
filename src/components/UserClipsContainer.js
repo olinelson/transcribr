@@ -19,8 +19,7 @@ class UserClipsContainer extends Component {
  
 
    unSaveClip = (clip) => {
-        // this.deleteClipFromDom(clip.id)
-        console.log("unsaving clip")
+       
         let token = localStorage.getItem("token")
         let id = clip.id
         fetch("http://localhost:3000/api/v1/user_clips/unsave", {
@@ -33,11 +32,12 @@ class UserClipsContainer extends Component {
                     'Content-Type': 'application/json'
                 },
             })
+            .then(() => this.props.getCurrentUser())
 
     }
 
       getUsersClips = () => {
-             console.log('getting users clips')
+
              fetch(`http://localhost:3000/api/v1/users/${this.props.currentUser.id}`)
                .then(r => r.json())
                .then(r => this.setState({
@@ -59,7 +59,7 @@ class UserClipsContainer extends Component {
     unSaveClipHandler = (c) => {
       let clips = this.state.filteredClips
       let result = clips.filter(clip => clip.id !== c.id)
-      console.log(result)
+
       this.setState({
         clips: result,
         filteredClips: result,
@@ -68,10 +68,10 @@ class UserClipsContainer extends Component {
     }
 
     deleteClipHandler = (c) =>{
-      // e.target.syle.
+
       let clips = this.state.filteredClips
       let result = clips.filter(clip => clip.id !== c.id)
-      console.log(result)
+
       this.setState({
         clips: result,
         filteredClips: result,
@@ -80,8 +80,6 @@ class UserClipsContainer extends Component {
     }
 
     deleteClip = (clip) => {
-
-        console.log("deleting clip")
         let token = localStorage.getItem("token")
 
         fetch(`http://localhost:3000/api/v1/clips/${clip.id}`, {

@@ -26,7 +26,8 @@ class App extends Component {
   }
 
   // auto login method that sets current user if one has already logged in
-  getCurrentUser(){
+  getCurrentUser= () => {
+    console.log("getting current user")
     let token = localStorage.getItem("token")
     if (token) {
 
@@ -40,7 +41,7 @@ class App extends Component {
         .then(r => this.setState({
           currentUser: r,
         }))
-        .then( () => this.getUsersClips())
+
 
     }
   }
@@ -118,20 +119,20 @@ class App extends Component {
     // id used to find clip in clip component with its own fetch request
     let id = match.params.id
     return (
-        <Clip getUsersClips={this.getUsersClips} currentUser={this.state.currentUser}  id={id}/>
+        <Clip  
+        currentUser={this.state.currentUser}
+        id={id}
+        getCurrentUser={this.getCurrentUser}
+        />
     );
   };
 
   UserShow = ({match}) => {
     return (
       <User
-       getUsersClips={this.getUsersClips}
-       setFilteredUsersClips={this.setFilteredUsersClips} 
-       getCurrentUser={this.getCurrentUser} 
-       usersClips={this.state.usersClips} 
-       usersFilteredClips={this.state.usersFilteredClips} 
        currentUser={this.state.currentUser}
-       getAllClips={this.getAllClips}
+       getCurrentUser={this.getCurrentUser}
+      
         />
     );
   };

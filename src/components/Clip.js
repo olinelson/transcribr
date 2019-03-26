@@ -16,7 +16,7 @@ class Clip extends Component {
     this.audio = React.createRef();
     this.state = {
         clip: null,
-        saved: false
+
         
     }
   }
@@ -30,22 +30,27 @@ class Clip extends Component {
         method: "GET",
       })
       .then(r => r.json())
-      
       .then(r => this.setState({clip: r,}))
 
-      .then(() => this.isClipSaved())
       
   }
 
-  isClipSaved = () => {
-    let currentUserClips = this.props.currentUser.clips 
-    for( let clip of currentUserClips){
+    showButtonIfSaved =  () =>{
+      let currentUserClips = this.props.currentUser.clips 
+      for( let clip of currentUserClips){
+        console.log("in the loop", clip.id)
       if (clip.id === this.state.clip.id){
-        this.setState({saved: true})
+        
+        return (
+          <button disabled> saved </button>
+        )
+
       }
     }
-    
-  }
+    return ( 
+      <button onClick={this.saveClip}> save </button>
+    )
+    }
 
   saveClip = () => {
       
@@ -61,8 +66,8 @@ class Clip extends Component {
               'Content-Type': 'application/json'
           },
       })
-      .then(() => this.setState({saved: true}))
-      .then(()=> this.props.getUsersClips())
+      .then(() => this.props.getCurrentUser())
+
 
   }
 
@@ -96,9 +101,9 @@ class Clip extends Component {
           <div className="clip-show-info">
             <h1>{this.state.clip.name}</h1>
             {
-            this.state.saved === true ? 
-            < button className = "clip-show-save-button" disabled > saved </button> 
-            : <button className="clip-show-save-button" onClick={this.saveClip}> save </button>
+            this.props.currentUser === null ? 
+            null
+            : this.showButtonIfSaved()
           }
           </div>
           
