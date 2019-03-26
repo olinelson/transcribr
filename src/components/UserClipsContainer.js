@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import { DebounceInput } from 'react-debounce-input';
+import { BeatLoader } from "react-spinners";
 
 const uuidv1 = require("uuid/v1");
 
@@ -9,7 +10,8 @@ class UserClipsContainer extends Component {
 
   state = {
     clips: [],
-    filteredClips: []
+    filteredClips: [],
+    loading: true
   }
 
   componentDidMount = () => {
@@ -43,7 +45,8 @@ class UserClipsContainer extends Component {
                .then(r => r.json())
                .then(r => this.setState({
                  clips: r.clips,
-                 filteredClips: r.clips
+                 filteredClips: r.clips,
+                 loading: false
                }));
            };
 
@@ -122,6 +125,11 @@ class UserClipsContainer extends Component {
           />
           </div>
           <div className="clips-grid">
+            {this.state.loading === true ?
+            <BeatLoader/>
+            : null
+          }
+
             {this.state.filteredClips.map(c => (
               <div key={uuidv1()} className="clip-card">
                 

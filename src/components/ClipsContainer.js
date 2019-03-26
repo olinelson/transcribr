@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Link, withRouter } from "react-router-d
 
 import { DebounceInput } from 'react-debounce-input';
 
+import { BeatLoader } from 'react-spinners';
+
 const uuidv1 = require("uuid/v1");
 
 class ClipsContainer extends Component {
@@ -10,6 +12,7 @@ class ClipsContainer extends Component {
     state = { 
       clips: [],
       filteredClips: [],
+      loading: true
     }
 
     searchInputHandler = e => {
@@ -30,7 +33,8 @@ class ClipsContainer extends Component {
           .then(r => r.json())
           .then(r => this.setState({
             clips: r,
-            filteredClips: r
+            filteredClips: r,
+            loading: false
           }))
 
 
@@ -38,7 +42,7 @@ class ClipsContainer extends Component {
       }
 
       showClips = () => {
-        console.log("hellos")
+
         if (this.state.filteredClips){
           return (
           this.state.filteredClips.map(c => (
@@ -59,8 +63,6 @@ class ClipsContainer extends Component {
           </div>
         ))
           )
-        }else{
-          return "loading"
         }
       }
 
@@ -87,6 +89,10 @@ return (
           />
       </div>
       <div className="clips-grid">
+        {this.state.loading === true ?
+        <BeatLoader/>
+        : null
+      }
         {this.showClips()}
         
       </div>
