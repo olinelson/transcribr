@@ -16,8 +16,6 @@ class Clip extends Component {
     this.audio = React.createRef();
     this.state = {
         clip: null,
-
-        
     }
   }
 
@@ -42,13 +40,13 @@ class Clip extends Component {
       if (clip.id === this.state.clip.id){
         
         return (
-          <button disabled> saved </button>
+          <button class="clip-show-save-button" disabled> saved </button>
         )
 
       }
     }
     return ( 
-      <button onClick={this.saveClip}> save </button>
+      <button class="clip-show-save-button" onClick={this.saveClip}> save </button>
     )
     }
 
