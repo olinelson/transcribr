@@ -17,16 +17,12 @@ import User from "./components/User"
 // filtered clips and clips used for results in clips container
 class App extends Component {
   state = {
-
-
     currentUser: null,
-    usersClips: [],
-    usersFilteredClips: []
   };
 
   componentDidMount() {
     this.getCurrentUser()
-    this.getAllClips()
+
   }
 
   // auto login method that sets current user if one has already logged in
@@ -49,31 +45,7 @@ class App extends Component {
     }
   }
 
-   getUsersClips = () => {
-     console.log('getting users clips')
-     fetch(`http://localhost:3000/api/v1/users/${this.state.currentUser.id}`)
-       .then(r => r.json())
-       .then(r => this.setState({
-         usersClips: r.clips,
-         usersFilteredClips: r.clips
-       }));
-   };
-
-  // gests all clips and adds them to state for use in clips container...
-  getAllClips(){
-    console.log('getting allclips in app')
-    fetch("http://localhost:3000/api/v1/clips", {
-      method: "GET"
-    })
-    .then( r => r.json())
-    
-    .then(r => this.setState({
-      clips: r,
-      filteredClips: r
-    }))
-    
-
-  }
+  
 
 
   // for use with the login form component
@@ -96,19 +68,6 @@ class App extends Component {
     this.setState({currentUser: null})
     this.props.history.push("/")
   }
-
-  // this gets called by clips container to filter the clips shown as a result of the search bar
-   filterClips = (result) => {
-     this.setState({
-       filteredClips: result
-     })
-   }
-
-   setFilteredUsersClips = (result) => {
-     this.setState({
-       usersFilteredClips: result
-     })
-   }
 
 
 

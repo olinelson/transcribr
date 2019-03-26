@@ -5,11 +5,20 @@ import { DebounceInput } from 'react-debounce-input';
 
 const uuidv1 = require("uuid/v1");
 
-const UserClipsContainer = (props) => {
+class UserClipsContainer extends Component {
+
+  state = {
+    clips: [],
+    filteredClips: []
+  }
+
+  componentDidMount = () => {
+    this.getUsersClips()
+  }
 
  
 
-   const unSaveClip = (clip) => {
+   unSaveClip = (clip) => {
         // this.deleteClipFromDom(clip.id)
         console.log("unsaving clip")
         let token = localStorage.getItem("token")
@@ -23,20 +32,54 @@ const UserClipsContainer = (props) => {
                     "Authorization": token,
                     'Content-Type': 'application/json'
                 },
-            }).then(() => props.getUsersClips())
+            })
 
     }
 
+      getUsersClips = () => {
+             console.log('getting users clips')
+             fetch(`http://localhost:3000/api/v1/users/${this.props.currentUser.id}`)
+               .then(r => r.json())
+               .then(r => this.setState({
+                 clips: r.clips,
+                 filteredClips: r.clips
+               }));
+           };
 
 
-    const searchInputHandler = (e) => {
+
+     searchInputHandler = (e) => {
       let query = e.target.value
-      let results = props.usersClips.filter(c => c.name.includes(query))
-      // this.setState({filteredClips: results})
-      props.setFilteredUsersClips(results)
+      let results = this.state.clips.filter(c => c.name.includes(query))
+      this.setState({filteredClips: results})
+
     }
 
-   const deleteClip = (clip) => {
+
+    unSaveClipHandler = (c) => {
+      let clips = this.state.filteredClips
+      let result = clips.filter(clip => clip.id !== c.id)
+      console.log(result)
+      this.setState({
+        clips: result,
+        filteredClips: result,
+      })
+      this.unSaveClip(c)
+    }
+
+    deleteClipHandler = (c) =>{
+      // e.target.syle.
+      let clips = this.state.filteredClips
+      let result = clips.filter(clip => clip.id !== c.id)
+      console.log(result)
+      this.setState({
+        clips: result,
+        filteredClips: result,
+      })
+      this.deleteClip(c)
+    }
+
+    deleteClip = (clip) => {
 
         console.log("deleting clip")
         let token = localStorage.getItem("token")
@@ -47,8 +90,8 @@ const UserClipsContainer = (props) => {
                     "Authorization": token,
                 },
             })
-            .then(() => props.getUsersClips())
-            .then(() => props.getAllClips())
+
+
            
 
         
@@ -57,8 +100,13 @@ const UserClipsContainer = (props) => {
 
     }
 
+      render(){
+
+
+
+      
      
-        console.log("in user clips", props)
+
         return(
         <div className="clips-container">
           <h1>Saved Clips</h1>
@@ -69,12 +117,12 @@ const UserClipsContainer = (props) => {
             placeholder="search clips..."
             minLength = { 2 }
             debounceTimeout = { 200 }
-            onChange={searchInputHandler}
+            onChange={this.searchInputHandler}
 
           />
           </div>
           <div className="clips-grid">
-            {props.usersFilteredClips.map(c => (
+            {this.state.filteredClips.map(c => (
               <div key={uuidv1()} className="clip-card">
                 
                 <img className="clip-image" src={c.gcloud_image_link}/>
@@ -83,16 +131,17 @@ const UserClipsContainer = (props) => {
                   <Link className = "clip-card-title" key = {uuidv1()} to = {`/clips/${c.id}`} > {c.name}</Link> 
 
                   {c.author ? <small> Uploaded By: {c.author.email} </small> : null }
-                  {c.author_id === props.currentUser.id ? 
-                    < button className = "button clip-card-button" onClick = { () => deleteClip(c)} > Delete </button>
+                  {c.author_id === this.props.currentUser.id ? 
+                    < button className = "button clip-card-button" onClick = { (e) => this.deleteClipHandler(c)} > Delete </button>
                     :
-                    < button className = "button clip-card-button" onClick = {() => unSaveClip(c)} > Remove </button>
+                    < button className = "button clip-card-button" onClick = {() => this.unSaveClipHandler(c)} > Remove </button>
                     }
               </div>
                         ))}
           </div>
         </div>
               );
+                  }
               
 
   
