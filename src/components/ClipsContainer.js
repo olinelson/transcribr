@@ -7,7 +7,7 @@ const uuidv1 = require("uuid/v1");
 
 class ClipsContainer extends Component {
 
-    state ={ 
+    state = { 
       clips: [],
       filteredClips: [],
     }
@@ -18,24 +18,51 @@ class ClipsContainer extends Component {
        this.setState({filteredClips: result})
      };
 
-     componentDidMount(){
+     componentDidMount= () => {
       this.getAllClips()
      }
 
-      getAllClips() {
-
+      getAllClips = () => {
+        console.log('getting all clips')
         fetch("http://localhost:3000/api/v1/clips", {
             method: "GET"
           })
           .then(r => r.json())
-
           .then(r => this.setState({
             clips: r,
             filteredClips: r
           }))
 
 
+
       }
+
+      showClips = () => {
+        console.log("hellos")
+        if (this.state.filteredClips){
+          return (
+          this.state.filteredClips.map(c => (
+
+          <div key={uuidv1()} className="clip-card">
+            
+            <img className="clip-image" src={c.gcloud_image_link}/>
+
+           
+              <Link 
+                className = "clip-card-title"
+                key = {uuidv1()}
+                to = {`clips/${c.id}`} > {c.name} 
+              </Link> 
+              <small> Uploaded By: {c.author.email} </small>
+            
+          
+          </div>
+        ))
+          )
+        }
+      }
+
+      
 
 
 render(){
@@ -58,22 +85,8 @@ return (
           />
       </div>
       <div className="clips-grid">
-        {this.state.filteredClips.map(c => (
-          <div key={uuidv1()} className="clip-card">
-            
-            <img className="clip-image" src={c.gcloud_image_link}/>
-
-           
-              <Link 
-              className = "clip-card-title"
-              key = {uuidv1()}
-              to = {`clips/${c.id}`} > {c.name} 
-              </Link> 
-              <small> Uploaded By: {c.author.email} </small>
-            
-          
-          </div>
-        ))}
+        {this.showClips()}
+        
       </div>
     </div>
   );
