@@ -87,10 +87,14 @@ class Clip extends Component {
           words={this.state.clip.words}
         />
       );
-    } else {
-      return <button onClick={this.processAudio}> process audio </button>
-;
     }
+    
+      if (this.state.processing === false){
+        return <button className="process-audio-button" onClick={this.processAudio}> process audio </button>
+      }
+      
+;
+    
   };
 
   processAudio = () => {

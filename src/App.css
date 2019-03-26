@@ -195,6 +195,11 @@ nav a {
 
 }
 
+.process-audio-button{
+
+  grid-area: words;
+}
+
 .css-10cs9pc-wrapper-wrapper {
   grid-area: words;
 }
