@@ -44,11 +44,15 @@ class Words extends Component {
   
 
       searchInputHandler = (e) =>{
-        this.filterWords(e)
+        let input = e.target.value
+        this.setState({
+          searchInput: input
+        })
+        this.filterWords()
       }
 
-     filterWords = (e) => {
-        const query = e.target.value
+     filterWords = () => {
+        const query = this.state.searchInput
 
         let oldWords = [...this.state.words];
 
@@ -63,7 +67,7 @@ class Words extends Component {
 
      nextPageHandler = () => {
         if (this.state.wordSelectionEnd >= this.state.words.length){
-         console.log("you are atthe end")
+
         
         }else {
           this.setState({
@@ -102,19 +106,27 @@ class Words extends Component {
           loading={this.state.loading}
         />
 
-        <button onClick={this.previousPageHandler}> previous page </button>
+       
 
          <DebounceInput
             label="search words"
             placeholder="search words..."
-            minLength = { 2 }
-            debounceTimeout = { 500 }
+
+            debounceTimeout = { 200 }
             onChange={this.searchInputHandler}
-            onKeyDown={this.spinner}
+            value={this.state.searchInput}
         
           /> 
 
+          {this.state.searchInput === "" ?
+          <div>
+            <button onClick={this.previousPageHandler}> previous page </button>
           <button onClick={this.nextPageHandler}> next page </button>
+          </div>
+          : null
+        }
+
+          
           
          
 

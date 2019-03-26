@@ -27,7 +27,7 @@ class App extends Component {
 
   // auto login method that sets current user if one has already logged in
   getCurrentUser= () => {
-    console.log("getting current user")
+
     let token = localStorage.getItem("token")
     if (token) {
 
@@ -51,7 +51,7 @@ class App extends Component {
 
   // for use with the login form component
   setCurrentUser = (response) => {
-    console.log("setting current user")
+
   
     this.setState({
       currentUser: response.user,
@@ -85,7 +85,7 @@ class App extends Component {
             <Route path="/upload" component={this.Upload} />
             <Route path="/signup" component={this.SignUp} />
             <Route path="/users/:id" component={this.UserShow}/>
-            <Route path="/login" render={(routerProps) => <LoginForm {...routerProps} setCurrentUser={this.setCurrentUser}/> } />
+            <Route path="/login" render={(routerProps) => <LoginForm {...routerProps} getCurrentUser={this.getCurrentUser} setCurrentUser={this.setCurrentUser}/> } />
 
 
           </div>
@@ -101,6 +101,7 @@ class App extends Component {
   Home = () => {
     return (
       <Fragment>
+        {console.log("in home page", this.state)}
         <ClipsContainer
           filterClips={this.filterClips}
           getAllClips={this.getAllClips}

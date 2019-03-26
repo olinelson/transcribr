@@ -33,9 +33,12 @@ import { withRouter } from "react-router-dom";
             }else{
                 
                 this.props.setCurrentUser(r)
+                this.props.getCurrentUser()
+                return r
                 }
             
         })
+        .then( r => this.props.history.push(`/users/${r.id}`))
 
         
     }

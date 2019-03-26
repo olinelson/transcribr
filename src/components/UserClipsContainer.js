@@ -13,6 +13,7 @@ class UserClipsContainer extends Component {
   }
 
   componentDidMount = () => {
+
     this.getUsersClips()
   }
 
@@ -101,7 +102,8 @@ class UserClipsContainer extends Component {
       render(){
 
 
-
+        console.log("you are in users clips, state=>", this.state)
+        console.log("you are in users clips, props=>", this.props)
       
      
 

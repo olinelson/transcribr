@@ -23,7 +23,7 @@ class ClipsContainer extends Component {
      }
 
       getAllClips() {
-        console.log('getting allclips in app')
+
         fetch("http://localhost:3000/api/v1/clips", {
             method: "GET"
           })
