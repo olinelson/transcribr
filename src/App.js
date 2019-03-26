@@ -61,12 +61,12 @@ class App extends Component {
 
   // gests all clips and adds them to state for use in clips container...
   getAllClips(){
-    console.log('getting allclips')
+    console.log('getting allclips in app')
     fetch("http://localhost:3000/api/v1/clips", {
       method: "GET"
     })
     .then( r => r.json())
-
+    
     .then(r => this.setState({
       clips: r,
       filteredClips: r
@@ -114,7 +114,7 @@ class App extends Component {
 
   render() {
 
-    console.log("in app", this.state)
+
     return (
         <Fragment >
           <NavBar logout={this.logout} currentUser={this.state.currentUser} />
@@ -143,7 +143,7 @@ class App extends Component {
       <Fragment>
         <ClipsContainer
           filterClips={this.filterClips}
-
+          getAllClips={this.getAllClips}
           filteredClips={this.state.filteredClips}
           clips={this.state.clips}
         />

@@ -5,14 +5,23 @@ import { DebounceInput } from 'react-debounce-input';
 
 const uuidv1 = require("uuid/v1");
 
-const ClipsContainer = (props) => {
+class ClipsContainer extends Component {
 
-    const searchInputHandler = e => {
+    searchInputHandler = e => {
        let input = e.target.value;
-       let result = [...props.clips].filter(c => c.name.includes(input));
+       let result = [...this.props.clips].filter(c => c.name.includes(input));
 
-       props.filterClips(result)
+       this.props.filterClips(result)
      };
+
+     componentDidMount(){
+       console.log("calling get all Clips in clips Container")
+       this.props.getAllClips()
+       console.log(this.props.clips)
+     }
+
+
+render(){
 
 
 return (
@@ -27,12 +36,12 @@ return (
             placeholder="search clips..."
             minLength = { 2 }
             debounceTimeout = { 300 }
-            onChange={searchInputHandler}
+            onChange={this.searchInputHandler}
 
           />
       </div>
       <div className="clips-grid">
-        {props.filteredClips.map(c => (
+        {this.props.filteredClips.map(c => (
           <div key={uuidv1()} className="clip-card">
             
             <img className="clip-image" src={c.gcloud_image_link}/>
@@ -51,6 +60,7 @@ return (
       </div>
     </div>
   );
+        }
 
   
 };
