@@ -20,6 +20,8 @@ class App extends Component {
     clips: [],
     filteredClips: [],
     currentUser: null,
+    usersClips: [],
+    usersFilteredClips: []
   };
 
   componentDidMount() {
@@ -42,9 +44,20 @@ class App extends Component {
         .then(r => this.setState({
           currentUser: r,
         }))
+        .then( () => this.getUsersClips())
 
     }
   }
+
+   getUsersClips = () => {
+     console.log('getting users clips')
+     fetch(`http://localhost:3000/api/v1/users/${this.state.currentUser.id}`)
+       .then(r => r.json())
+       .then(r => this.setState({
+         usersClips: r.clips,
+         usersFilteredClips: r.clips
+       }));
+   };
 
   // gests all clips and adds them to state for use in clips container...
   getAllClips(){
@@ -53,10 +66,13 @@ class App extends Component {
       method: "GET"
     })
     .then( r => r.json())
+
     .then(r => this.setState({
       clips: r,
       filteredClips: r
     }))
+    
+
   }
 
 
@@ -69,6 +85,7 @@ class App extends Component {
    
     })
     localStorage.setItem("token", response.jwt)
+   
 
 
   }
@@ -84,6 +101,12 @@ class App extends Component {
    filterClips = (result) => {
      this.setState({
        filteredClips: result
+     })
+   }
+
+   setFilteredUsersClips = (result) => {
+     this.setState({
+       usersFilteredClips: result
      })
    }
 
@@ -136,20 +159,33 @@ class App extends Component {
     // id used to find clip in clip component with its own fetch request
     let id = match.params.id
     return (
-        <Clip currentUser={this.state.currentUser}  id={id}/>
+        <Clip getUsersClips={this.getUsersClips} currentUser={this.state.currentUser}  id={id}/>
     );
   };
 
   UserShow = ({match}) => {
     return (
-      <User getCurrentUser={this.getCurrentUser}  currentUser={this.state.currentUser} />
+      <User
+       getUsersClips={this.getUsersClips}
+       setFilteredUsersClips={this.setFilteredUsersClips} 
+       getCurrentUser={this.getCurrentUser} 
+       usersClips={this.state.usersClips} 
+       usersFilteredClips={this.state.usersFilteredClips} 
+       currentUser={this.state.currentUser}
+       getAllClips={this.getAllClips}
+        />
     );
   };
 
   Upload = () => {
     return (
       <Fragment>
-        <AddClipForm  getCurrentUser={this.getCurrentUser} getAllClips={this.getAllClips} currentUser={this.state.currentUser} />
+        <AddClipForm  
+          getCurrentUser={this.getCurrentUser} 
+          getAllClips={this.getAllClips} 
+          currentUser={this.state.currentUser}
+          getUsersClips={this.getUsersClips}
+           />
       </Fragment>
     );
   };

@@ -5,36 +5,12 @@ import { DebounceInput } from 'react-debounce-input';
 
 const uuidv1 = require("uuid/v1");
 
-class UserClipsContainer extends Component {
-
-  constructor(props){
-  
-    super(props)
-    this.state= {
-      clips: [],
-      filteredClips: []
-    }
-  }
-
-  componentDidMount= () => {
-    this.getUsersClips()
-  }
-  
-
-  getUsersClips = () => {
-    console.log('getting users clips')
-    fetch(`http://localhost:3000/api/v1/users/${this.props.currentUser.id}`)
-      .then(r => r.json())
-      .then(r => this.setState({
-        clips: r.clips,
-        filteredClips: r.clips
-      }));
-  };
+const UserClipsContainer = (props) => {
 
  
 
-   unSaveClip = (clip) => {
-        this.deleteClipFromDom(clip.id)
+   const unSaveClip = (clip) => {
+        // this.deleteClipFromDom(clip.id)
         console.log("unsaving clip")
         let token = localStorage.getItem("token")
         let id = clip.id
@@ -47,25 +23,21 @@ class UserClipsContainer extends Component {
                     "Authorization": token,
                     'Content-Type': 'application/json'
                 },
-            }).then(() => this.props.getCurrentUser())
+            }).then(() => props.getUsersClips())
 
     }
 
-    deleteClipFromDom= (clipId) => {
-      let clips = [...this.state.filteredClips]
-      let newClips =  clips.filter(c => c.id != clipId)
-      console.log(newClips)
-      this.setState({filteredClips: newClips, clips: newClips})
-    }
 
-    searchInputHandler = (e) => {
+
+    const searchInputHandler = (e) => {
       let query = e.target.value
-      let results = [...this.state.clips].filter(c => c.name.includes(query))
-      this.setState({filteredClips: results})
+      let results = props.usersClips.filter(c => c.name.includes(query))
+      // this.setState({filteredClips: results})
+      props.setFilteredUsersClips(results)
     }
 
-   deleteClip = (clip) => {
-        this.deleteClipFromDom(clip.id)
+   const deleteClip = (clip) => {
+
         console.log("deleting clip")
         let token = localStorage.getItem("token")
 
@@ -75,6 +47,9 @@ class UserClipsContainer extends Component {
                     "Authorization": token,
                 },
             })
+            .then(() => props.getUsersClips())
+            .then(() => props.getAllClips())
+           
 
         
 
@@ -82,8 +57,8 @@ class UserClipsContainer extends Component {
 
     }
 
-      render(){
-
+     
+        console.log("in user clips", props)
         return(
         <div className="clips-container">
           <h1>Saved Clips</h1>
@@ -94,12 +69,12 @@ class UserClipsContainer extends Component {
             placeholder="search clips..."
             minLength = { 2 }
             debounceTimeout = { 200 }
-            onChange={this.searchInputHandler}
+            onChange={searchInputHandler}
 
           />
           </div>
           <div className="clips-grid">
-            {this.state.filteredClips.map(c => (
+            {props.usersFilteredClips.map(c => (
               <div key={uuidv1()} className="clip-card">
                 
                 <img className="clip-image" src={c.gcloud_image_link}/>
@@ -108,17 +83,17 @@ class UserClipsContainer extends Component {
                   <Link className = "clip-card-title" key = {uuidv1()} to = {`/clips/${c.id}`} > {c.name}</Link> 
 
                   {c.author ? <small> Uploaded By: {c.author.email} </small> : null }
-                  {c.author_id === this.props.currentUser.id ? 
-                    < button className = "button clip-card-button" onClick = { () => this.deleteClip(c)} > Delete </button>
+                  {c.author_id === props.currentUser.id ? 
+                    < button className = "button clip-card-button" onClick = { () => deleteClip(c)} > Delete </button>
                     :
-                    < button className = "button clip-card-button" onClick = {() => this.unSaveClip(c)} > Remove </button>
+                    < button className = "button clip-card-button" onClick = {() => unSaveClip(c)} > Remove </button>
                     }
               </div>
                         ))}
           </div>
         </div>
               );
-              }
+              
 
   
 }; // end of class

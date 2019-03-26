@@ -36,7 +36,8 @@ import { withRouter } from "react-router-dom";
                 }
             
         })
-        // .then(r => this.props.history.push(`/`))
+
+        
     }
 
 

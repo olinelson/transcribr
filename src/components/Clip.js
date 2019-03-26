@@ -62,6 +62,7 @@ class Clip extends Component {
           },
       })
       .then(() => this.setState({saved: true}))
+      .then(()=> this.props.getUsersClips())
 
   }
 
@@ -125,7 +126,9 @@ class Clip extends Component {
 
 
     return(
-      <Fragment >
+
+
+      <Fragment>
         <div className="player-container"  >
 
         {this.state.clip === null ? 
