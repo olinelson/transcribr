@@ -17,8 +17,8 @@ import User from "./components/User"
 // filtered clips and clips used for results in clips container
 class App extends Component {
   state = {
-    clips: [],
-    filteredClips: [],
+
+
     currentUser: null,
     usersClips: [],
     usersFilteredClips: []

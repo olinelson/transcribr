@@ -7,18 +7,35 @@ const uuidv1 = require("uuid/v1");
 
 class ClipsContainer extends Component {
 
+    state ={ 
+      clips: [],
+      filteredClips: [],
+    }
+
     searchInputHandler = e => {
        let input = e.target.value;
        let result = [...this.props.clips].filter(c => c.name.includes(input));
-
-       this.props.filterClips(result)
+       this.setState({filteredClips: result})
      };
 
      componentDidMount(){
-       console.log("calling get all Clips in clips Container")
-       this.props.getAllClips()
-       console.log(this.props.clips)
+      this.getAllClips()
      }
+
+      getAllClips() {
+        console.log('getting allclips in app')
+        fetch("http://localhost:3000/api/v1/clips", {
+            method: "GET"
+          })
+          .then(r => r.json())
+
+          .then(r => this.setState({
+            clips: r,
+            filteredClips: r
+          }))
+
+
+      }
 
 
 render(){
@@ -41,7 +58,7 @@ return (
           />
       </div>
       <div className="clips-grid">
-        {this.props.filteredClips.map(c => (
+        {this.state.filteredClips.map(c => (
           <div key={uuidv1()} className="clip-card">
             
             <img className="clip-image" src={c.gcloud_image_link}/>
