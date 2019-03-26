@@ -59,6 +59,8 @@ class ClipsContainer extends Component {
           </div>
         ))
           )
+        }else{
+          return "loading"
         }
       }
 
@@ -97,4 +99,3 @@ return (
 
 export default ClipsContainer;
 
-// changes

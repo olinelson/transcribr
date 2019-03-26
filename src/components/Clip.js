@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import ReactAudioPlayer from "react-audio-player";
 import Words from "./Words";
 
-import { BeatLoader } from 'react-spinners';
+import { BeatLoader, PacmanLoader } from 'react-spinners';
 
 import {
     withRouter
@@ -16,6 +16,7 @@ class Clip extends Component {
     this.audio = React.createRef();
     this.state = {
         clip: null,
+        processing: false
     }
   }
 
@@ -24,14 +25,19 @@ class Clip extends Component {
   };
 
   componentDidMount = () => {
-     fetch(`http://localhost:3000/api/v1/clips/${this.props.id}`, {
+    this.getClip() 
+  }
+
+    getClip = () => {
+       fetch(`http://localhost:3000/api/v1/clips/${this.props.id}`, {
         method: "GET",
       })
       .then(r => r.json())
-      .then(r => this.setState({clip: r,}))
-
-      
-  }
+      .then(r => this.setState({
+        clip: r,
+        processing: false,
+      }))
+    }
 
     showButtonIfSaved =  () =>{
       let currentUserClips = this.props.currentUser.clips 
@@ -82,10 +88,28 @@ class Clip extends Component {
         />
       );
     } else {
-      return <p>processing clip...</p>;
+      return <button onClick={this.processAudio}> process audio </button>
+;
     }
   };
 
+  processAudio = () => {
+      this.setState({processing: true})
+      let token = localStorage.getItem("token")
+      let id = this.state.clip.id
+      fetch(`http://localhost:3000/api/v1/audio_process`, {
+          method: "POST",
+          body: JSON.stringify({
+              clip_id: id,
+          }),
+          headers: {
+              "Authorization": token,
+              'Content-Type': 'application/json'
+          },
+      })
+      .then(() => this.getClip())
+
+  }
 
 
 
@@ -95,7 +119,7 @@ class Clip extends Component {
      
            
         <div className="clip-show">
-        
+
           <img className="clip-show-image" alt={this.state.clip.name} src={this.state.clip.gcloud_image_link}/>
           <div className="clip-show-info">
             <h1>{this.state.clip.name}</h1>
@@ -116,9 +140,11 @@ class Clip extends Component {
           />
 
           
+          
            
 
           {this.renderWords()}
+          {this.state.processing === true ? <PacmanLoader className="pacman-loader"/> : null}
         </div>
        
       );

@@ -195,6 +195,10 @@ nav a {
 
 }
 
+.css-10cs9pc-wrapper-wrapper {
+  grid-area: words;
+}
+
 .word-page-forward-button {
   grid-area: forward-button;
 

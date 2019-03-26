@@ -107,8 +107,8 @@ class Words extends Component {
         />
 
        
-
-         <DebounceInput
+          {this.state.words.length >= 0 ? null :
+          <DebounceInput
             label="search words"
             placeholder="search words..."
 
@@ -117,6 +117,9 @@ class Words extends Component {
             value={this.state.searchInput}
         
           /> 
+          
+          }
+         
 
         
 
