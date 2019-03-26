@@ -48,13 +48,13 @@ class AddClipForm extends Component {
         <div className="add-clip-form-container">
           <h1>Upload Clip</h1>
           <form className="add-clip-form" onSubmit={this.submitHandler}>
-            <label>Clip Title</label>
-            <input name="name" placeholder="Clip Title"/>
-            <label>Audio File</label>
-            <input name="audioFileInput" type="file" />
-            <label>Image</label>
-            <input name="imageInput" type="file" />
-            <button disabled={this.state.fileUploading}>submit</button>
+
+            <input className="add-clip-title" name="name" placeholder="Clip Title"/>
+            <label className="add-clip-audio-label">Audio File</label>
+            <input className="add-clip-audio-input" name="audioFileInput" type="file" />
+            <label className="add-clip-image-label">Image</label>
+            <input className="add-clip-image-input" name="imageInput" type="file" />
+            <button className="add-clip-submit" disabled={this.state.fileUploading}>submit</button>
             <ClipLoader
           // css={override}
           sizeUnit={"px"}
