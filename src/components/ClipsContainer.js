@@ -17,8 +17,11 @@ class ClipsContainer extends Component {
 
     searchInputHandler = e => {
        let input = e.target.value;
-       let result = [...this.props.clips].filter(c => c.name.includes(input));
-       this.setState({filteredClips: result})
+       let result = [...this.state.clips].filter(c => c.name.toLowerCase().includes(input));
+       this.setState({
+         filteredClips: result,
+         loading: false
+        })
      };
 
      componentDidMount= () => {
@@ -26,7 +29,7 @@ class ClipsContainer extends Component {
      }
 
       getAllClips = () => {
-        console.log('getting all clips')
+
         fetch("http://localhost:3000/api/v1/clips", {
             method: "GET"
           })
@@ -34,7 +37,8 @@ class ClipsContainer extends Component {
           .then(r => this.setState({
             clips: r,
             filteredClips: r,
-            loading: false
+            loading: false,
+
           }))
 
 
@@ -44,6 +48,11 @@ class ClipsContainer extends Component {
       showClips = () => {
 
         if (this.state.filteredClips){
+          if (this.state.filteredClips.length === 0 && this.state.loading === false){
+            return "no search results"
+          }
+
+
           return (
           this.state.filteredClips.map(c => (
 
@@ -85,6 +94,8 @@ return (
             minLength = { 2 }
             debounceTimeout = { 300 }
             onChange={this.searchInputHandler}
+        
+
 
           />
       </div>

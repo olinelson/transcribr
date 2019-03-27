@@ -46,7 +46,7 @@ class Clip extends Component {
       if (clip.id === this.state.clip.id){
         
         return (
-          <button class="clip-show-save-button" disabled> saved </button>
+          <button className="clip-show-save-button" disabled> saved </button>
         )
 
       }

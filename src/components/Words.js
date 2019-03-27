@@ -52,15 +52,19 @@ class Words extends Component {
       }
 
      filterWords = () => {
+
+
         const query = this.state.searchInput
 
         let oldWords = [...this.state.words];
 
         let newWords = oldWords.filter(w => w.word.includes(query));
-
+        console.log(newWords)
         this.setState({
           filteredWords: newWords,
-          loading: false
+          loading: false,
+          wordSelectionStart: 0,
+          wordSelectionEnd: 500
 
         });
      }

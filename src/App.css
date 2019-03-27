@@ -338,4 +338,11 @@ border: 1px solid #4747475d;
 .add-clip-submit {
   grid-area: submit;
 }
-/* hello */
+
+/* beatLoader */
+.css-0{
+
+  display: flex;
+  justify-items: center;
+  justify-content: center;
+}
