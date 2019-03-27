@@ -20,6 +20,7 @@ import ClipsContainer from "./components/ClipsContainer";
 import SignUpForm from "./components/SignUpForm";
 import LoginForm from "./components/LoginForm"
 import User from "./components/User"
+import Jumbotron from "./components/Jumbotron"
 
 library.add(fab, faCheckSquare, faCoffee, faCheck, faUser)
 
@@ -89,6 +90,7 @@ class App extends Component {
           <NavBar logout={this.logout} currentUser={this.state.currentUser} />
           <div className="site-container" >
             <Route exact path="/" component={this.Home} />
+            <Route exact path="/feed" component={this.Feed} />
             <Route exact path="/clips" component={this.ClipsIndex} />
             <Route path="/clips/:id" component={this.ClipShow} />
             <Route path="/upload" component={this.Upload} />
@@ -103,14 +105,19 @@ class App extends Component {
     );
   }
 
+  Home = () => {
+    return(
+      < Jumbotron / >
+    )
+  }
+
  
 
 
 
-  Home = () => {
+  Feed = () => {
     return (
       <Fragment>
-        {console.log("in home page", this.state)}
         <ClipsContainer
           filterClips={this.filterClips}
           getAllClips={this.getAllClips}
@@ -121,7 +128,7 @@ class App extends Component {
         {/* <AddClipForm /> */}
       </Fragment>
     );
-  }; //end of Home
+  }; //end of Feed
 
 
 

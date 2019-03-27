@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -11,7 +11,7 @@ const NavBar = props => {
             <Fragment>
              
              
-             <Link to={`/users/${props.currentUser.id}`}>SAVED CLIPS</Link>
+             <NavLink activeClassName="selected" to={`/users/${props.currentUser.id}`}>SAVED CLIPS</NavLink>
              <a onClick = {props.logout}> LOGOUT </a>
              <a className="logged-in-as"> <FontAwesomeIcon icon = "user" /> {props.currentUser.user_name}</a>
              </Fragment >
@@ -22,14 +22,15 @@ const NavBar = props => {
   return (
        
     <nav>
-      <h4>transcribr.</h4>
+      < NavLink to = "/" ><h4>transcribr.</h4></NavLink>
+      
       <div className="nav-links">
-      <Link to="/">FEED</Link>
-      <Link to="/upload">UPLOAD</Link>
+      <NavLink activeClassName="selected" to="/feed">FEED</NavLink>
+      <NavLink activeClassName="selected" to="/upload">UPLOAD</NavLink>
       
 
       {props.currentUser === null ? 
-      < Link to = "/login" > LOGIN </Link>
+      < NavLink activeClassName="selected" to = "/login" > LOGIN </NavLink>
       : showCurrentUserLinks()
     }
       
