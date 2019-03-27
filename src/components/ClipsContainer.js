@@ -85,12 +85,12 @@ return (
 
     <div className="clips-container">
 
-      <h1>Clips Index</h1>
+      {/* <h1>Clips Index</h1> */}
       <div className="search-container">
 
         <DebounceInput
             label="search clips"
-            placeholder="search clips..."
+            placeholder="search for clips..."
             minLength = { 2 }
             debounceTimeout = { 300 }
             onChange={this.searchInputHandler}

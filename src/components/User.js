@@ -8,7 +8,7 @@ import UserClipsContainer from "./UserClipsContainer"
    const showUserName = (props) => {
     return(
         <div className="user-container">
-        <h1>{props.currentUser.user_name}</h1>
+        {/* <h1>{props.currentUser.user_name}</h1> */}
          {props.currentUser.clips ? 
          < UserClipsContainer  
             currentUser = {props.currentUser}

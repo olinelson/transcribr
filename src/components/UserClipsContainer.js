@@ -112,7 +112,7 @@ class UserClipsContainer extends Component {
 
         return(
         <div className="clips-container">
-          <h1>Saved Clips</h1>
+          {/* <h1>Saved Clips</h1> */}
           <div className="search-container">
             {/* <input placeholder="search clips..." onChange={this.searchInputHandler} /> */}
             <DebounceInput

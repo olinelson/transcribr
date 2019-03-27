@@ -26,6 +26,21 @@ class Clip extends Component {
 
   componentDidMount = () => {
     this.getClip() 
+    
+  }
+
+  isClipProcessing= (clip) => {
+     if (clip.processing === true) {
+       this.setState({
+         clip: clip,
+         processing: true
+       })
+     } else{
+       this.setState({
+           clip: clip,
+           processing: false
+         })
+       }
   }
 
     getClip = () => {
@@ -33,10 +48,8 @@ class Clip extends Component {
         method: "GET",
       })
       .then(r => r.json())
-      .then(r => this.setState({
-        clip: r,
-        processing: false,
-      }))
+      .then(r => this.isClipProcessing(r) )
+     
     }
 
     showButtonIfSaved =  () =>{

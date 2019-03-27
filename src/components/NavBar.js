@@ -2,14 +2,17 @@ import React, { Fragment } from "react";
 
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 const NavBar = props => {
 
     const showCurrentUserLinks = () => {
         return (
             <Fragment>
-             <a>{`logged in as ${props.currentUser.user_name}` }</a>
-             <a onClick = {props.logout}> logout </a>
-             <Link to={`/users/${props.currentUser.id}`}>My Clips</Link>
+             
+             <a onClick = {props.logout}> LOGOUT </a>
+             <Link to={`/users/${props.currentUser.id}`}>SAVED CLIPS</Link>
+        <a className="logged-in-as"> <FontAwesomeIcon icon = "user" /> {props.currentUser.user_name}</a>
              </Fragment >
         )
         
@@ -18,16 +21,17 @@ const NavBar = props => {
   return (
        
     <nav>
-      <h4>PodSearcher</h4>
-      <Link to="/upload">Upload Clip</Link>
-      <Link to="/">Home</Link>
-      {/* <Link to="/signup">Sign Up</Link> */}
+      <h4>transcribr.</h4>
+      <div className="nav-links">
+      <Link to="/upload">UPLOAD</Link>
+      <Link to="/">FEED</Link>
+
       {props.currentUser === null ? 
-      < Link to = "/login" > Login </Link>
+      < Link to = "/login" > LOGIN </Link>
       : showCurrentUserLinks()
     }
       
-      
+      </div>
 
       
       {/* {props.currentUser ? showCurrentUserLinks() : null} */}
