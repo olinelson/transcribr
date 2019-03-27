@@ -167,9 +167,9 @@ class Clip extends Component {
 
         {this.state.clip === null ? 
             <BeatLoader
-            sizeUnit={"px"}
-            size={150}
-            color={'#123abc'}
+            sizeUnit={"rem"}
+            size={1}
+            // color={'#123abc'}
             loading={true}
         />
             

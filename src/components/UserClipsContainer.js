@@ -54,7 +54,7 @@ class UserClipsContainer extends Component {
 
      searchInputHandler = (e) => {
       let query = e.target.value
-      let results = this.state.clips.filter(c => c.name.includes(query))
+      let results = this.state.clips.filter(c => c.name.toLowerCase().includes(query))
       this.setState({filteredClips: results})
 
     }
