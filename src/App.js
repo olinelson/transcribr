@@ -1,6 +1,13 @@
 import React, { Component, Fragment } from "react";
 import "./App.css";
 
+// font awesome
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+import { faCheckSquare, faCoffee, faCheck } from '@fortawesome/free-solid-svg-icons'
+
+
+
 // react router
 import { BrowserRouter as Router, Route, Link, withRouter } from "react-router-dom";
 
@@ -13,6 +20,7 @@ import SignUpForm from "./components/SignUpForm";
 import LoginForm from "./components/LoginForm"
 import User from "./components/User"
 
+library.add(fab, faCheckSquare, faCoffee, faCheck)
 
 // filtered clips and clips used for results in clips container
 class App extends Component {

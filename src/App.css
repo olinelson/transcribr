@@ -304,12 +304,16 @@ border: 1px solid #4747475d;
 .add-clip-form {
   display: grid;
   flex-direction: column;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 1fr;
+  grid-gap: 1rem;
   grid-template-areas:
-  " title title"
-  "audio-label audio-input "
-  "image-label image-input "
-  "submit submit "
+  " title"
+  "audio-label"
+  "audio-input "
+  " image-label"
+  "image-input"
+  "submit"
+  "loader"
 ;
   height: 30vh;
   width: 30vw;
@@ -317,19 +321,52 @@ border: 1px solid #4747475d;
 
 .add-clip-title {
   grid-area: title;
+
 }
 .add-clip-audio-label {
   grid-area: audio-label;
+  font-weight: bold;
+  text-align: center;
+
 }
 .add-clip-audio-input {
   grid-area: audio-input;
   border: none;
+  
+  
+}
+
+/* spinner loader */
+
+.css-y7slra-style-style {
+  grid-area: loader;
+  justify-self: center;
+  align-self: center;
+
+}
+
+.upload-complete-message{
+  grid-area: loader;
+  display: flex;
+
+  align-self: center;
+  justify-self: center;
+ 
+  
+  
+
+}
+
+.upload-complete-message small{
+  font-size: 1rem;
   
 }
 
 
 .add-clip-image-label {
   grid-area: image-label;
+  text-align: center;
+  font-weight: bold;
 }
 .add-clip-image-input {
   grid-area: image-input;

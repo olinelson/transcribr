@@ -4,9 +4,12 @@ import { ClipLoader } from 'react-spinners';
 
 import { withRouter } from "react-router-dom";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 class AddClipForm extends Component {
   state = {
-    fileUploading: false
+    fileUploading: false,
+    uploadComplete: false,
   };
 
   submitHandler = e => {
@@ -31,10 +34,13 @@ class AddClipForm extends Component {
       body: formData
 
     })
-    .then(() => this.setState({ fileUploading: false }))
+    .then(() => this.setState({ 
+      fileUploading: false,
+      uploadComplete: true
+     }))
     .then(() => this.props.getCurrentUser())
-    .then(() => this.props.getAllClips())
-    .then(()=> this.props.getUsersClips())
+    // .then(() => this.props.getAllClips())
+    // .then(()=> this.props.getUsersClips())
     .then(() => this.props.history.push(`/users/${this.props.currentUser.id}`))
     
   }; // end of submitHandler
@@ -54,14 +60,28 @@ class AddClipForm extends Component {
             <input className="add-clip-audio-input" name="audioFileInput" type="file" />
             <label className="add-clip-image-label">Image</label>
             <input className="add-clip-image-input" name="imageInput" type="file" />
-            <button className="add-clip-submit" disabled={this.state.fileUploading}>submit</button>
+            {this.state.uploadComplete === false ?
+            <button className="add-clip-submit" disabled={this.state.fileUploading}>upload</button>
+            : 
+            <button className="add-clip-submit" disabled>upload</button>
+          }
+            
             <ClipLoader
           // css={override}
-          sizeUnit={"px"}
-          size={150}
+          sizeUnit={"rem"}
+          size={1}
           color={'#123abc'}
           loading={this.state.fileUploading}
         />
+        {this.state.uploadComplete === true ?
+          <div className="upload-complete-message">
+           
+          < small ><FontAwesomeIcon icon = "check" />  done</small>
+        
+         
+          </div>
+        : null}
+        
           </form>
         </div>
         : this.props.history.push(`/login`)
