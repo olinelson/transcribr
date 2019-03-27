@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import { withRouter } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
 
  class LoginForm extends Component {
 
@@ -73,7 +74,8 @@ import { withRouter } from "react-router-dom";
             >
           </input>
           <button className="login-button"> Login </button>
-          <button className="signup-button"> Sign Up </button>
+          {/* <button className="signup-button"> Sign Up </button> */}
+          <Link className="signup-button" to="/signup"> Sign Up </Link>
 
       </form>
     </div>

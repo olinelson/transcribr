@@ -65,7 +65,10 @@ class SignUpForm extends Component {
   render() {
    
     return (
-      <form onSubmit={this.submitHandler}>
+      <div className="login-container">
+
+     <h1>Sign Up</h1>
+      <form className="sign-up-form" onSubmit={this.submitHandler}>
         <label>Username</label>
         <input
           name="username"
@@ -88,6 +91,7 @@ class SignUpForm extends Component {
         <label>Password</label>
         <input
           name="password"
+          placeholder = "superSecretPassword"
           value={this.state.password}
           onChange={e => this.setState({ password: e.target.value }, () => this.passwordCheck())}
           type="password"
@@ -95,12 +99,14 @@ class SignUpForm extends Component {
         <label>Confirm Password</label>
         <input
           name="password_confirm"
+          placeholder = "superSecretPassword"
           value={this.state.password_confirm}
           onChange={e => this.setState({ password_confirm: e.target.value }, () => this.passwordCheck())}
           type="password"
         />
-        <button disabled={this.state.password_error}> Create Account </button>
+        <button className="create-account-button" disabled={this.state.password_error}> Create Account </button>
       </form>
+       </div>
     );
   }
 }

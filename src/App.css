@@ -39,7 +39,7 @@ button {
 
 
 button:disabled {
-  opacity: 0.3;
+  opacity: 0.1;
 }
 
 
@@ -342,12 +342,27 @@ border: 1px solid #4747475d;
   justify-self: center;
 }
 
+.sign-up-form {
+  display: grid;
+  grid-gap: 1rem;
+  justify-content: center;
+}
+
+.sign-up-form * {
+  justify-self: center;
+}
+
 
 .signup-button{
   justify-self: center;
   background-color: white;
   color: black;
   border: none;
+  font-size: .8rem;
+
+}
+.create-account-button {
+  justify-self: center;
 }
 
 .add-clip-form-container {
