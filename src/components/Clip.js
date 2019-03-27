@@ -149,7 +149,8 @@ class Clip extends Component {
           
           
           <ReactAudioPlayer
-          
+            // autoPlay
+            preload="auto"
             className="audio-player"
             ref={this.audio}
             src={this.state.clip.gcloud_media_link}
