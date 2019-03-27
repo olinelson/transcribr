@@ -10,9 +10,10 @@ const NavBar = props => {
         return (
             <Fragment>
              
-             <a onClick = {props.logout}> LOGOUT </a>
+             
              <Link to={`/users/${props.currentUser.id}`}>SAVED CLIPS</Link>
-        <a className="logged-in-as"> <FontAwesomeIcon icon = "user" /> {props.currentUser.user_name}</a>
+             <a onClick = {props.logout}> LOGOUT </a>
+             <a className="logged-in-as"> <FontAwesomeIcon icon = "user" /> {props.currentUser.user_name}</a>
              </Fragment >
         )
         
@@ -23,8 +24,9 @@ const NavBar = props => {
     <nav>
       <h4>transcribr.</h4>
       <div className="nav-links">
-      <Link to="/upload">UPLOAD</Link>
       <Link to="/">FEED</Link>
+      <Link to="/upload">UPLOAD</Link>
+      
 
       {props.currentUser === null ? 
       < Link to = "/login" > LOGIN </Link>

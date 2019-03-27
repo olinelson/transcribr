@@ -156,16 +156,28 @@ justify-self: right;
    align-items: center;
    grid-gap: 1rem;
    grid-template-areas:
-   "image title . button"
+   "image title ."
+   "image author ."
    ;
    
 }
 
-.clip-image {
-  max-height: 5rem;
+.author-tag {
+  grid-area: author;
+}
+
+.clip-image-container {
+  display: flex;
   justify-self: center;
   grid-area: image;
+  width: 5rem;
+  height: 5rem;
+  overflow: hidden;
+  align-items: center;
+  background-image: grey;
 }
+
+
 
 .clip-card-title {
   grid-area: title;
