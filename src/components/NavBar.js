@@ -23,6 +23,7 @@ const NavBar = props => {
        
     <nav>
       < NavLink to = "/" ><h4>transcribr.</h4></NavLink>
+
       
       <div className="nav-links">
       <NavLink activeClassName="selected" to="/feed">FEED</NavLink>

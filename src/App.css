@@ -59,6 +59,7 @@ button:disabled {
   height: 100vh;
   display: grid;
   justify-self: center;
+
   width: 90vw;
 }
 
@@ -152,7 +153,7 @@ justify-self: right;
 
 
 .clips-grid{
-  min-height: 40rem;
+  min-height: 80vh;
   display: grid;
   grid-template-columns: 1fr;
 
@@ -509,16 +510,18 @@ top: 5rem;
 
 .jumbotron {
 
-  height: 100%;
-
-  background-image: url("https://storage.googleapis.com/bucket-of-doom/soundfileimage.png");
+  height: 80vh;
+  background-color: #FFA136;
+  background-image: url("https://storage.googleapis.com/bucket-of-doom/wordcloud2.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-
+  display: grid;
 
 
 }
+
+
 
 .selected {
 font-weight: bold;
