@@ -47,7 +47,7 @@ class Clip extends Component {
   }
 
     getClip = () => {
-       fetch(`${API_URL}/${this.props.id}`, {
+       fetch(`${API_URL}/clips/${this.props.id}`, {
         method: "GET",
       })
       .then(r => r.json())

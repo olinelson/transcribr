@@ -120,7 +120,7 @@ return (
         
         : null
       }
-        {/* {this.showClips()} */}
+        {this.showClips()}
         
       </div>
     </div>
