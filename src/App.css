@@ -50,6 +50,9 @@ button:disabled {
   width: 100%;
   margin: 0 0 1rem 0;
   grid-area: player;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 1rem;
 }
 
 #root {
@@ -307,7 +310,7 @@ color: #FFA136;
 border: none;
 position: -webkit-sticky;
 position: sticky;
-top: 20px;
+top: 5rem;
 
 
 }
