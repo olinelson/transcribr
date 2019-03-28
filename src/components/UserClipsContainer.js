@@ -45,7 +45,7 @@ class UserClipsContainer extends Component {
 
       getUsersClips = () => {
 
-             fetch(`http://localhost:3000/api/v1/users/${this.props.currentUser.id}`)
+             fetch(`${API_URL}/users/${this.props.currentUser.id}`)
                .then(r => r.json())
                .then(r => this.setState({
                  clips: r.clips,
@@ -90,7 +90,7 @@ class UserClipsContainer extends Component {
     deleteClip = (clip) => {
         let token = localStorage.getItem("token")
 
-        fetch(`http://localhost:3000/api/v1/clips/${clip.id}`, {
+        fetch(`${API_URL}/clips/${clip.id}`, {
                 method: "DELETE",
                 headers: {
                     "Authorization": token,
@@ -107,10 +107,6 @@ class UserClipsContainer extends Component {
     }
 
       render(){
-
-
-        console.log("you are in users clips, state=>", this.state)
-        console.log("you are in users clips, props=>", this.props)
       
      
 
