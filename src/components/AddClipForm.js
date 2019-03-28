@@ -6,6 +6,9 @@ import { withRouter } from "react-router-dom";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+// api URL
+import API_URL from "./config"
+
 class AddClipForm extends Component {
   state = {
     fileUploading: false,
@@ -26,7 +29,7 @@ class AddClipForm extends Component {
 
     this.setState({ fileUploading: true });
 
-    fetch("http://localhost:3000/api/v1/clips", {
+    fetch(`${API_URL}/clips`, {
       method: "POST",
       headers: {
           "Authorization": token

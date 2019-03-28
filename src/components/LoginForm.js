@@ -3,6 +3,9 @@ import React, { Component } from 'react'
 import { withRouter } from "react-router-dom";
 import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
 
+// api URL
+import API_URL from "./config"
+
  class LoginForm extends Component {
 
     state = {
@@ -16,7 +19,7 @@ import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom"
         let email = this.state.email
         let password = this.state.password
 
-        fetch("http://localhost:3000/api/v1/login", {
+        fetch(`${API_URL}/login`, {
             method: 'POST', 
             body: JSON.stringify({
                 email: email,

@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 
+// api URL
+import API_URL from "./config"
+
 import {
     withRouter
 } from "react-router-dom";
@@ -21,7 +24,7 @@ class SignUpForm extends Component {
     e.preventDefault();
 
   
-    fetch("http://localhost:3000/api/v1/users", {
+    fetch(`${API_URL}/users`, {
         method: 'POST', // or 'PUT'
         body: JSON.stringify({
             email: email,

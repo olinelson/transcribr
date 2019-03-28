@@ -2,6 +2,9 @@ import React, { Component, Fragment } from "react";
 import ReactAudioPlayer from "react-audio-player";
 import Words from "./Words";
 
+// api URL
+import API_URL from "./config"
+
 import { BeatLoader, PacmanLoader } from 'react-spinners';
 
 import {
@@ -44,7 +47,7 @@ class Clip extends Component {
   }
 
     getClip = () => {
-       fetch(`http://localhost:3000/api/v1/clips/${this.props.id}`, {
+       fetch(`${API_URL}/${this.props.id}`, {
         method: "GET",
       })
       .then(r => r.json())
@@ -73,7 +76,7 @@ class Clip extends Component {
       
       let token = localStorage.getItem("token")
       let id = this.state.clip.id
-      fetch("http://localhost:3000/api/v1/user_clips", {
+      fetch(`${API_URL}/user_clips`, {
           method: "POST",
           body: JSON.stringify({
               clip_id: id,
@@ -114,7 +117,7 @@ class Clip extends Component {
       this.setState({processing: true})
       let token = localStorage.getItem("token")
       let id = this.state.clip.id
-      fetch(`http://localhost:3000/api/v1/audio_process`, {
+      fetch(`${API_URL}/audio_process`, {
           method: "POST",
           body: JSON.stringify({
               clip_id: id,

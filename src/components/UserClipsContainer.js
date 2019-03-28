@@ -4,6 +4,9 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { DebounceInput } from 'react-debounce-input';
 import { BeatLoader } from "react-spinners";
 
+// api URL
+import API_URL from "./config"
+
 const uuidv1 = require("uuid/v1");
 
 class UserClipsContainer extends Component {
@@ -25,7 +28,7 @@ class UserClipsContainer extends Component {
        
         let token = localStorage.getItem("token")
         let id = clip.id
-        fetch("http://localhost:3000/api/v1/user_clips/unsave", {
+        fetch(`${API_URL}/user_clips/unsave`, {
                 method: "POST",
                 body: JSON.stringify({
                     clip_id: id,

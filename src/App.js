@@ -22,6 +22,9 @@ import LoginForm from "./components/LoginForm"
 import User from "./components/User"
 import Jumbotron from "./components/Jumbotron"
 
+// api URL
+import API_URL from "./components/config"
+
 library.add(fab, faCheckSquare, faCoffee, faCheck, faUser, faSadTear)
 
 // filtered clips and clips used for results in clips container
@@ -41,7 +44,7 @@ class App extends Component {
     let token = localStorage.getItem("token")
     if (token) {
 
-      fetch("http://localhost:3000/api/v1/auto_login", {
+      fetch(`${API_URL}/auto_login`, {
           method: "GET",
           headers: {
             "Authorization": token

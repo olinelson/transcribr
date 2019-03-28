@@ -7,6 +7,9 @@ import { BeatLoader } from 'react-spinners';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+// api URL
+import API_URL from "./config"
+
 const uuidv1 = require("uuid/v1");
 
 class ClipsContainer extends Component {
@@ -32,7 +35,7 @@ class ClipsContainer extends Component {
 
       getAllClips = () => {
 
-        fetch("http://localhost:3000/api/v1/clips", {
+        fetch(`${API_URL}/clips`, {
             method: "GET"
           })
           .then(r => r.json())
