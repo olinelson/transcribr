@@ -137,8 +137,8 @@ class Words extends Component {
           {this.state.searchInput === "" ?
           <Fragment>
           
-            <button className="word-page-button word-page-back-button" onClick={this.previousPageHandler}> previous page </button>
-          <button className="word-page-button word-page-forward-button" onClick={this.nextPageHandler}> next page </button>
+            <div className="word-page-button-container word-page-back-button-container" onClick={this.previousPageHandler}> <button> back </button> </div>
+          <div className="word-page-button-container word-page-forward-button-container" onClick={this.nextPageHandler}> <button> forward </button> </div>
          </Fragment>
           : null
         }

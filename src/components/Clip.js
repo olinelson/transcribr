@@ -136,8 +136,10 @@ class Clip extends Component {
      
            
         <div className="clip-show">
-
+          <div className="clip-show-image-container">
           <img className="clip-show-image" alt={this.state.clip.name} src={this.state.clip.gcloud_image_link}/>
+          </div>
+          
           <div className="clip-show-info">
             <h1>{this.state.clip.name}</h1>
             {
