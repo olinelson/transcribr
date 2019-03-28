@@ -267,6 +267,7 @@ input::placeholder{
 }
 .word-page-back-button-container {
   grid-area: back-button;
+  border-right: 1px solid #FFA136;
 
 
 }
@@ -282,6 +283,7 @@ input::placeholder{
 
 .word-page-forward-button-container {
   grid-area: forward-button;
+  border-left: 1px solid #FFA136;
 
 
 }
@@ -289,7 +291,7 @@ input::placeholder{
 .word-page-button-container {
 height: 100%;
 width: 100%;
-background-color: #f1f3f4;
+background-color: ;
 color: black;
 
 display: grid;
@@ -305,7 +307,7 @@ grid-template-rows: 2rem;
 .word-page-button-container button {
 
 
-background-color: #f1f3f4;
+background-color: white;
 color: #FFA136;
 border: none;
 position: -webkit-sticky;
