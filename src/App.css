@@ -58,9 +58,8 @@ button:disabled {
 }
 
 .site-container {
-
-  background-color: white;
   height: 100%;
+  width: 100%;
 
 }
 
@@ -74,11 +73,12 @@ a:hover {
 }
 
 nav {
-  /* height: 15vh; */
+  max-height: 15vh;
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid rgb(255, 161, 54); 
    padding: 0 1rem .25rem 1rem;
+  /* display: none; */
 
   
 }
@@ -177,19 +177,18 @@ justify-self: right;
   grid-area: author;
 }
 
-/* .clip-image {
+.clip-image {
   width: 100%;
   height: auto;
-} */
+
+}
 
 .clip-image-container {
   display: flex;
   justify-self: center;
   grid-area: image;
-  width: 100%;
-  height: 100%;
-  max-width: 7rem;
-  max-height: 7rem;
+  height: 7rem;
+  width: 7rem;
   overflow: hidden;
   align-items: center;
 
@@ -378,10 +377,8 @@ border: 1px solid #4747475d;
 .add-clip-form-container {
   padding: 0;
   margin: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  justify-items: center;
 }
 
 .add-clip-form {
@@ -398,8 +395,7 @@ border: 1px solid #4747475d;
   "submit"
   "loader"
 ;
-  height: 30vh;
-  width: 30vw;
+  
 }
 
 .add-clip-title {

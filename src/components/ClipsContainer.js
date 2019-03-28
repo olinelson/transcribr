@@ -76,6 +76,8 @@ class ClipsContainer extends Component {
         }
       }
 
+     
+
       
 
 
@@ -102,7 +104,9 @@ return (
       </div>
       <div className="clips-grid">
         {this.state.loading === true ?
+
         <BeatLoader/>
+        
         : null
       }
         {this.showClips()}
