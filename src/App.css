@@ -525,3 +525,9 @@ font-weight: bold;
 
 }
 
+.no-results-message {
+  justify-self: center;
+  color: #b7b8b8;
+  font-size: 1.5rem;
+}
+

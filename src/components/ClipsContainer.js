@@ -1,9 +1,11 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { BrowserRouter as Router, Route, Link, withRouter } from "react-router-dom"
 
 import { DebounceInput } from 'react-debounce-input';
 
 import { BeatLoader } from 'react-spinners';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const uuidv1 = require("uuid/v1");
 
@@ -49,7 +51,13 @@ class ClipsContainer extends Component {
 
         if (this.state.filteredClips){
           if (this.state.filteredClips.length === 0 && this.state.loading === false){
-            return "no search results"
+            return (
+              <Fragment>
+                
+                <p className="no-results-message"> < FontAwesomeIcon icon = "sad-tear" />  no results...</p>
+              </Fragment>
+            )
+            
           }
 
 

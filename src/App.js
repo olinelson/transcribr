@@ -5,7 +5,7 @@ import "./App.css";
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 
-import { faCheckSquare, faCoffee, faCheck, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faCheckSquare, faCoffee, faCheck, faUser, faSadTear } from '@fortawesome/free-solid-svg-icons'
 
 
 
@@ -22,7 +22,7 @@ import LoginForm from "./components/LoginForm"
 import User from "./components/User"
 import Jumbotron from "./components/Jumbotron"
 
-library.add(fab, faCheckSquare, faCoffee, faCheck, faUser)
+library.add(fab, faCheckSquare, faCoffee, faCheck, faUser, faSadTear)
 
 // filtered clips and clips used for results in clips container
 class App extends Component {
