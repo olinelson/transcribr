@@ -150,9 +150,10 @@ justify-self: right;
   min-height: 40rem;
   display: grid;
   grid-template-columns: 1fr;
+
   grid-gap: 1rem;
   margin: 2rem;
-  height: 100%;
+  height: auto;
   grid-template-rows: auto;
 
 
@@ -163,6 +164,7 @@ justify-self: right;
 .clip-card {
    display: grid;
    height: auto;
+   max-height: 10rem;
    grid-template-columns: 1fr 7fr 1fr ;
    align-items: center;
    grid-gap: 1rem;

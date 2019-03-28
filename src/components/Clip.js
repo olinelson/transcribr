@@ -65,7 +65,7 @@ class Clip extends Component {
       }
     }
     return ( 
-      <button class="clip-show-save-button" onClick={this.saveClip}> save </button>
+      <button className="clip-show-save-button" onClick={this.saveClip}> save </button>
     )
     }
 
