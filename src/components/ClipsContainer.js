@@ -85,7 +85,7 @@ class ClipsContainer extends Component {
         ))
           )
         }
-      }
+      } //end of show clip
 
      
 
@@ -120,7 +120,7 @@ return (
         
         : null
       }
-        {this.showClips()}
+        {/* {this.showClips()} */}
         
       </div>
     </div>

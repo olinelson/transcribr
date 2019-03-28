@@ -87,7 +87,7 @@ class App extends Component {
 
   render() {
 
-
+    console.log(process.env)
     return (
         <Fragment >
           <NavBar logout={this.logout} currentUser={this.state.currentUser} />
