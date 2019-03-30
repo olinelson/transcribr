@@ -16,7 +16,9 @@ class AddClipForm extends Component {
   };
 
   submitHandler = e => {
+
     e.preventDefault();
+    console.log("submitting form")
     
 
     let formData = new FormData();
@@ -28,7 +30,7 @@ class AddClipForm extends Component {
      let token = localStorage.getItem("token")
 
     this.setState({ fileUploading: true });
-
+    console.log("using this url", `${API_URL}/clips`)
     fetch(`${API_URL}/clips`, {
       method: "POST",
       headers: {
@@ -37,10 +39,12 @@ class AddClipForm extends Component {
       body: formData
 
     })
+    .then( r => console.log(r))
     .then(() => this.setState({ 
       fileUploading: false,
       uploadComplete: true
      }))
+     
     .then(() => this.props.getCurrentUser())
     // .then(() => this.props.getAllClips())
     // .then(()=> this.props.getUsersClips())
