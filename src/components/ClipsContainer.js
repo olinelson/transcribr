@@ -69,7 +69,7 @@ class ClipsContainer extends Component {
 
           <div key={uuidv1()} className="clip-card">
             <div className="clip-image-container">
-            <img className="clip-image" src={c.gcloud_image_link}/>
+            <img alt="clip-thumbnail" className="clip-image" src={c.gcloud_image_link}/>
             </div>
 
            
