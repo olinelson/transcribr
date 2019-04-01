@@ -167,7 +167,14 @@ class Clip extends Component {
            
 
           {this.renderWords()}
-          {this.state.processing === true ? <PacmanLoader className="pacman-loader"/> : null}
+          {this.state.processing === true ? 
+          < div className = "pacman-loader">
+          <PacmanLoader/> 
+          <div className="clip-processing-message">
+          <p>Transcribing clip. We'll email you when its done!</p>
+          </div>
+          </div>
+          : null}
         </div>
        
       );

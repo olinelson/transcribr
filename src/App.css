@@ -79,7 +79,8 @@ a:hover {
 }
 
 nav {
-  max-height: 15vh;
+  
+  height: 8rem;
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid rgb(255, 161, 54); 
@@ -278,9 +279,28 @@ input::placeholder{
   grid-area: words;
 }
 
-.css-10cs9pc-wrapper-wrapper {
-  grid-area: words;
+.pacman-loader {
+   width: 100%;
+   grid-area: words;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
 }
+
+.clip-processing-message {
+  width: 100%;
+  margin-top: 3rem;
+  border-top: 1px solid #ffa036;
+  text-align: center;
+  font-size: 1rem;
+  
+
+
+}
+
+/* .css-10cs9pc-wrapper-wrapper {
+  grid-area: words;
+} */
 
 .word-page-forward-button-container {
   grid-area: forward-button;
@@ -511,7 +531,7 @@ top: 5rem;
 .jumbotron {
 
   height: 80vh;
-  background-color: #FFA136;
+
   background-image: url("https://storage.googleapis.com/bucket-of-doom/wordcloud2.jpg");
   background-repeat: no-repeat;
   background-size: cover;
