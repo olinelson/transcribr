@@ -192,7 +192,9 @@ button:disabled {
   position: -webkit-sticky;
   position: sticky;
   top: 1rem;
+  
 }
+
 
 #root {
   height: 100vh;
@@ -229,7 +231,8 @@ nav {
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid #ffa036;
-   padding: 0 1rem .25rem 1rem;
+  padding: 0 1rem .25rem 1rem;
+  margin-top: 1rem;
 
 
   
