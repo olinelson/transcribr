@@ -205,6 +205,7 @@ button:disabled {
 .site-container {
 
   height:85vh;
+  width: 100%;
   max-width: 150rem;
   justify-self: center;
 
@@ -261,10 +262,11 @@ justify-self: right;
 
 
 .player-container {
-  display: flex;
+  width: 100%;
+  /* display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 2rem;
+  margin-top: 2rem; */
 }
 
 .word-card{
@@ -293,7 +295,7 @@ justify-self: right;
   margin-top: .1rem;
   height: 80%;
   width: 100%;
-  color: pink;
+
   text-align: center;
   display: flex;
   align-items: flex-end;
@@ -401,10 +403,9 @@ input::placeholder{
 
 
 .clip-show {
-  /* width: 90%;
-  height: 100%; */
-  max-width: 100rem;
+  width: 100%;
   display: grid;
+
   justify-items: center;
   grid-template-columns: 1fr 3fr 3fr 1fr;
 
@@ -512,17 +513,20 @@ top: 5rem;
   grid-area: image;
   width: 100%;
   height: 10rem;
-  max-width: 10rem;
-  justify-self: left;
-  overflow: hidden;
-  display: grid;
-  justify-content: center;
-  align-content: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  /* max-width: 10rem; */
+  /* justify-self: left; */
+  /* overflow: hidden; */
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-content: center; */
 }
 
 .clip-show-image{
-  width: 100%;
-  height: auto;
+  width: auto;
+  height: 100%;
 }
 
 

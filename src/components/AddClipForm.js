@@ -66,7 +66,7 @@ class AddClipForm extends Component {
             <label className="add-clip-audio-label">Audio File</label>
             <input required className="add-clip-audio-input" name="audioFileInput" type="file" />
             <label className="add-clip-image-label">Image</label>
-            <input required className="add-clip-image-input" name="imageInput" type="file" />
+            <input className="add-clip-image-input" name="imageInput" type="file" />
             {this.state.uploadComplete === false ?
             <button className="add-clip-submit" disabled={this.state.fileUploading}>upload</button>
             : 

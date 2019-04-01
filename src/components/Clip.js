@@ -131,6 +131,29 @@ class Clip extends Component {
 
   }
 
+    showImage = () =>{
+      if (this.state.clip.gcloud_image_link === ""){
+        return (
+          <div className="clip-show-image-container"
+          style={
+            {backgroundImage: `url(${this.state.clip.gcloud_image_link})`}
+          }
+          >
+          </div>
+          
+        )
+      }else{
+        return(
+          <div className="clip-show-image-container"
+          style={
+            {backgroundImage: `url(https://storage.googleapis.com/bucket-of-doom/YKmY2gceXAQgbmAVkm6ruQPr)`}
+          }
+          >
+          </div>
+        )
+      }
+    }
+
 
 
 
@@ -139,9 +162,8 @@ class Clip extends Component {
      
            
         <div className="clip-show">
-          <div className="clip-show-image-container">
-          <img className="clip-show-image" alt={this.state.clip.name} src={this.state.clip.gcloud_image_link}/>
-          </div>
+          {this.showImage()}
+        
           
           <div className="clip-show-info">
             <h1>{this.state.clip.name}</h1>
