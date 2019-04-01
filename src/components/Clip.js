@@ -131,19 +131,30 @@ class Clip extends Component {
 
   }
 
+    // started working on default image if none uploaded by user
     showImage = () =>{
-      if (this.state.clip.gcloud_image_link === ""){
-        return (
-          <div className="clip-show-image-container"
-          style={
-            {backgroundImage: `url(${this.state.clip.gcloud_image_link})`}
-          }
-          >
-          </div>
+      // if (this.state.clip.gcloud_image_link === ""){
+      //   return (
+      //     <div className="clip-show-image-container"
+      //     style={
+      //       {backgroundImage: `url(${this.state.clip.gcloud_image_link})`}
+      //     }
+      //     >
+      //     </div>
           
-        )
-      }else{
-        return(
+      //   )
+      // }else{
+      //   return(
+      //     <div className="clip-show-image-container"
+      //     style={
+      //       {backgroundImage: `url(https://storage.googleapis.com/bucket-of-doom/YKmY2gceXAQgbmAVkm6ruQPr)`}
+      //     }
+      //     >
+      //     </div>
+      //   )
+      // }
+
+      return(
           <div className="clip-show-image-container"
           style={
             {backgroundImage: `url(https://storage.googleapis.com/bucket-of-doom/YKmY2gceXAQgbmAVkm6ruQPr)`}
@@ -151,7 +162,8 @@ class Clip extends Component {
           >
           </div>
         )
-      }
+
+
     }
 
 
