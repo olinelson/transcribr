@@ -1,9 +1,148 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
 
 body{
- 
-  display: grid;
-  grid-template-columns: 1fr;
- 
+width: 100vw;
+overflow-x: hidden;
+height: auto;
+
+display: grid;
+padding: 0;
+margin: 0;
 }
 
 
@@ -64,8 +203,10 @@ button:disabled {
 }
 
 .site-container {
-  height: 100%;
-  width: 100%;
+
+  height:85vh;
+  max-width: 150rem;
+  justify-self: center;
 
 }
 
@@ -80,12 +221,15 @@ a:hover {
 
 nav {
   
-  height: 8rem;
+  height: 15vh;
+  width: 100%;
+  max-width: 200rem;
+  justify-self: center;
   display: flex;
   flex-direction: column;
-  border-bottom: 1px solid rgb(255, 161, 54); 
+  border-bottom: 1px solid #ffa036;
    padding: 0 1rem .25rem 1rem;
-  /* display: none; */
+
 
   
 }
@@ -95,7 +239,7 @@ nav {
 nav h4 {
 font-size: 3rem;
 padding: 0;
-margin: 0 0 -1rem -.2rem;
+margin: 0 0 0 -.2rem;
 color: rgb(255, 161, 54);
 }
 nav a {
@@ -130,11 +274,13 @@ justify-self: right;
 .words-container{
   display: flex;
   flex-wrap: wrap;
+  
 }
 
 .word{
-  margin: 0 .25rem;
- 
+  margin: 0 .5rem 0 0;
+
+  height: 2.3rem;
   display: flex;
   flex-direction: column;
  
@@ -142,36 +288,38 @@ justify-self: right;
 
 
 .word-stamp{
-  border-top: 1px solid #474747;
   font-size: .75rem;
-  margin: -1rem 0;
+  border-top: 1px solid #ffa036;
+  margin-top: .1rem;
+  height: 80%;
+  width: 100%;
+  color: pink;
+  text-align: center;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 
 } 
 
 
 
+.clips-container {
 
+  height: 5rem;
+  margin: 0;
+}
 
 
 .clips-grid{
-  min-height: 80vh;
-  display: grid;
-  grid-template-columns: 1fr;
-
-  grid-gap: 1rem;
-  margin: 2rem;
-  height: auto;
-  grid-template-rows: auto;
-
-
-
-  
+  margin-top: 1rem;
+  display:grid;
+  grid-row-gap: 1rem;
 }
 
 .clip-card {
    display: grid;
-   height: auto;
-   max-height: 10rem;
+
+   height: 7rem;
    grid-template-columns: 1fr 7fr 1fr ;
    align-items: center;
    grid-gap: 1rem;
@@ -179,6 +327,8 @@ justify-self: right;
    "image title ."
    "image author button"
    ;
+   margin: 0;
+
    
 }
 
@@ -212,7 +362,10 @@ justify-self: right;
 
 .clip-card-button {
   grid-area: button;
+  border: 1px solid rgb(12, 12, 5);
 
+
+ 
 }
 
 
