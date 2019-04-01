@@ -11,8 +11,10 @@ import UserClipsContainer from "./UserClipsContainer"
         {/* <h1>{props.currentUser.user_name}</h1> */}
          {props.currentUser.clips ? 
          < UserClipsContainer  
+          
             currentUser = {props.currentUser}
             getCurrentUser={props.getCurrentUser}
+            
             /> 
             : null}
         </div>

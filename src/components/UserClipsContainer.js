@@ -39,7 +39,7 @@ class UserClipsContainer extends Component {
                 },
             })
             .then(() => this.props.getCurrentUser())
-            .then(() => this.props.getUsersClips())
+            .then(() => this.getUsersClips())
 
     }
 
