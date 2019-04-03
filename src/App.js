@@ -22,6 +22,7 @@ import LoginForm from "./components/LoginForm"
 import User from "./components/User"
 import Jumbotron from "./components/Jumbotron"
 
+
 // api URL
 import API_URL from "./components/config"
 
@@ -166,6 +167,7 @@ class App extends Component {
           currentUser={this.state.currentUser}
           getUsersClips={this.getUsersClips}
            />
+
       </Fragment>
     );
   };
