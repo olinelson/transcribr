@@ -284,7 +284,7 @@ justify-self: right;
 
 .word{
   margin: 0 .5rem 0 0;
-
+  cursor: pointer;
   height: 2.3rem;
   display: flex;
   flex-direction: column;
@@ -449,6 +449,7 @@ input::placeholder{
 .clip-processing-message {
   width: 100%;
   margin-top: 3rem;
+  padding-top: 1rem;
   border-top: 1px solid #ffa036;
   text-align: center;
   font-size: 1rem;
