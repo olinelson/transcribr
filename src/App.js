@@ -22,6 +22,9 @@ import LoginForm from "./components/LoginForm"
 import User from "./components/User"
 import Jumbotron from "./components/Jumbotron"
 
+//  hocs
+import Feed from "./hocs/Feed"
+
 
 // api URL
 import API_URL from "./components/config"
@@ -121,16 +124,11 @@ class App extends Component {
 
   Feed = () => {
     return (
-      <Fragment>
-        <ClipsContainer
-          filterClips={this.filterClips}
+      <Feed filterClips={this.filterClips}
           getAllClips={this.getAllClips}
           filteredClips={this.state.filteredClips}
           clips={this.state.clips}
-        />
-
-        {/* <AddClipForm /> */}
-      </Fragment>
+          />
     );
   }; //end of Feed
 
