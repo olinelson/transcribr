@@ -13,7 +13,7 @@ import { BrowserRouter as Router, Route, Link, withRouter } from "react-router-d
 import NavBar from "./components/NavBar";
 import Clip from "./components/Clip";
 import AddClipForm from "./components/AddClipForm";
-import ClipsContainer from "./components/ClipsContainer";
+// import ClipsContainer from "./hocs/ClipsContainer";
 import SignUpForm from "./components/SignUpForm";
 import LoginForm from "./components/LoginForm"
 import User from "./components/User"

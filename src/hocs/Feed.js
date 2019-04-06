@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 
 // components
-import ClipsContainer from "../components/ClipsContainer"
+import ClipsContainer from "./ClipsContainer"
 
 function Feed(props) {
   return (
