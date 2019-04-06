@@ -11,12 +11,11 @@ import { BrowserRouter as Router, Route, Link, withRouter } from "react-router-d
 
 // components
 import NavBar from "./components/NavBar";
-import Clip from "./components/Clip";
+import Clip from "./hocs/Clip";
 import AddClipForm from "./components/AddClipForm";
-// import ClipsContainer from "./hocs/ClipsContainer";
 import SignUpForm from "./components/SignUpForm";
 import LoginForm from "./components/LoginForm"
-import User from "./components/User"
+import User from "./hocs/User"
 import Jumbotron from "./components/Jumbotron"
 
 //  hocs
