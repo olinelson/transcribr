@@ -18,6 +18,7 @@ import SignUpForm from "./components/SignUpForm";
 import LoginForm from "./components/LoginForm"
 import User from "./hocs/User"
 import Jumbotron from "./components/Jumbotron"
+import NewClipChooser from "./components/NewClipChooser"
 
 //  hocs
 import Feed from "./hocs/Feed"
@@ -87,6 +88,7 @@ class App extends Component {
             <Route path="/clips/:id" component={this.ClipShow} />
             <Route path="/upload" component={this.Upload} />
             <Route path="/uploadvideo" component={this.UploadVideo} />
+            <Route path="/newClip" component={this.NewClip} />
             <Route path="/signup" component={this.SignUp} />
             <Route path="/users/:id" component={this.UserShow}/>
             <Route path="/login" render={(routerProps) => <LoginForm {...routerProps} getCurrentUser={this.getCurrentUser} setCurrentUser={this.setCurrentUser}/> } />
@@ -133,6 +135,17 @@ class App extends Component {
         getCurrentUser={this.getCurrentUser}
       
       />
+    );
+  };
+
+  NewClip = () => {
+    return (
+        <NewClipChooser  
+          getCurrentUser={this.getCurrentUser} 
+          getAllClips={this.getAllClips} 
+          currentUser={this.state.currentUser}
+          getUsersClips={this.getUsersClips}
+        />
     );
   };
 

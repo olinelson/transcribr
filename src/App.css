@@ -738,3 +738,12 @@ font-weight: bold;
   font-size: 1.5rem;
 }
 
+
+.new-clip-chooser {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  height: 50vh;
+  align-content: center;
+  justify-items: center;
+}
+

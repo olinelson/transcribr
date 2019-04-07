@@ -155,7 +155,6 @@ class Clip extends Component {
   showVideoClip = () => {
      return (
       <div className="clip-show-video">
-        {/* {this.showImage()} */}
   
        <ReactPlayer
           className="media-player"
