@@ -152,15 +152,28 @@ class Clip extends Component {
           : this.showButtonIfSaved()
           }
         </div>
-           
-        <ReactAudioPlayer
+
+        {this.state.clip.media_type === "audio" ? 
+         <ReactAudioPlayer
           preload="auto"
           className="audio-player"
           ref={this.audio}
           src={this.state.clip.gcloud_media_link}
           controls
         />
+        : null }
+        
+        {this.state.clip.media_type === "video" ?
+        <video controls>
+          <source src={this.state.clip.gcloud_media_link} type="video/mp4"/>
+        </video>
+        : null
+         }
+        
 
+      
+           
+       
         {this.renderWords()}
 
         {this.state.processing === true ? 

@@ -13,6 +13,7 @@ import { BrowserRouter as Router, Route, Link, withRouter } from "react-router-d
 import NavBar from "./components/NavBar";
 import Clip from "./hocs/Clip";
 import AddClipForm from "./components/AddClipForm";
+import AddVideoClipForm from "./components/AddVideoClipForm";
 import SignUpForm from "./components/SignUpForm";
 import LoginForm from "./components/LoginForm"
 import User from "./hocs/User"
@@ -85,6 +86,7 @@ class App extends Component {
             <Route exact path="/clips" component={this.ClipsIndex} />
             <Route path="/clips/:id" component={this.ClipShow} />
             <Route path="/upload" component={this.Upload} />
+            <Route path="/uploadvideo" component={this.UploadVideo} />
             <Route path="/signup" component={this.SignUp} />
             <Route path="/users/:id" component={this.UserShow}/>
             <Route path="/login" render={(routerProps) => <LoginForm {...routerProps} getCurrentUser={this.getCurrentUser} setCurrentUser={this.setCurrentUser}/> } />
@@ -138,6 +140,17 @@ class App extends Component {
   Upload = () => {
     return (
         <AddClipForm  
+          getCurrentUser={this.getCurrentUser} 
+          getAllClips={this.getAllClips} 
+          currentUser={this.state.currentUser}
+          getUsersClips={this.getUsersClips}
+        />
+    );
+  };
+
+  UploadVideo = () => {
+    return (
+        <AddVideoClipForm  
           getCurrentUser={this.getCurrentUser} 
           getAllClips={this.getAllClips} 
           currentUser={this.state.currentUser}
