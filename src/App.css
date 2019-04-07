@@ -185,8 +185,9 @@ button:disabled {
 
 
 
-.audio-player {
+.media-player {
   width: 100%;
+  max-width: 50rem;
   margin: 0 0 1rem 0;
   grid-area: player;
   position: -webkit-sticky;
@@ -426,6 +427,26 @@ input::placeholder{
   
 
 }
+
+.clip-show-video {
+  width: 100%;
+  display: grid;
+
+  justify-items: center;
+  grid-template-columns: 1fr 3fr 3fr 1fr;
+
+  grid-template-areas:
+    "player player player player "
+    " info info info info"
+    "search search search search "
+    "back-button words words forward-button"
+  ;
+  grid-gap: 1rem;
+
+
+
+}
+
 .word-page-back-button-container {
   grid-area: back-button;
   border-right: 1px solid #FFA136;
@@ -502,9 +523,11 @@ top: 5rem;
   grid-area: info;
   height: 100%;
   width: 100%;
+  max-width: 50rem;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+
 }
 
 .clip-show-info h1 {
@@ -513,6 +536,7 @@ top: 5rem;
 
 .clip-show-save-button {
   align-self: flex-start;
+  margin: .5rem 0;
 }
 
 .clip-show-image-container {
@@ -522,12 +546,6 @@ top: 5rem;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  /* max-width: 10rem; */
-  /* justify-self: left; */
-  /* overflow: hidden; */
-  /* display: flex; */
-  /* justify-content: center; */
-  /* align-content: center; */
 }
 
 .clip-show-image{

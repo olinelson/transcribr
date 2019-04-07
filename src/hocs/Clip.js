@@ -152,9 +152,88 @@ class Clip extends Component {
     }
   } // end of showImage
 
+  showVideoClip = () => {
+     return (
+      <div className="clip-show-video">
+        {/* {this.showImage()} */}
+  
+       <ReactPlayer
+          className="media-player"
+          ref={this.video}
+          url={this.state.clip.gcloud_media_link}
+          width = '100%'
+          height = '100%'
+          playing
+          controls
+           />
 
-  showClip = () => {
-    console.log(this.state)
+        <div className="clip-show-info">
+          <h1>{this.state.clip.name}</h1>
+          { this.props.currentUser === null ? null
+          : this.showButtonIfSaved()
+          }
+        </div>
+       
+        {this.renderWords()}
+
+        {this.state.processing === true ? 
+          <div className = "pacman-loader">
+          <PacmanLoader/> 
+          <div className="clip-processing-message">
+            <p>Transcribing clip. We'll email you when its done!</p>
+          </div>
+
+          </div>
+        : null}
+
+      </div>
+       
+    ); //end of return
+  }
+
+  showAudioClip = () => {
+    return (
+      <div className="clip-show">
+        {this.showImage()}
+    
+        <div className="clip-show-info">
+          <h1>{this.state.clip.name}</h1>
+          { this.props.currentUser === null ? null
+          : this.showButtonIfSaved()
+          }
+        </div>
+
+        <ReactAudioPlayer
+          preload="auto"
+          className="media-player"
+          ref={this.audio}
+          src={this.state.clip.gcloud_media_link}
+          controls
+        />
+        {this.renderWords()}
+
+        {this.state.processing === true ? 
+          <div className = "pacman-loader">
+            <PacmanLoader/> 
+            <div className="clip-processing-message">
+              <p>Transcribing clip. We'll email you when its done!</p>
+            </div>
+
+          </div>
+        : null}
+
+      </div>
+    ) // end of return
+  } // end of showAudioClip
+
+
+  showVideoOrAudioClip = () => {
+    if (this.state.clip.media_type === "audio"){
+      return this.showAudioClip()
+    }
+    if (this.state.clip.media_type === "video"){
+      return this.showVideoClip()
+    }
     return (
       <div className="clip-show">
         {this.showImage()}
@@ -220,7 +299,7 @@ class Clip extends Component {
             size={1}
             loading={true}
           />
-        : this.showClip()  }
+        : this.showVideoOrAudioClip()  }
         </div>
     );
   } // end of render
