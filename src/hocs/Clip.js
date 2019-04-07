@@ -2,7 +2,8 @@ import React, { Component, Fragment } from "react";
 import ReactAudioPlayer from "react-audio-player";
 import Words from "./Words";
 
-// api URL
+import ReactPlayer from 'react-player'
+
 import API_URL from "../components/config"
 
 import { BeatLoader, PacmanLoader } from 'react-spinners';
@@ -14,6 +15,7 @@ class Clip extends Component {
   constructor(props) {
     super(props);
     this.audio = React.createRef();
+    this.video = React.createRef();
     this.state = {
         clip: null,
         processing: false
@@ -21,7 +23,17 @@ class Clip extends Component {
   }
 
   setPlayerPosition = e => {
-    this.audio.current.audioEl.currentTime = e.start_time;
+    if (this.state.clip.media_type === "audio"){
+      this.audio.current.audioEl.currentTime = e.start_time
+    }
+    if (this.state.clip.media_type === "video"){
+      // this.audio.current.audioEl.currentTime = e.start_time
+      console.log('adjusting video postion')
+      // console.log(this.video.current.seekTo)
+
+      this.video.current.seekTo(e.start_time, "seconds")
+    }
+    
   };
 
   componentDidMount = () => {
@@ -142,6 +154,7 @@ class Clip extends Component {
 
 
   showClip = () => {
+    console.log(this.state)
     return (
       <div className="clip-show">
         {this.showImage()}
@@ -162,11 +175,16 @@ class Clip extends Component {
           controls
         />
         : null }
-        
+
         {this.state.clip.media_type === "video" ?
-        <video controls>
-          <source src={this.state.clip.gcloud_media_link} type="video/mp4"/>
-        </video>
+        <ReactPlayer
+          ref={this.video}
+          url={this.state.clip.gcloud_media_link}
+          width = '100%'
+          height = '100%'
+          playing
+          controls
+           />
         : null
          }
         
