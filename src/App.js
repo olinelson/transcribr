@@ -19,6 +19,7 @@ import LoginForm from "./components/LoginForm"
 import User from "./hocs/User"
 import Jumbotron from "./components/Jumbotron"
 import NewClipChooser from "./components/NewClipChooser"
+import AddUrlForm from "./components/AddUrlForm"
 
 //  hocs
 import Feed from "./hocs/Feed"
@@ -88,6 +89,7 @@ class App extends Component {
             <Route path="/clips/:id" component={this.ClipShow} />
             <Route path="/upload" component={this.Upload} />
             <Route path="/uploadvideo" component={this.UploadVideo} />
+            <Route path="/addurl" component={this.AddUrl} />
             <Route path="/newClip" component={this.NewClip} />
             <Route path="/signup" component={this.SignUp} />
             <Route path="/users/:id" component={this.UserShow}/>
@@ -172,6 +174,17 @@ class App extends Component {
     );
   };
 
+  AddUrl = () => {
+    return (
+        <AddUrlForm  
+          getCurrentUser={this.getCurrentUser} 
+          getAllClips={this.getAllClips} 
+          currentUser={this.state.currentUser}
+          getUsersClips={this.getUsersClips}
+        />
+    );
+  };
+
 
   SignUp = () => {
     return (
@@ -180,7 +193,7 @@ class App extends Component {
   };
 
 } 
-{/* end of app */}
+
 
 
 
