@@ -1,4 +1,4 @@
-This project connects to a my backend api which can be found here: https://github.com/olinelson/podcast_searcher_back
+This project connects to a backend api which can be found here: https://github.com/olinelson/podcast_searcher_back
 
 ## What Is This?
 
