@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
 
 // api URL
-import API_URL from "./config"
+import API_URL from "../config"
 
  class LoginForm extends Component {
 

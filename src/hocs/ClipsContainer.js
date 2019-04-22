@@ -13,7 +13,7 @@ import { BeatLoader } from 'react-spinners';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 // api URL
-import API_URL from "../components/config"
+import API_URL from "../config"
 
 // unique id generator
 const uuidv1 = require("uuid/v1");

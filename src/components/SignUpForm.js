@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 // api URL
-import API_URL from "./config"
+import API_URL from "../config"
 
 import {
     withRouter

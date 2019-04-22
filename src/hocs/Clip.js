@@ -4,7 +4,7 @@ import Words from "./Words";
 
 import ReactPlayer from 'react-player'
 
-import API_URL from "../components/config"
+import API_URL from "../config"
 
 import { BeatLoader, PacmanLoader } from 'react-spinners';
 

@@ -5,7 +5,7 @@ import { DebounceInput } from 'react-debounce-input';
 import { BeatLoader } from "react-spinners";
 
 // api URL
-import API_URL from "../components/config"
+import API_URL from "../config"
 
 const uuidv1 = require("uuid/v1");
 

@@ -26,7 +26,7 @@ import Feed from "./hocs/Feed"
 
 
 // api URL
-import API_URL from "./components/config"
+import API_URL from "./config"
 
 // font awesome icons in use
 library.add(fab, faCheckSquare, faCoffee, faCheck, faUser, faSadTear)
