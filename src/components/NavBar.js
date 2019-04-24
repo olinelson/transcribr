@@ -27,9 +27,8 @@ const NavBar = props => {
       
       <div className="nav-links">
       <NavLink activeClassName="selected" to="/feed">FEED</NavLink>
-      <NavLink activeClassName="selected" to="/newclip">New Clip</NavLink>
-     
-      
+      <NavLink activeClassName="selected" to="/newclip">NEW CLIP</NavLink>
+
 
       {props.currentUser === null ? 
       < NavLink activeClassName="selected" to = "/login" > LOGIN </NavLink>
