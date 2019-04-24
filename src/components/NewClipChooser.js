@@ -7,7 +7,8 @@ import { BrowserRouter as Router, Route, Link, withRouter } from "react-router-d
     <div className="new-clip-chooser">
         <Link to="/upload">Upload Audio file</Link>
         <Link to="/uploadvideo">Upload Video file</Link>
-        <Link to="/addurl">Add YouTube URL Audio file</Link>
+        {/* for use for youtube dl... removed for now because of memory problems */}
+        {/* <Link to="/addurl">Add YouTube URL Audio file</Link> */}
        
       
     </div>
