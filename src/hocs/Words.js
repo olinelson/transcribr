@@ -120,21 +120,21 @@ class Words extends Component {
         </div>  {/* end of search container */}
        
         {/* stops the next and back page buttons displaying when the user is searching for a word */}
-        {this.state.searchInput === "" ?
+        {this.state.searchInput === "" && this.state.filteredWords.length >= 500 ?
 
           <Fragment>
             <div 
               className="word-page-button-container word-page-back-button-container" 
               onClick={this.previousPageHandler}
             > 
-              <button> back </button> 
+              <button> previous page </button> 
             </div>
 
             <div 
               className="word-page-button-container word-page-forward-button-container" 
               onClick={this.nextPageHandler}
             > 
-              <button> forward </button> 
+              <button> next page </button> 
             </div>
           </Fragment>
 
