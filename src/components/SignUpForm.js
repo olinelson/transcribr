@@ -37,9 +37,7 @@ class SignUpForm extends Component {
         if (r.errors) {
           alert(r.errors);
         } else {
-          
           this.props.history.push(`/login`);
-
         }
       });
   };
