@@ -33,8 +33,9 @@ class ClipsContainer extends Component {
   // finds clips with titles that match input and puts result in state
   searchInputHandler = e => {
     let input = e.target.value;
-    let result = [...this.state.clips].filter(
-      c => c.name.toLowerCase().includes(input) || c.transcript.includes(input)
+    let result
+    result = [...this.state.clips].filter(
+      c => c.name.toLowerCase().includes(input)
     );
     this.setState({
       filteredClips: result,

@@ -56,7 +56,7 @@ class AddVideoClipForm extends Component {
               <input required className="add-clip-title" name="name" placeholder="Clip Title"/>
               <label className="add-clip-audio-label">Video File</label>
               <input required className="add-clip-audio-input" name="audioFileInput" type="file" />
-              <label className="add-clip-image-label">Image</label>
+              {/* <label className="add-clip-image-label">Image</label> */}
               {/* <input required className="add-clip-image-input" name="imageInput" type="file" /> */}
 
               {/* disabled upload button while uploading */}

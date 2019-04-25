@@ -240,8 +240,7 @@ justify-self: right;
 
 }
 
-
- input {
+form input, .custom-input {
   height: 2rem;
   font-size: 1rem;
   margin: 0 1rem;
@@ -260,6 +259,11 @@ input::placeholder{
 
 }
 
+.checkbox {
+  border: 1px solid black;
+  width: 1rem;
+  height: 1rem;
+}
 
 
 .clip-show {
