@@ -33,9 +33,9 @@ class ClipsContainer extends Component {
   // finds clips with titles that match input and puts result in state
   searchInputHandler = e => {
     let input = e.target.value;
-    let result
-    result = [...this.state.clips].filter(
-      c => c.name.toLowerCase().includes(input)
+    let result;
+    result = [...this.state.clips].filter(c =>
+      c.name.toLowerCase().includes(input)
     );
     this.setState({
       filteredClips: result,
@@ -104,6 +104,7 @@ class ClipsContainer extends Component {
       <div className="clips-container">
         <div className="search-container">
           <DebounceInput
+            className="custom-input"
             label="search clips"
             placeholder="search for clips..."
             minLength={2}
