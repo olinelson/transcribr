@@ -27,8 +27,9 @@ justify-content: center;
 height: 2rem;
 align-self: center;
 color: white;
-width: 4rem;
+width: auto;
 font-weight: bold;
+padding: .5rem;
 }
 
 button:disabled {
@@ -214,10 +215,11 @@ border: 1px solid rgb(12, 12, 5);
 
 .search-container {
 width: 100%;
-margin-top: 2rem;
+/* margin-top: 2rem; */
 height: 100%; 
 display: flex;
 justify-content: center;
+/* border: 1px solid red; */
 }
 
 
@@ -231,20 +233,17 @@ border: 0;
 text-align: center;
 border-bottom: 1px solid black;
 color: rgb(255, 161, 54);
--webkit-appearance: none;
+/* -webkit-appearance: none; */
 border-radius: 0;
 
 }
+
 input::placeholder{
 color: rgb(255, 161, 54);
 opacity: 0.5;
 }
 
-.checkbox {
-border: 1px solid black;
-width: 1rem;
-height: 1rem;
-}
+
 
 
 
@@ -286,6 +285,7 @@ border-right: 1px solid #FFA136;
 .process-audio-button{
 grid-area: words;
 justify-self: center;
+
 }
 
 .pacman-loader {
@@ -318,6 +318,7 @@ display: grid;
 justify-items: center;
 grid-template-rows: 2rem;
 background-color:  rgba(255, 161, 54, 0.66);
+padding: .5rem;
 }
 
 .word-page-button-container:hover{
@@ -332,11 +333,15 @@ border: none;
 position: -webkit-sticky;
 position: sticky;
 top: 5rem;
+
 }
 
 .clip-show-info {
 grid-area: info;
 display: flex;
+
+flex-direction: column;
+justify-content: space-between;
 }
 
 .clip-show-info h1 {
@@ -345,7 +350,7 @@ margin: 0;
 
 .clip-show-save-button {
 align-self: flex-start;
-margin: .5rem 0;
+
 }
 
 .clip-show-image-container {
@@ -358,15 +363,14 @@ background-position: center;
 
 }
 
-/* .clip-show-image{
-width: 100%;
-height: auto;
-} */
+
 
 
 
 .search-container {
 grid-area: search;
+display:flex;
+align-items: center;
 }
 
 .words-container {
@@ -533,8 +537,33 @@ align-content: center;
 justify-items: center;
 }
 
+.new-clip-chooser a {
+  background-color: black;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2rem;
+  align-self: center;
+  color: white;
+  width: auto;
+  font-weight: bold;
+  padding: .5rem;
+}
 
-@media screen and (max-width: 800px){
+input.checkbox {
+border: 1px solid black;
+width: 1rem;
+height: 1rem;
+}
+
+input.checkbox:checked{
+  /* border: 1px solid rgba(255, 161, 54, 0.66); */
+  background-color: rgba(255, 161, 54, 0.66);
+}
+
+
+@media screen and (max-width: 60rem){
   .clip-show {
 display: grid;
 width: 100%;
@@ -559,12 +588,35 @@ position: static;
 height: 100%;
 width: 100%;
 
+
+
+
 display: grid;
 justify-items: center;
 align-items: center;
 align-content: center;
 /* grid-template-rows: 2rem; */
 background-color:  rgba(255, 161, 54, 0.66);
+}
+
+}
+
+@media screen and (max-width: 40rem){
+  .clip-show {
+display: grid;
+width: 100%;
+grid-template-columns: 10rem 1fr 1fr 10rem;
+grid-template-areas: 
+"image info info info "
+"player player player player "
+"search search search search "
+"back-button back-button forward-button forward-button "
+"words words words words"
+;
+grid-gap:1rem ;
+margin-top: 3rem;
+
+
 }
 
 }
