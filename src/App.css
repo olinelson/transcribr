@@ -220,7 +220,9 @@ display: flex;
 justify-content: center;
 }
 
-form input, .custom-input {
+
+
+form input, .custom-input, .search-container input {
 height: 2rem;
 font-size: 1rem;
 margin: 0 1rem;
@@ -231,6 +233,7 @@ border-bottom: 1px solid black;
 color: rgb(255, 161, 54);
 -webkit-appearance: none;
 border-radius: 0;
+
 }
 input::placeholder{
 color: rgb(255, 161, 54);
@@ -248,7 +251,6 @@ height: 1rem;
 .clip-show {
 display: grid;
 width: 100%;
-
 grid-template-columns: 10rem 1fr 1fr 10rem;
 grid-template-areas: 
 "image info info info "
@@ -311,10 +313,11 @@ border-left: 1px solid #FFA136;
 .word-page-button-container {
 height: 100%;
 width: 100%;
-color: black;
+
 display: grid;
 justify-items: center;
 grid-template-rows: 2rem;
+background-color:  rgba(255, 161, 54, 0.66);
 }
 
 .word-page-button-container:hover{
@@ -323,8 +326,8 @@ cursor: pointer;
 
 
 .word-page-button-container button {
-background-color: white;
-color: #FFA136;
+background-color: rgba(255, 255, 255, 0);
+color: white;
 border: none;
 position: -webkit-sticky;
 position: sticky;
@@ -528,4 +531,40 @@ grid-template-columns: 1fr 1fr;
 height: 50vh;
 align-content: center;
 justify-items: center;
+}
+
+
+@media screen and (max-width: 800px){
+  .clip-show {
+display: grid;
+width: 100%;
+grid-template-columns: 10rem 1fr 1fr 10rem;
+grid-template-areas: 
+"image info info info "
+"player player player player "
+"back-button search search forward-button "
+"words words words words"
+;
+grid-gap:1rem ;
+margin-top: 3rem;
+
+
+}
+
+.word-page-button-container button {
+border: none;
+position: static;
+}
+.word-page-button-container {
+height: 100%;
+width: 100%;
+
+display: grid;
+justify-items: center;
+align-items: center;
+align-content: center;
+/* grid-template-rows: 2rem; */
+background-color:  rgba(255, 161, 54, 0.66);
+}
+
 }
