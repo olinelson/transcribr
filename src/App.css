@@ -563,7 +563,7 @@ input.checkbox:checked{
 }
 
 
-@media screen and (max-width: 60rem){
+@media screen and (max-width: 1000px){
   .clip-show {
 display: grid;
 width: 100%;
@@ -601,7 +601,7 @@ background-color:  rgba(255, 161, 54, 0.66);
 
 }
 
-@media screen and (max-width: 40rem){
+@media screen and (max-width: 700px){
   .clip-show {
 display: grid;
 width: 100%;
