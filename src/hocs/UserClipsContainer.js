@@ -44,8 +44,8 @@ class UserClipsContainer extends Component {
       .then(r => r.json())
       .then(r =>
         this.setState({
-          clips: r.clips,
-          filteredClips: r.clips,
+          clips: r.data.attributes.clips,
+          filteredClips: r.data.attributes.clips,
           loading: false
         })
       );
@@ -106,7 +106,7 @@ class UserClipsContainer extends Component {
   }; // end of deleteClip
 
   render() {
-    console.log(this.state.filteredClips);
+    console.log("hello",this.state.filteredClips);
     return (
       <div className="clips-container">
         <div className="search-container">

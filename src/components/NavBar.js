@@ -13,7 +13,7 @@ const NavBar = props => {
              
              <NavLink activeClassName="selected" to={`/users/${props.currentUser.id}`}>SAVED CLIPS</NavLink>
              <a onClick = {props.logout}> LOGOUT </a>
-             <Link to={`/users/${props.currentUser.id}`} className="logged-in-as"> <FontAwesomeIcon icon = "user" /> {props.currentUser.user_name}</Link>
+             <Link to={`/users/${props.currentUser.id}`} className="logged-in-as"> <FontAwesomeIcon icon = "user" /> {props.currentUser.attributes.user_name}</Link>
              </Fragment >
         )
         

@@ -8,7 +8,7 @@ function User(props) {
   const showUserName = (props) => {
     return(
       <div className="user-container">
-        {props.currentUser.clips ? 
+        {props.currentUser.attributes.clips ? 
           < UserClipsContainer  
             currentUser = {props.currentUser}
             getCurrentUser={props.getCurrentUser}

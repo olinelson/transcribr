@@ -64,9 +64,10 @@ class App extends Component {
         .then(r => r.json())
         .then(r =>
           this.setState({
-            currentUser: r
+            currentUser: r.data
           })
-        );
+        )
+        .then( ()=> console.log(this.state))
     }
   };
 

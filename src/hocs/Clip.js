@@ -59,12 +59,14 @@ class Clip extends Component {
     method: "GET",
     })
     .then(r => r.json())
-    .then(r => this.isClipProcessing(r) )
+    .then(r => this.isClipProcessing(r.data.attributes) )
   }
 
   // conditionaly renders save or saved button if the clip exists in curret User Clips
   showButtonIfSaved =  () => {
-    let currentUserClips = this.props.currentUser.clips 
+    let currentUserClips = this.props.currentUser.attributes.clips 
+
+    console.log(currentUserClips)
 
     for( let clip of currentUserClips){
       if (clip.id === this.state.clip.id){

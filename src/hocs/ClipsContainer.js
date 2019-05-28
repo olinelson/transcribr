@@ -35,7 +35,7 @@ class ClipsContainer extends Component {
     let input = e.target.value;
     let result;
     result = [...this.state.clips].filter(c =>
-      c.name.toLowerCase().includes(input)
+      c.attributes.name.toLowerCase().includes(input)
     );
     this.setState({
       filteredClips: result,
@@ -53,13 +53,16 @@ class ClipsContainer extends Component {
       method: "GET"
     })
       .then(r => r.json())
+
       .then(r =>
         this.setState({
-          clips: r,
-          filteredClips: r,
+          clips: r.data,
+          filteredClips: r.data,
           loading: false
         })
-      );
+      )
+
+   
   }; // end of getAllClips
 
   showClips = () => {
@@ -84,16 +87,16 @@ class ClipsContainer extends Component {
             <img
               alt="clip-thumbnail"
               className="clip-image"
-              src={c.gcloud_image_link}
+              src={c.attributes.gcloud_image_link}
             />
           </div>
 
-          <Link className="clip-card-title" key={uuidv1()} to={`clips/${c.id}`}>
+          <Link className="clip-card-title" key={uuidv1()} to={`clips/${c.attributes.id}`}>
             {" "}
-            {c.name}
+            {c.attributes.name}
           </Link>
 
-          <small className="author-tag">{c.author.user_name} </small>
+          <small className="author-tag">{c.attributes.author.user_name} </small>
         </div>
       ));
     } // end of if statement to wait for props
