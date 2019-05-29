@@ -18,7 +18,8 @@ const NavBar = props => {
         )
         
     }
-   
+
+
   return (
        
     <nav>

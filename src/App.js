@@ -37,6 +37,7 @@ import Feed from "./hocs/Feed";
 
 // api URL
 import API_URL from "./config";
+import { RaceSubscriber } from "rxjs/internal/observable/race";
 
 // font awesome icons in use
 library.add(fab, faCheckSquare, faCoffee, faCheck, faUser, faSadTear);
@@ -54,6 +55,7 @@ class App extends Component {
   // auto login method that sets current user if one has already logged in
   getCurrentUser = () => {
     let token = localStorage.getItem("token");
+    
     if (token) {
       fetch(`${API_URL}/auto_login`, {
         method: "GET",
@@ -62,19 +64,22 @@ class App extends Component {
         }
       })
         .then(r => r.json())
+
         .then(r =>
           this.setState({
-            currentUser: r.data
+            currentUser: r.user.data
           })
         )
+        .then(r => console.log(r))
 
     }
   };
 
   // for use with the login form component
   setCurrentUser = response => {
+    console.log("hello response",response)
     this.setState({
-      currentUser: response.user
+      currentUser: response.user.data
     });
 
     localStorage.setItem("token", response.jwt);
