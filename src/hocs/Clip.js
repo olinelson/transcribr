@@ -28,8 +28,8 @@ class Clip extends Component {
     }
     if (this.state.clip.media_type === "video"){
       // this.audio.current.audioEl.currentTime = e.start_time
-      console.log('adjusting video postion')
-      // console.log(this.video.current.seekTo)
+
+
 
       this.video.current.seekTo(e.start_time, "seconds")
     }
@@ -66,9 +66,10 @@ class Clip extends Component {
   showButtonIfSaved =  () => {
     let currentUserClips = this.props.currentUser.attributes.clips 
 
-    console.log(currentUserClips)
+
 
     for( let clip of currentUserClips){
+
       if (clip.id === this.state.clip.id){
         return (
           <button className="clip-show-save-button" disabled> saved </button>

@@ -106,7 +106,8 @@ class UserClipsContainer extends Component {
   }; // end of deleteClip
 
   render() {
-    console.log("hello",this.state.filteredClips);
+    console.log("props",this.props)
+    console.log("state",this.state)
     return (
       <div className="clips-container">
         <div className="search-container">
@@ -127,13 +128,14 @@ class UserClipsContainer extends Component {
             }
             checked={this.state.searchTranscript}
           />
-          <label for="search transcript">Search Transcripts</label>
+          <label name="search transcript">Search Transcripts</label>
         </div>{" "}
         {/* end of search-container div  */}
         <div className="clips-grid">
           {this.state.loading === true ? <BeatLoader /> : null}
 
           {this.state.filteredClips.map(c => (
+            
             <div key={uuidv1()} className="clip-card">
               <div className="clip-image-container">
                 <img
@@ -153,8 +155,8 @@ class UserClipsContainer extends Component {
               </Link>
 
               {c.author ? <small> Uploaded By: {c.author.email} </small> : null}
-
-              {c.author_id === this.props.currentUser.id ? (
+              
+              {c.author_id == this.props.currentUser.id ? (
                 <button
                   className="button clip-card-button"
                   onClick={e => this.deleteClipHandler(c)}
