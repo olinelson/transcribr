@@ -106,8 +106,7 @@ class UserClipsContainer extends Component {
   }; // end of deleteClip
 
   render() {
-    console.log("props",this.props)
-    console.log("state",this.state)
+
     return (
       <div className="clips-container">
         <div className="search-container">

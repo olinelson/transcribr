@@ -70,7 +70,7 @@ class App extends Component {
             currentUser: r.user.data
           })
         )
-        .then(r => console.log(r))
+
 
     }
   };
