@@ -1,15 +1,16 @@
 import React, { Component, Fragment } from "react";
 import Word from "../components/Word";
 
-import { DebounceInput } from 'react-debounce-input';
+import _ from "lodash";
 
-import { BeatLoader } from 'react-spinners';
+import { BeatLoader } from "react-spinners";
+
+import { Container, Button, Search } from "semantic-ui-react";
 
 const uuidv1 = require("uuid/v1");
 
 class Words extends Component {
   constructor(props) {
-
     // this filteres the output of the api into usable JSON
     const unfilteredWords = JSON.parse(props.words);
     // repeats the process for the individual words
@@ -19,7 +20,7 @@ class Words extends Component {
     for (let wordObject of words) {
       wordObject.word = wordObject.word.toLowerCase();
     }
-   
+
     super(props);
     // word selection start and end used for page view, navigating forward and back
     this.state = {
@@ -29,12 +30,14 @@ class Words extends Component {
       wordSelectionEnd: 500,
       loading: false,
       searchInput: ""
-
     };
   } // end of constructor
 
   showWords = () => {
-    const wordSelection = this.state.filteredWords.slice(this.state.wordSelectionStart, this.state.wordSelectionEnd)
+    const wordSelection = this.state.filteredWords.slice(
+      this.state.wordSelectionStart,
+      this.state.wordSelectionEnd
+    );
     return wordSelection.map(w => (
       <Word
         setPlayerPosition={this.props.setPlayerPosition}
@@ -47,7 +50,7 @@ class Words extends Component {
   // filters words shown on page for use with the search input field
   // resets the wordSelection to make sure that search results aren't hidden
   filterWords = () => {
-    const query = this.state.searchInput
+    const query = this.state.searchInput;
     let oldWords = [...this.state.words];
     let newWords = oldWords.filter(w => w.word.includes(query));
 
@@ -57,30 +60,28 @@ class Words extends Component {
       wordSelectionStart: 0,
       wordSelectionEnd: 500
     });
-  } //end of filterWords
+  }; //end of filterWords
 
-  
   // handles text input for search of words
-  searchInputHandler = (e) =>{
-    let input = e.target.value
+  searchInputHandler = e => {
+    let input = e.target.value;
     this.setState({
       searchInput: input
-    })
-    this.filterWords()
-  }
+    });
+    this.filterWords();
+  };
 
   // if the users is at the end of the transcript, do not permit next page,
   // else go to next page
   nextPageHandler = () => {
-    if (this.state.wordSelectionEnd >= this.state.words.length){
-    }else {
+    if (this.state.wordSelectionEnd >= this.state.words.length) {
+    } else {
       this.setState({
         wordSelectionStart: this.state.wordSelectionStart + 500,
         wordSelectionEnd: this.state.wordSelectionEnd + 500
-      })
+      });
     }
-  }
-
+  };
 
   // if the users is at the beginning of the transcript, do not permit next page,
   // else go to prevous page
@@ -90,68 +91,71 @@ class Words extends Component {
       this.setState({
         wordSelectionStart: this.state.wordSelectionStart - 500,
         wordSelectionEnd: this.state.wordSelectionEnd - 500
-      })
+      });
     }
-  }
+  };
+
+  showSearchBarIfThereAreWords = () => {
+    if (this.state.words.length >= 0) {
+      return (
+        <Search
+          onSearchChange={_.debounce(this.searchInputHandler, 500, {
+            leading: true
+          })}
+          open={false}
+          value={this.state.searchInput}
+        />
+      );
+    }
+  };
+
+  showPageNavButtonsIfNotSearchingAndThereAreMultiplePages = () => {
+    if (
+      this.state.searchInput === "" &&
+      this.state.filteredWords.length >= 500
+    ) {
+      return (
+        <Fragment>
+          <Container
+            className="word-page-button-container word-page-back-button-container"
+            onClick={this.previousPageHandler}
+          >
+            <Button> previous page </Button>
+          </Container>
+
+          <Container
+            className="word-page-button-container word-page-forward-button-container"
+            onClick={this.nextPageHandler}
+          >
+            <Button> next page </Button>
+          </Container>
+        </Fragment>
+      );
+    }
+  };
 
   render() {
-
     return (
       <Fragment>
-        <div className="search-container">
+        <Container text>
+          {this.showSearchBarIfThereAreWords()}
+        </Container>
 
-          <BeatLoader
-            sizeUnit={"px"}
-            size={150}
-            color={'#123abc'}
-            loading={this.state.loading}
-          />
 
-          {this.state.words.length >= 0 ? 
-            <DebounceInput
-              label="search words"
-              placeholder="search words..."
-              debounceTimeout = { 200 }
-              onChange={this.searchInputHandler}
-              value={this.state.searchInput}
-            /> 
-          : null
-          }
-        </div>  {/* end of search container */}
-       
-        {/* stops the next and back page buttons displaying when the user is searching for a word */}
-        {this.state.searchInput === "" && this.state.filteredWords.length >= 500 ?
+        {this.showPageNavButtonsIfNotSearchingAndThereAreMultiplePages()}
 
-          <Fragment>
-            <div 
-              className="word-page-button-container word-page-back-button-container" 
-              onClick={this.previousPageHandler}
-            > 
-              <button> previous page </button> 
-            </div>
-
-            <div 
-              className="word-page-button-container word-page-forward-button-container" 
-              onClick={this.nextPageHandler}
-            > 
-              <button> next page </button> 
-            </div>
-          </Fragment>
-
-        : null
-        }
-
-        <div className="words-container">
-          {this.state.words ? this.showWords() : 
+        <Container textAlign="justified">
+          {this.state.words ? (
+            this.showWords()
+          ) : (
             <BeatLoader
               sizeUnit={"px"}
               size={150}
-              color={'#123abc'}
+              color={"#123abc"}
               loading={true}
             />
-          }
-        </div>
-
+          )}
+        </Container>
       </Fragment>
     ); //end of return
   } // end of render

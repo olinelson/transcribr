@@ -4,8 +4,8 @@
   "private": true,
   "dependencies": {
     "@emotion/core": "^10.0.9",
+    "faker": "^4.1.0",
     "react": "^16.8.4",
-    "react-debounce-input": "^3.2.0",
     "react-dom": "^16.8.4",
     "react-player": "^1.10.0",
     "react-router-dom": "^4.3.1",

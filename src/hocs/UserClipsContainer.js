@@ -1,49 +1,65 @@
-import React, { Component } from "react";
+import _ from "lodash";
+import PropTypes from "prop-types";
+import React, { Component, Fragment } from "react";
+import {
+  Search,
+  Image,
+  Container,
+  Card,
+  Divider,
+  Item,
+  Loader
+} from "semantic-ui-react";
+
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-import _ from "lodash";
-
-import { DebounceInput } from "react-debounce-input";
-import { BeatLoader } from "react-spinners";
-
-// api URL
 import API_URL from "../config";
 
-import { Card, Icon, Image, Container, Search, Label } from "semantic-ui-react";
+// let source = [];
 
-const uuidv1 = require("uuid/v1");
+const resultRenderer = clip => (
+  <Link className="item" color="black" to={`/clips/${clip.search_id}`}>
+    <Item.Image size="tiny" src={clip.gcloud_image_link} />
 
+    <Item.Content>
+      <Item.Header color="black" as="h4">
+        {clip.name}
+      </Item.Header>
 
+      <Item.Meta>{clip.transcript.slice(5, 20)}...</Item.Meta>
+    </Item.Content>
+  </Link>
+);
 
-class UserClipsContainer extends Component {
+resultRenderer.propTypes = {
+  title: PropTypes.string
+  // key: PropTypes.number
+};
+
+const dummyImages = _.times(5, () => ({
+  name: "loading",
+  gcloud_image_link: "https://react.semantic-ui.com/images/wireframe/image.png"
+}));
+
+// const initialState = {
+//   isLoading: false,
+//   results: [],
+//   value: "",
+//   clips: dummyImages
+// };
+
+export default class SearchExampleStandard extends Component {
   state = {
+    isLoading: false,
+    results: [],
+    value: "",
     clips: [],
-    filteredClips: [],
-    loading: true,
-    searchTranscript: false
+    pageLoad: true
   };
 
   componentDidMount = () => {
     this.getUsersClips();
   };
-
-  unSaveClip = clip => {
-    let token = localStorage.getItem("token");
-    let id = clip.id;
-
-    fetch(`${API_URL}/user_clips/unsave`, {
-      method: "POST",
-      body: JSON.stringify({
-        clip_id: id
-      }),
-      headers: {
-        Authorization: token,
-        "Content-Type": "application/json"
-      }
-    })
-      .then(() => this.props.getCurrentUser())
-      .then(() => this.getUsersClips());
-  }; // end of unSaveClip
 
   getUsersClips = () => {
     fetch(`${API_URL}/users/${this.props.currentUser.id}`)
@@ -51,115 +67,58 @@ class UserClipsContainer extends Component {
       .then(r =>
         this.setState({
           clips: r.data.attributes.clips,
-          filteredClips: r.data.attributes.clips,
-          loading: false
+          pageLoad: false
         })
       );
   };
 
-  filterCondition = (clip, query) => {
-    return clip.name.toLowerCase().includes(query);
+  handleResultSelect = (e, { result }) =>
+    this.setState({ value: result.title });
+
+  handleSearchChange = (e, { value }) => {
+    this.setState({ isLoading: true, value });
+
+    setTimeout(() => {
+      if (this.state.value.length < 1)
+        return this.setState({ isLoading: false, results: [], value: "" });
+
+      const re = new RegExp(_.escapeRegExp(this.state.value), "i");
+      const isMatch = clip => re.test(clip.name);
+
+      let results = _.filter(this.state.clips, isMatch);
+
+      results = results.map(c => ({ ...c, search_id: c.id }));
+
+      this.setState({
+        isLoading: false,
+        results: results
+      });
+    }, 300);
   };
 
-  searchInputHandler = e => {
-    let query = e.target.value;
-    let results;
-
-    if (this.state.searchTranscript === true) {
-      results = this.state.clips.filter(
-        c => c.transcript !== null && c.transcript.includes(query)
-      );
-    } else {
-      results = this.state.clips.filter(c =>
-        c.name.toLowerCase().includes(query)
-      );
-    }
-
-    this.setState({ filteredClips: results });
-  };
-
-  unSaveClipHandler = c => {
-    let clips = this.state.filteredClips;
-    let result = clips.filter(clip => clip.id !== c.id);
-
-    this.setState({
-      clips: result,
-      filteredClips: result
-    });
-
-    this.unSaveClip(c);
-  }; // end of unSaveClipHandler
-
-  deleteClipHandler = c => {
-    let clips = this.state.filteredClips;
-    let result = clips.filter(clip => clip.id !== c.id);
-
-    this.setState({
-      clips: result,
-      filteredClips: result
-    });
-
-    this.deleteClip(c);
-  };
-
-  deleteClip = clip => {
-    let token = localStorage.getItem("token");
-
-    fetch(`${API_URL}/clips/${clip.id}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: token
-      }
-    });
-  }; // end of deleteClip
-
-  resultRenderer = ({ name }) => <Label content={name} />;
-
-  render() {
+  pageLoadedView = () => {
     return (
       <Container>
-        <div className="search-container">
-          <DebounceInput
-            className="custom-input"
-            label="search clips"
-            placeholder="search clips..."
-            minLength={2}
-            debounceTimeout={200}
-            onChange={this.searchInputHandler}
-          />
-          <Search
-            loading={this.state.loading}
-            onResultSelect={this.handleResultSelect}
-            onSearchChange={_.debounce(this.searchInputHandler, 200, {
-              leading: true
-            })}
-            results={this.state.filteredClips}
-            resultRenderer={this.resultRenderer}
-            // value={''}
-            // {...this.props}
-          />
-          {/* <input
-            type="checkbox"
-            className="checkbox"
-            name="search transcript"
-            onClick={() =>
-              this.setState({ searchTranscript: !this.state.searchTranscript })
-            }
-            checked={this.state.searchTranscript}
-          /> */}
-          {/* <label name="search transcript">Search Transcripts</label> */}
-        </div>{" "}
-        {/* end of search-container div  */}
-        <div className="clips-grid">
-          {this.state.loading === true ? <BeatLoader /> : null}
-
+        <Card.Group>
           {this.state.clips.map(c => (
-            <Card key={uuidv1()}>
-              <Image src={c.gcloud_image_link} wrapped ui={false} />
+            <Link className="ui card" to={`/clips/${c.id}`}>
+              <div
+                className="ui image medium"
+                style={{
+                  backgroundImage: `url(${c.gcloud_image_link})`,
+                  backgroundSize: "cover",
+                  height: "150px"
+                }}
+              />
+              <Card.Content>
+                <Card.Header>
+                  {c.name}
+                </Card.Header>
+                <Card.Description>
+                    {c.transcript ? c.transcript.slice(0,75) : "no transcript yet"}
+                </Card.Description>
+              </Card.Content>
 
-              <Link className="ui header" key={uuidv1()} to={`/clips/${c.id}`}>
-                {c.name}
-              </Link>
               <Card.Content extra>
                 {c.author_id == this.props.currentUser.id ? (
                   <button
@@ -179,13 +138,36 @@ class UserClipsContainer extends Component {
                   </button>
                 )}
               </Card.Content>
-            </Card> // end of clip-card div
+            </Link>
           ))}
-        </div>{" "}
-        {/* end of clips-grid div */}
-      </Container> // end of clips-container-div
-    ); //end of return
-  } // end of render
-} // end of class
+        </Card.Group>
+      </Container>
+    );
+  };
 
-export default UserClipsContainer;
+  render() {
+    return (
+      <Fragment>
+        <Container>
+          <Search
+            loading={this.state.isLoading}
+            onResultSelect={this.handleResultSelect}
+            onSearchChange={_.debounce(this.handleSearchChange, 500, {
+              leading: true
+            })}
+            results={this.state.results}
+            value={this.state.value}
+            resultRenderer={resultRenderer}
+            {...this.props}
+          />
+        </Container>
+        <Divider />
+        {!this.state.pageLoad ? (
+          this.pageLoadedView()
+        ) : (
+          <Loader active inline="centered" />
+        )}
+      </Fragment>
+    );
+  }
+}

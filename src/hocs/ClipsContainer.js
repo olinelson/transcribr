@@ -8,6 +8,8 @@ import {
   withRouter
 } from "react-router-dom";
 
+import {Container} from "semantic-ui-react"
+
 // react debouce input
 import { DebounceInput } from "react-debounce-input";
 
@@ -102,7 +104,7 @@ class ClipsContainer extends Component {
 
   render() {
     return (
-      <div className="clips-container">
+      <Container>
         <div className="search-container">
           <DebounceInput
             className="custom-input"
@@ -118,7 +120,7 @@ class ClipsContainer extends Component {
           {this.state.loading === true ? <BeatLoader /> : null}
           {this.showClips()}
         </div>
-      </div> //end of clips container div
+      </Container> //end of clips container div
     ); // end of return
   } // end of render
 } // end of ClipsContainer

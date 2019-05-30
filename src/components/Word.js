@@ -1,31 +1,41 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
+import { Divider, Label, Item } from "semantic-ui-react";
+
+
 
 class Word extends Component {
   state = {
-    clicked: false
+    hover: false
   };
 
   onClickHandler = () => {
     this.props.setPlayerPosition(this.props.word);
-  }
-
-  showTimeStamp = () => {
-    this.setState({ clicked: true });
-
   };
 
-    hideTimeStamp = () => {
-        this.setState({ clicked: false });
-    };
+  showTimeStamp = () => {
+    this.setState({ hover: true });
+  };
+
+  hideTimeStamp = () => {
+    this.setState({ hover: false });
+  };
 
   render() {
     return (
-        <div onClick={this.onClickHandler} onMouseEnter={this.showTimeStamp} onMouseLeave={this.hideTimeStamp} className="word">
-        <p>{this.props.word.word}</p>
-        {this.state.clicked === true ? (
-          <p className="word-stamp">{this.props.word.start_time}</p>
-        ) : null}
-      </div>
+      <Fragment>
+        <span
+          onClick={this.onClickHandler}
+          onMouseEnter={this.showTimeStamp}
+          onMouseLeave={this.hideTimeStamp}
+          className="word"
+        >
+          {this.props.word.word}
+          {"  "}
+          {this.state.hover === true ? (
+            <span className="word-stamp">{this.props.word.start_time}</span>
+          ) : null}
+        </span>
+      </Fragment>
     );
   }
 }

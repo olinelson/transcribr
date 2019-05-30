@@ -10,6 +10,8 @@ import { BeatLoader, PacmanLoader } from "react-spinners";
 
 import { withRouter } from "react-router-dom";
 
+import {Container, Button} from "semantic-ui-react"
+
 class Clip extends Component {
   constructor(props) {
     super(props);
@@ -65,19 +67,17 @@ class Clip extends Component {
     for (let clip of currentUserClips) {
       if (clip.id === this.state.clip.id) {
         return (
-          <button className="clip-show-save-button" disabled>
-            {" "}
-            saved{" "}
-          </button>
+          <Button disabled>
+            saved
+          </Button>
         );
       }
     } // end of for of loop
 
     return (
-      <button className="clip-show-save-button" onClick={this.saveClip}>
-        {" "}
-        save{" "}
-      </button>
+      <Button onClick={this.saveClip}>
+        save
+      </Button>
     );
   }; // end of showButtonIfSaved
 
@@ -109,10 +109,9 @@ class Clip extends Component {
     // shows process audio button if the clip isn't processing and there are no words
     if (this.state.processing === false) {
       return (
-        <button className="process-audio-button" onClick={this.processAudio}>
-          {" "}
-          process audio{" "}
-        </button>
+        <Button className="process-audio-button" onClick={this.processAudio}>
+          process audio
+        </Button>
       );
     }
   }; // end of render words
@@ -160,7 +159,7 @@ class Clip extends Component {
 
   showVideoClip = () => {
     return (
-      <div className="clip-show-video">
+      <Container>
         <ReactPlayer
           className="media-player"
           ref={this.video}
@@ -171,10 +170,10 @@ class Clip extends Component {
           controls
         />
 
-        <div className="clip-show-info">
+        <Container>
           <h1>{this.state.clip.name}</h1>
           {this.props.currentUser === null ? null : this.showButtonIfSaved()}
-        </div>
+        </Container>
 
         {this.renderWords()}
 
@@ -186,13 +185,13 @@ class Clip extends Component {
             </div>
           </div>
         ) : null}
-      </div>
+      </Container>
     ); //end of return
   };
 
   showAudioClip = () => {
     return (
-      <div className="clip-show">
+      <Container>
         {this.showImage()}
 
         <div className="clip-show-info">
@@ -226,7 +225,7 @@ class Clip extends Component {
             </div>
           </div>
         ) : null}
-      </div>
+      </Container>
     ); // end of return
   }; // end of showAudioClip
 

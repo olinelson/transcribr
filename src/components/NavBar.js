@@ -42,9 +42,9 @@ const NavBar = props => {
         <h1>transcribr.</h1>
       </NavLink>
 
-      <NavLink className="item" activeClassName="active" to="/feed">
+      {/* <NavLink className="item" activeClassName="active" to="/feed">
         FEED
-      </NavLink>
+      </NavLink> */}
       <NavLink className="item" activeClassName="active" to="/newclip">
         NEW CLIP
       </NavLink>
