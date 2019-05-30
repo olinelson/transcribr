@@ -1,47 +1,65 @@
 import React, { Fragment } from "react";
 
-import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  NavLink
+} from "react-router-dom";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Menu } from "semantic-ui-react";
 
 const NavBar = props => {
+  const showCurrentUserLinks = () => {
+    return (
+      <Fragment>
+        <NavLink
+          className="item"
+          activeClassName="active"
+          to={`/users/${props.currentUser.id}`}
+        >
+          SAVED CLIPS
+        </NavLink>
+        <a className="item" onClick={props.logout}>
+          {" "}
+          LOGOUT{" "}
+        </a>
 
-    const showCurrentUserLinks = () => {
-        return (
-            <Fragment>
-             
-             
-             <NavLink activeClassName="selected" to={`/users/${props.currentUser.id}`}>SAVED CLIPS</NavLink>
-             <a onClick = {props.logout}> LOGOUT </a>
-             <Link to={`/users/${props.currentUser.id}`} className="logged-in-as"> <FontAwesomeIcon icon = "user" /> {props.currentUser.attributes.user_name}</Link>
-             </Fragment >
-        )
-        
-    }
+        <Link
+          className="item right"
+          to={`/users/${props.currentUser.id}`}
 
+        >
+          {props.currentUser.attributes.user_name}
+        </Link>
+      </Fragment>
+    );
+  };
 
   return (
-       
-    <nav>
-      < NavLink to = "/" ><h4>transcribr.</h4></NavLink>
+    <Menu>
+      <NavLink to="/">
+        <h1>transcribr.</h1>
+      </NavLink>
 
-      
-      <div className="nav-links">
-      <NavLink activeClassName="selected" to="/feed">FEED</NavLink>
-      <NavLink activeClassName="selected" to="/newclip">NEW CLIP</NavLink>
+      <NavLink className="item" activeClassName="active" to="/feed">
+        FEED
+      </NavLink>
+      <NavLink className="item" activeClassName="active" to="/newclip">
+        NEW CLIP
+      </NavLink>
 
+      {props.currentUser === null ? (
+        <NavLink className="item" activeClassName="active" to="/login">
+          LOGIN
+        </NavLink>
+      ) : (
+        showCurrentUserLinks()
+      )}
 
-      {props.currentUser === null ? 
-      < NavLink activeClassName="selected" to = "/login" > LOGIN </NavLink>
-      : showCurrentUserLinks()
-    }
-      
-      </div>
-
-      
       {/* {props.currentUser ? showCurrentUserLinks() : null} */}
       {/* <p onClick={props.logout}>logout</p> */}
-    </nav>
+    </Menu>
   );
 };
 

@@ -4,7 +4,6 @@ import { ClipLoader } from 'react-spinners';
 
 import { withRouter } from "react-router-dom";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import API_URL from "../config"
 
@@ -74,7 +73,7 @@ class AddVideoClipForm extends Component {
               />
               {this.state.uploadComplete === true ?
                 <div className="upload-complete-message">
-                  < small ><FontAwesomeIcon icon = "check" />  done</small>
+                  < small >  done</small>
                 </div>
               : null}
         

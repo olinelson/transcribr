@@ -1,16 +1,6 @@
 import React, { Component, Fragment } from "react";
 import "./App.css";
 
-// font awesome
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { fab } from "@fortawesome/free-brands-svg-icons";
-import {
-  faCheckSquare,
-  faCoffee,
-  faCheck,
-  faUser,
-  faSadTear
-} from "@fortawesome/free-solid-svg-icons";
 
 // react router
 import {
@@ -39,8 +29,7 @@ import Feed from "./hocs/Feed";
 import API_URL from "./config";
 import { RaceSubscriber } from "rxjs/internal/observable/race";
 
-// font awesome icons in use
-library.add(fab, faCheckSquare, faCoffee, faCheck, faUser, faSadTear);
+
 
 // filtered clips and clips used for results in clips container
 class App extends Component {
@@ -77,7 +66,7 @@ class App extends Component {
 
   // for use with the login form component
   setCurrentUser = response => {
-    console.log("hello response",response)
+
     this.setState({
       currentUser: response.user.data
     });

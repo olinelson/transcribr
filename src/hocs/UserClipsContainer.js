@@ -1,13 +1,19 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
+import _ from "lodash";
+
 import { DebounceInput } from "react-debounce-input";
 import { BeatLoader } from "react-spinners";
 
 // api URL
 import API_URL from "../config";
 
+import { Card, Icon, Image, Container, Search, Label } from "semantic-ui-react";
+
 const uuidv1 = require("uuid/v1");
+
+
 
 class UserClipsContainer extends Component {
   state = {
@@ -60,7 +66,9 @@ class UserClipsContainer extends Component {
     let results;
 
     if (this.state.searchTranscript === true) {
-      results = this.state.clips.filter(c => c.transcript !== null && c.transcript.includes(query));
+      results = this.state.clips.filter(
+        c => c.transcript !== null && c.transcript.includes(query)
+      );
     } else {
       results = this.state.clips.filter(c =>
         c.name.toLowerCase().includes(query)
@@ -105,10 +113,11 @@ class UserClipsContainer extends Component {
     });
   }; // end of deleteClip
 
-  render() {
+  resultRenderer = ({ name }) => <Label content={name} />;
 
+  render() {
     return (
-      <div className="clips-container">
+      <Container>
         <div className="search-container">
           <DebounceInput
             className="custom-input"
@@ -118,7 +127,18 @@ class UserClipsContainer extends Component {
             debounceTimeout={200}
             onChange={this.searchInputHandler}
           />
-          <input
+          <Search
+            loading={this.state.loading}
+            onResultSelect={this.handleResultSelect}
+            onSearchChange={_.debounce(this.searchInputHandler, 200, {
+              leading: true
+            })}
+            results={this.state.filteredClips}
+            resultRenderer={this.resultRenderer}
+            // value={''}
+            // {...this.props}
+          />
+          {/* <input
             type="checkbox"
             className="checkbox"
             name="search transcript"
@@ -126,57 +146,44 @@ class UserClipsContainer extends Component {
               this.setState({ searchTranscript: !this.state.searchTranscript })
             }
             checked={this.state.searchTranscript}
-          />
-          <label name="search transcript">Search Transcripts</label>
+          /> */}
+          {/* <label name="search transcript">Search Transcripts</label> */}
         </div>{" "}
         {/* end of search-container div  */}
         <div className="clips-grid">
           {this.state.loading === true ? <BeatLoader /> : null}
 
-          {this.state.filteredClips.map(c => (
-            
-            <div key={uuidv1()} className="clip-card">
-              <div className="clip-image-container">
-                <img
-                  alt="clip-thumbnail"
-                  className="clip-image"
-                  src={c.gcloud_image_link}
-                />
-              </div>
+          {this.state.clips.map(c => (
+            <Card key={uuidv1()}>
+              <Image src={c.gcloud_image_link} wrapped ui={false} />
 
-              <Link
-                className="clip-card-title"
-                key={uuidv1()}
-                to={`/clips/${c.id}`}
-              >
-                {" "}
+              <Link className="ui header" key={uuidv1()} to={`/clips/${c.id}`}>
                 {c.name}
               </Link>
-
-              {c.author ? <small> Uploaded By: {c.author.email} </small> : null}
-              
-              {c.author_id == this.props.currentUser.id ? (
-                <button
-                  className="button clip-card-button"
-                  onClick={e => this.deleteClipHandler(c)}
-                >
-                  {" "}
-                  Delete{" "}
-                </button>
-              ) : (
-                <button
-                  className="button clip-card-button"
-                  onClick={() => this.unSaveClipHandler(c)}
-                >
-                  {" "}
-                  Remove{" "}
-                </button>
-              )}
-            </div> // end of clip-card div
+              <Card.Content extra>
+                {c.author_id == this.props.currentUser.id ? (
+                  <button
+                    className="ui secondary button"
+                    onClick={e => this.deleteClipHandler(c)}
+                  >
+                    {" "}
+                    Delete{" "}
+                  </button>
+                ) : (
+                  <button
+                    className="ui secondary button"
+                    onClick={() => this.unSaveClipHandler(c)}
+                  >
+                    {" "}
+                    Remove{" "}
+                  </button>
+                )}
+              </Card.Content>
+            </Card> // end of clip-card div
           ))}
         </div>{" "}
         {/* end of clips-grid div */}
-      </div> // end of clips-container-div
+      </Container> // end of clips-container-div
     ); //end of return
   } // end of render
 } // end of class

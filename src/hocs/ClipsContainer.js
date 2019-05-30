@@ -14,8 +14,7 @@ import { DebounceInput } from "react-debounce-input";
 // beat loader from react spinners
 import { BeatLoader } from "react-spinners";
 
-// font awesome
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 
 // api URL
 import API_URL from "../config";
@@ -74,8 +73,7 @@ class ClipsContainer extends Component {
         return (
           <Fragment>
             <p className="no-results-message">
-              {" "}
-              <FontAwesomeIcon icon="sad-tear" /> no results...
+             no results...
             </p>
           </Fragment>
         );

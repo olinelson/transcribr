@@ -1,4 +1,4 @@
-body{
+/* body{
 width: 100vw;
 overflow-x: hidden;
 height: auto;
@@ -40,7 +40,6 @@ color:grey;
 
 .media-player {
 width: 100%;
-/* max-width: 50rem; */
 margin: 0 0 1rem 0;
 grid-area: player;
 justify-self: center;
@@ -49,7 +48,6 @@ top: 1rem;
 }
 
 #root {
-/* height: 85vh; */
 display: grid;
 justify-self: center;
 width: 90vw;
@@ -215,11 +213,11 @@ border: 1px solid rgb(12, 12, 5);
 
 .search-container {
 width: 100%;
-/* margin-top: 2rem; */
+
 height: 100%; 
 display: flex;
 justify-content: center;
-/* border: 1px solid red; */
+
 }
 
 
@@ -233,7 +231,7 @@ border: 0;
 text-align: center;
 border-bottom: 1px solid black;
 color: rgb(255, 161, 54);
-/* -webkit-appearance: none; */
+
 border-radius: 0;
 
 }
@@ -465,7 +463,7 @@ grid-area: audio-input;
 border: none;
 }
 
-/* spinner loader */
+
 
 .css-y7slra-style-style {
 grid-area: loader;
@@ -499,7 +497,7 @@ grid-area: submit;
 justify-self: center;
 }
 
-/* beatLoader */
+
 .css-0{
 display: flex;
 justify-self: center;
@@ -558,7 +556,7 @@ height: 1rem;
 }
 
 input.checkbox:checked{
-  /* border: 1px solid rgba(255, 161, 54, 0.66); */
+
   background-color: rgba(255, 161, 54, 0.66);
 }
 
@@ -595,7 +593,7 @@ display: grid;
 justify-items: center;
 align-items: center;
 align-content: center;
-/* grid-template-rows: 2rem; */
+
 background-color:  rgba(255, 161, 54, 0.66);
 }
 
@@ -619,4 +617,4 @@ margin-top: 3rem;
 
 }
 
-}
+} */
