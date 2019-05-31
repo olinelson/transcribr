@@ -1,7 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { Divider, Label, Item } from "semantic-ui-react";
-
-
+import { Divider, Label, Item, Grid } from "semantic-ui-react";
 
 class Word extends Component {
   state = {
@@ -22,20 +20,32 @@ class Word extends Component {
 
   render() {
     return (
-      <Fragment>
-        <span
-          onClick={this.onClickHandler}
-          onMouseEnter={this.showTimeStamp}
-          onMouseLeave={this.hideTimeStamp}
-          className="word"
-        >
-          {this.props.word.word}
-          {"  "}
+      <p
+        style={{
+          display: "inline-flex",
+          
+          border: "1px solid green",
+
+        }}
+      >
+
+          <span
+            onClick={this.onClickHandler}
+            onMouseEnter={this.showTimeStamp}
+            onMouseLeave={this.hideTimeStamp}
+
+          >
+            {this.props.word.word}
+          </span>
+
+
           {this.state.hover === true ? (
-            <span className="word-stamp">{this.props.word.start_time}</span>
-          ) : null}
-        </span>
-      </Fragment>
+            <Label pointing>{this.props.word.start_time}</Label>
+          ) : (
+            <Label pointing style={{visibility: "hidden"}}>{this.props.word.start_time}</Label>
+          )}
+
+      </p>
     );
   }
 }

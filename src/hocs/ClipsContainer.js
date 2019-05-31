@@ -10,8 +10,6 @@ import {
 
 import {Container} from "semantic-ui-react"
 
-// react debouce input
-import { DebounceInput } from "react-debounce-input";
 
 // beat loader from react spinners
 import { BeatLoader } from "react-spinners";
@@ -106,14 +104,14 @@ class ClipsContainer extends Component {
     return (
       <Container>
         <div className="search-container">
-          <DebounceInput
+          {/* <DebounceInput
             className="custom-input"
             label="search clips"
             placeholder="search for clips..."
             minLength={2}
             debounceTimeout={300}
             onChange={this.searchInputHandler}
-          />
+          /> */}
         </div>
 
         <div className="clips-grid">

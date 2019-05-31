@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component} from "react";
 
 import Words from "./Words";
 
@@ -10,7 +10,7 @@ import { BeatLoader, PacmanLoader } from "react-spinners";
 
 import { withRouter } from "react-router-dom";
 
-import { Container, Button, Form } from "semantic-ui-react";
+import { Container, Button } from "semantic-ui-react";
 
 class Clip extends Component {
   constructor(props) {
@@ -100,6 +100,7 @@ class Clip extends Component {
           <Words
             setPlayerPosition={this.setPlayerPosition}
             words={this.state.clip.words}
+            pageSize={500}
 
           />
 

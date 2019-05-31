@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import _ from "lodash";
 
-import { DebounceInput } from "react-debounce-input";
 import { BeatLoader } from "react-spinners";
 
 // api URL

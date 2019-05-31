@@ -65,14 +65,17 @@ class Words extends Component {
     }
 
     let index = this.state.activePage - 1;
-    console.log("index here", index);
-    return this.state.pages[index].map(w => (
-      <Word
-        setPlayerPosition={this.props.setPlayerPosition}
-        key={uuidv1()}
-        word={w}
-      />
-    ));
+    console.log("this is pages", this.state.pages)
+
+
+      return this.state.pages[index].map(w => (
+        <Word
+          setPlayerPosition={this.props.setPlayerPosition}
+          key={uuidv1()}
+          word={w}
+        />
+      ));
+
   };
 
   // filters words shown on page for use with the search input field
@@ -119,7 +122,7 @@ class Words extends Component {
     return (
       <Fragment>
         {this.showSearchBarIfThereAreWords()}
-        <Form.Input
+        {/* <Form.Input
           label={`Page Size: ${this.state.pageSize} characters `}
           min={100}
           max={2000}
@@ -128,15 +131,23 @@ class Words extends Component {
           step={100}
           type="range"
           value={this.state.pageSize}
-        />
-        ;
+        /> */}
+        
         <Pagination
           onPageChange={this.handlePaginationChange}
           defaultActivePage={this.state.activePage}
           totalPages={this.state.pages.length}
           disabled={this.state.searchInput.length > 0 ? true : false}
         />
-        <Container textAlign="justified">
+        <p 
+          text 
+          style={{
+            border: "1px solid pink",
+            
+
+        
+          }}
+          >
           {this.state.words ? (
             this.showWords()
           ) : (
@@ -147,7 +158,7 @@ class Words extends Component {
               loading={true}
             />
           )}
-        </Container>
+        </p>
       </Fragment>
     ); //end of return
   } // end of render

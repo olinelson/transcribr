@@ -26,7 +26,7 @@ const resultRenderer = clip => (
         {clip.name}
       </Item.Header>
 
-      <Item.Meta>{clip.transcript.slice(5, 20)}...</Item.Meta>
+      <Item.Meta>{clip.transcript.slice(0, 20)}...</Item.Meta>
     </Item.Content>
   </Link>
 );
