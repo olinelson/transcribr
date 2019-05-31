@@ -5,7 +5,14 @@ import _ from "lodash";
 
 import { BeatLoader } from "react-spinners";
 
-import { Container, Button, Search } from "semantic-ui-react";
+import {
+  Container,
+  Button,
+  Search,
+  Icon,
+  Pagination,
+  Form
+} from "semantic-ui-react";
 
 const uuidv1 = require("uuid/v1");
 
@@ -20,25 +27,46 @@ class Words extends Component {
     for (let wordObject of words) {
       wordObject.word = wordObject.word.toLowerCase();
     }
+    console.log(props.pageSize);
+    let pages = [];
+    let pageSize = props.pageSize;
+    let i = pageSize;
+    while (i < words.length + pageSize) {
+      pages.push(words.slice(i - pageSize, i));
+      i += pageSize;
+    }
+
+    console.log(pages);
+    console.log("how many words", words.length);
 
     super(props);
     // word selection start and end used for page view, navigating forward and back
     this.state = {
       words: words,
       filteredWords: words,
-      wordSelectionStart: 0,
-      wordSelectionEnd: 500,
       loading: false,
-      searchInput: ""
+      searchInput: "",
+      pages: pages,
+      activePage: 1
     };
   } // end of constructor
 
   showWords = () => {
-    const wordSelection = this.state.filteredWords.slice(
-      this.state.wordSelectionStart,
-      this.state.wordSelectionEnd
-    );
-    return wordSelection.map(w => (
+    // if a user is searching don't show them the page view,
+    // show them all the words at once
+    if (this.state.searchInput.length > 0) {
+      return this.state.filteredWords.map(w => (
+        <Word
+          setPlayerPosition={this.props.setPlayerPosition}
+          key={uuidv1()}
+          word={w}
+        />
+      ));
+    }
+
+    let index = this.state.activePage - 1;
+    console.log("index here", index);
+    return this.state.pages[index].map(w => (
       <Word
         setPlayerPosition={this.props.setPlayerPosition}
         key={uuidv1()}
@@ -71,30 +99,6 @@ class Words extends Component {
     this.filterWords();
   };
 
-  // if the users is at the end of the transcript, do not permit next page,
-  // else go to next page
-  nextPageHandler = () => {
-    if (this.state.wordSelectionEnd >= this.state.words.length) {
-    } else {
-      this.setState({
-        wordSelectionStart: this.state.wordSelectionStart + 500,
-        wordSelectionEnd: this.state.wordSelectionEnd + 500
-      });
-    }
-  };
-
-  // if the users is at the beginning of the transcript, do not permit next page,
-  // else go to prevous page
-  previousPageHandler = () => {
-    if (this.state.wordSelectionStart <= 0) {
-    } else {
-      this.setState({
-        wordSelectionStart: this.state.wordSelectionStart - 500,
-        wordSelectionEnd: this.state.wordSelectionEnd - 500
-      });
-    }
-  };
-
   showSearchBarIfThereAreWords = () => {
     if (this.state.words.length >= 0) {
       return (
@@ -109,41 +113,29 @@ class Words extends Component {
     }
   };
 
-  showPageNavButtonsIfNotSearchingAndThereAreMultiplePages = () => {
-    if (
-      this.state.searchInput === "" &&
-      this.state.filteredWords.length >= 500
-    ) {
-      return (
-        <Fragment>
-          <Container
-            className="word-page-button-container word-page-back-button-container"
-            onClick={this.previousPageHandler}
-          >
-            <Button> previous page </Button>
-          </Container>
-
-          <Container
-            className="word-page-button-container word-page-forward-button-container"
-            onClick={this.nextPageHandler}
-          >
-            <Button> next page </Button>
-          </Container>
-        </Fragment>
-      );
-    }
-  };
+  handlePaginationChange = (e, { activePage }) => this.setState({ activePage });
 
   render() {
     return (
       <Fragment>
-        <Container text>
-          {this.showSearchBarIfThereAreWords()}
-        </Container>
-
-
-        {this.showPageNavButtonsIfNotSearchingAndThereAreMultiplePages()}
-
+        {this.showSearchBarIfThereAreWords()}
+        <Form.Input
+          label={`Page Size: ${this.state.pageSize} characters `}
+          min={100}
+          max={2000}
+          name="pageSize"
+          onChange={this.handleChange}
+          step={100}
+          type="range"
+          value={this.state.pageSize}
+        />
+        ;
+        <Pagination
+          onPageChange={this.handlePaginationChange}
+          defaultActivePage={this.state.activePage}
+          totalPages={this.state.pages.length}
+          disabled={this.state.searchInput.length > 0 ? true : false}
+        />
         <Container textAlign="justified">
           {this.state.words ? (
             this.showWords()

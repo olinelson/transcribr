@@ -10,7 +10,7 @@ import { BeatLoader, PacmanLoader } from "react-spinners";
 
 import { withRouter } from "react-router-dom";
 
-import {Container, Button} from "semantic-ui-react"
+import { Container, Button, Form } from "semantic-ui-react";
 
 class Clip extends Component {
   constructor(props) {
@@ -19,7 +19,8 @@ class Clip extends Component {
     this.video = React.createRef();
     this.state = {
       clip: null,
-      processing: false
+      processing: false,
+
     };
   }
 
@@ -66,19 +67,11 @@ class Clip extends Component {
 
     for (let clip of currentUserClips) {
       if (clip.id === this.state.clip.id) {
-        return (
-          <Button disabled>
-            saved
-          </Button>
-        );
+        return <Button disabled>saved</Button>;
       }
     } // end of for of loop
 
-    return (
-      <Button onClick={this.saveClip}>
-        save
-      </Button>
-    );
+    return <Button onClick={this.saveClip}>save</Button>;
   }; // end of showButtonIfSaved
 
   saveClip = () => {
@@ -97,13 +90,19 @@ class Clip extends Component {
     }).then(() => this.props.getCurrentUser());
   };
 
+  
+
   renderWords = () => {
     if (this.state.clip.words) {
       return (
-        <Words
-          setPlayerPosition={this.setPlayerPosition}
-          words={this.state.clip.words}
-        />
+
+          
+          <Words
+            setPlayerPosition={this.setPlayerPosition}
+            words={this.state.clip.words}
+
+          />
+
       );
     }
     // shows process audio button if the clip isn't processing and there are no words
