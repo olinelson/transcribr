@@ -1,4 +1,4 @@
-import React, { Component} from "react";
+import React, { Component } from "react";
 
 import Words from "./Words";
 
@@ -15,24 +15,18 @@ import { Container, Button } from "semantic-ui-react";
 class Clip extends Component {
   constructor(props) {
     super(props);
-    this.audio = React.createRef();
-    this.video = React.createRef();
+    this.clip = React.createRef();
+
     this.state = {
       clip: null,
-      processing: false,
-
+      processing: false
     };
   }
 
   setPlayerPosition = e => {
-    if (this.state.clip.media_type === "audio") {
-      this.audio.current.audioEl.currentTime = Math.floor(e.start_time);
-    }
-    if (this.state.clip.media_type === "video") {
-      // this.audio.current.audioEl.currentTime = e.start_time
 
-      this.video.current.seekTo(e.start_time, "seconds");
-    }
+      this.clip.current.seekTo(Math.floor(e.start_time), "seconds");
+
   };
 
   componentDidMount = () => {
@@ -90,20 +84,14 @@ class Clip extends Component {
     }).then(() => this.props.getCurrentUser());
   };
 
-  
-
   renderWords = () => {
     if (this.state.clip.words) {
       return (
-
-          
-          <Words
-            setPlayerPosition={this.setPlayerPosition}
-            words={this.state.clip.words}
-            pageSize={500}
-
-          />
-
+        <Words
+          setPlayerPosition={this.setPlayerPosition}
+          words={this.state.clip.words}
+          pageSize={500}
+        />
       );
     }
     // shows process audio button if the clip isn't processing and there are no words
@@ -162,7 +150,7 @@ class Clip extends Component {
       <Container>
         <ReactPlayer
           className="media-player"
-          ref={this.video}
+          ref={this.clip}
           url={this.state.clip.gcloud_media_link}
           width="100%"
           height="100%"
@@ -208,7 +196,7 @@ class Clip extends Component {
         /> */}
         <ReactPlayer
           className="media-player"
-          ref={this.video}
+          ref={this.clip}
           url={this.state.clip.gcloud_media_link}
           width="100%"
           height="100%"
