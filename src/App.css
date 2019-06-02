@@ -1,0 +1,33 @@
+.word-card{
+border: 1px solid black;
+}
+
+.words-container{
+display: flex;
+flex-wrap: wrap;
+
+}
+
+.word{
+margin: 0 .5rem 0 0;
+cursor: pointer;
+height: 2.3rem;
+display: flex;
+flex-direction: column;
+
+}
+
+
+.word-stamp{
+font-size: .75rem;
+border-top: 1px solid #ffa036;
+margin-top: .1rem;
+height: 80%;
+width: 100%;
+
+text-align: center;
+display: flex;
+align-items: flex-end;
+justify-content: center;
+
+} 
