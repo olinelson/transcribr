@@ -26,7 +26,7 @@ class Clip extends Component {
 
   setPlayerPosition = e => {
     if (this.state.clip.media_type === "audio") {
-      this.audio.current.audioEl.currentTime = e.start_time;
+      this.audio.current.audioEl.currentTime = Math.floor(e.start_time);
     }
     if (this.state.clip.media_type === "video") {
       // this.audio.current.audioEl.currentTime = e.start_time

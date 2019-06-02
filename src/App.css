@@ -1,19 +1,21 @@
-.word-card{
-border: 1px solid black;
-}
+
 
 .words-container{
 display: flex;
 flex-wrap: wrap;
+/* justify-content: space-between; */
 
 }
 
 .word{
 margin: 0 .5rem 0 0;
 cursor: pointer;
-height: 2.3rem;
-display: flex;
-flex-direction: column;
+height: 4rem;
+display: grid;
+
+grid-template-columns: 1fr;
+/* border: 1px solid red; */
+/* flex-direction: column; */
 
 }
 
@@ -30,4 +32,11 @@ display: flex;
 align-items: flex-end;
 justify-content: center;
 
+
 } 
+
+.time-stamp-label {
+  justify-self: center !important;
+  position: absolute !important;
+  margin-top: 2.5rem !important;
+}

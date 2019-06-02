@@ -11,7 +11,8 @@ import {
   Search,
   Icon,
   Pagination,
-  Form
+  Form,
+  Divider
 } from "semantic-ui-react";
 
 const uuidv1 = require("uuid/v1");
@@ -65,17 +66,15 @@ class Words extends Component {
     }
 
     let index = this.state.activePage - 1;
-    console.log("this is pages", this.state.pages)
+    console.log("this is pages", this.state.pages);
 
-
-      return this.state.pages[index].map(w => (
-        <Word
-          setPlayerPosition={this.props.setPlayerPosition}
-          key={uuidv1()}
-          word={w}
-        />
-      ));
-
+    return this.state.pages[index].map(w => (
+      <Word
+        setPlayerPosition={this.props.setPlayerPosition}
+        key={uuidv1()}
+        word={w}
+      />
+    ));
   };
 
   // filters words shown on page for use with the search input field
@@ -121,33 +120,14 @@ class Words extends Component {
   render() {
     return (
       <Fragment>
-        {this.showSearchBarIfThereAreWords()}
-        {/* <Form.Input
-          label={`Page Size: ${this.state.pageSize} characters `}
-          min={100}
-          max={2000}
-          name="pageSize"
-          onChange={this.handleChange}
-          step={100}
-          type="range"
-          value={this.state.pageSize}
-        /> */}
-        
-        <Pagination
-          onPageChange={this.handlePaginationChange}
-          defaultActivePage={this.state.activePage}
-          totalPages={this.state.pages.length}
-          disabled={this.state.searchInput.length > 0 ? true : false}
-        />
-        <p 
-          text 
-          style={{
-            border: "1px solid pink",
-            
+        <Container textAlign="center">
+          <Divider />
+          <Divider hidden/>
+          {this.showSearchBarIfThereAreWords()}
+          <Divider hidden />
+        </Container>
 
-        
-          }}
-          >
+        <div className="words-container">
           {this.state.words ? (
             this.showWords()
           ) : (
@@ -158,7 +138,15 @@ class Words extends Component {
               loading={true}
             />
           )}
-        </p>
+        </div>
+        <Container textAlign="center">
+          <Pagination
+            onPageChange={this.handlePaginationChange}
+            defaultActivePage={this.state.activePage}
+            totalPages={this.state.pages.length}
+            disabled={this.state.searchInput.length > 0 ? true : false}
+          />
+        </Container>
       </Fragment>
     ); //end of return
   } // end of render
