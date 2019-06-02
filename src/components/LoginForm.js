@@ -8,6 +8,16 @@ import {
   NavLink
 } from "react-router-dom";
 
+import {
+  Grid,
+  Button,
+  Segment,
+  Container,
+  Divider,
+  Form,
+  Icon
+} from "semantic-ui-react";
+
 // api URL
 import API_URL from "../config";
 
@@ -38,43 +48,60 @@ class LoginForm extends Component {
         if (r.errors) {
           return alert(r.errors);
         } else {
-            // console.log(r)
+          // console.log(r)
           this.props.setCurrentUser(r);
-          this.props
-            .getCurrentUser()
-             this.props.history.push(`/feed`);
+          this.props.getCurrentUser();
+          this.props.history.push(`/feed`);
         }
       });
   };
 
   render() {
     return (
-      <div className="login-container">
-        <h1>Login</h1>
-        <form className="login-form" onSubmit={this.submitHandler}>
-          <input
-            className="email-input"
-            type="email"
-            placeholder="olaf@olafson.com"
-            value={this.state.email}
-            onChange={e => this.setState({ email: e.target.value })}
-          />
+      <Container text>
+        <Segment>
+          <Grid columns={2} stackable textAlign="center">
+            <Divider vertical>Or</Divider>
+            <Grid.Row verticalAlign="middle">
+              <Grid.Column>
+                <h1>Login</h1>
+                <Form onSubmit={this.submitHandler}>
+                  <Form.Field>
+                    <label>Email</label>
+                    <input
+                      className="email-input"
+                      type="email"
+                      placeholder="olaf@olafson.com"
+                      value={this.state.email}
+                      onChange={e => this.setState({ email: e.target.value })}
+                    />
+                  </Form.Field>
+                  <Form.Field>
+                    <label>Password</label>
+                    <input
+                      className="password-input"
+                      type="password"
+                      placeholder="your password"
+                      value={this.state.password}
+                      onChange={e =>
+                        this.setState({ password: e.target.value })
+                      }
+                    />
+                  </Form.Field>
 
-          <input
-            className="password-input"
-            type="password"
-            placeholder="your password"
-            value={this.state.password}
-            onChange={e => this.setState({ password: e.target.value })}
-          />
-          <button className="login-button"> Login </button>
-          {/* <button className="signup-button"> Sign Up </button> */}
-          <Link className="signup-button" to="/signup">
-            {" "}
-            Sign Up{" "}
-          </Link>
-        </form>
-      </div>
+                  <Button type="submit">Submit</Button>
+                </Form>
+              </Grid.Column>
+              <Grid.Column>
+                <Link className="ui icon left labeled button" to="/signup">
+                    Sign Up
+                  <Icon name="signup" />
+                </Link>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </Segment>
+      </Container>
     );
   }
 }

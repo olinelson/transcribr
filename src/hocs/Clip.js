@@ -156,6 +156,7 @@ class Clip extends Component {
           height="100%"
           playing
           controls
+          pip={true}
         />
 
         <Container>
@@ -180,20 +181,13 @@ class Clip extends Component {
   showAudioClip = () => {
     return (
       <Container>
-        {this.showImage()}
+        {/* {this.showImage()} */}
 
-        <div className="clip-show-info">
+        <Container>
           <h1>{this.state.clip.name}</h1>
           {this.props.currentUser === null ? null : this.showButtonIfSaved()}
-        </div>
+        </Container>
 
-        {/* <ReactAudioPlayer
-          preload="auto"
-          className="media-player"
-          ref={this.audio}
-          src={this.state.clip.gcloud_media_link}
-          controls
-        /> */}
         <ReactPlayer
           className="media-player"
           ref={this.clip}

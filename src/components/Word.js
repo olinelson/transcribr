@@ -18,6 +18,7 @@ class Word extends Component {
     this.setState({ hover: false });
   };
 
+
   formatStartTime = d => {
     let h = Math.floor(d / 3600);
     let m = Math.floor((d % 3600) / 60);
@@ -43,9 +44,11 @@ class Word extends Component {
         >
           <p>{this.props.word.word}</p>
           {this.state.hover === true ? (
+            <div className="time-stamp-label-container">
             <Label className="time-stamp-label" pointing>
               {this.formatStartTime(this.props.word.start_time)}
             </Label>
+            </div>
           ) : null}
         </div>
       </Fragment>
