@@ -7,31 +7,28 @@ import {
   NavLink
 } from "react-router-dom";
 
-import { Menu } from "semantic-ui-react";
+import { Menu, Icon, Button } from "semantic-ui-react";
 
 const NavBar = props => {
   const showCurrentUserLinks = () => {
     return (
       <Fragment>
-        <NavLink
+        {/* <NavLink
           className="item"
           activeClassName="active"
           to={`/users/${props.currentUser.id}`}
         >
-          SAVED CLIPS
-        </NavLink>
-        <a className="item" onClick={props.logout}>
-          {" "}
-          LOGOUT{" "}
-        </a>
+          My Clips
+        </NavLink> */}
 
-        <Link
-          className="item right"
-          to={`/users/${props.currentUser.id}`}
-
-        >
+        <Link className="item right" to={`/users/${props.currentUser.id}`}>
+          <Icon name="user" />
           {props.currentUser.attributes.user_name}
         </Link>
+        <a className="item right" onClick={props.logout}>
+          <Icon name="log out" />
+          Log Out
+        </a>
       </Fragment>
     );
   };
@@ -46,16 +43,19 @@ const NavBar = props => {
         FEED
       </NavLink> */}
       <NavLink className="item" activeClassName="active" to="/newclip">
-        NEW CLIP
+        <Icon name="add" />
+        New Clip
       </NavLink>
-
-      {props.currentUser === null ? (
-        <NavLink className="item" activeClassName="active" to="/login">
-          LOGIN
-        </NavLink>
-      ) : (
-        showCurrentUserLinks()
-      )}
+      <Menu.Menu position="right">
+        {props.currentUser === null ? (
+          <NavLink className="item" activeClassName="active" to="/login">
+            <Icon name="sign in" />
+            Sign In
+          </NavLink>
+        ) : (
+          showCurrentUserLinks()
+        )}
+      </Menu.Menu>
 
       {/* {props.currentUser ? showCurrentUserLinks() : null} */}
       {/* <p onClick={props.logout}>logout</p> */}

@@ -1,4 +1,6 @@
-
+a{
+  outline: 0;
+}
 
 .words-container{
 display: flex;

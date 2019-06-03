@@ -18,7 +18,7 @@ import API_URL from "../config";
 // let source = [];
 
 const resultRenderer = clip => (
-  <Link className="item" color="black" to={`/clips/${clip.search_id}`}>
+  <Link key={clip.id} className="item" color="black" to={`/clips/${clip.search_id}`}>
     <Item.Image size="tiny" src={clip.gcloud_image_link} />
 
     <Item.Content>

@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
 import "./App.css";
 
-
 // react router
 import {
   BrowserRouter as Router,
@@ -18,7 +17,7 @@ import AddVideoClipForm from "./components/AddVideoClipForm";
 import SignUpForm from "./components/SignUpForm";
 import LoginForm from "./components/LoginForm";
 import User from "./hocs/User";
-import Jumbotron from "./components/Jumbotron";
+import HomePage from "./components/HomePage";
 import NewClipChooser from "./components/NewClipChooser";
 import AddUrlForm from "./components/AddUrlForm";
 
@@ -28,8 +27,6 @@ import Feed from "./hocs/Feed";
 // api URL
 import API_URL from "./config";
 import { RaceSubscriber } from "rxjs/internal/observable/race";
-
-
 
 // filtered clips and clips used for results in clips container
 class App extends Component {
@@ -44,7 +41,7 @@ class App extends Component {
   // auto login method that sets current user if one has already logged in
   getCurrentUser = () => {
     let token = localStorage.getItem("token");
-    
+
     if (token) {
       fetch(`${API_URL}/auto_login`, {
         method: "GET",
@@ -58,15 +55,12 @@ class App extends Component {
           this.setState({
             currentUser: r.user.data
           })
-        )
-
-
+        );
     }
   };
 
   // for use with the login form component
   setCurrentUser = response => {
-
     this.setState({
       currentUser: response.user.data
     });
@@ -81,7 +75,6 @@ class App extends Component {
   };
 
   render() {
-
     return (
       <Fragment>
         <NavBar logout={this.logout} currentUser={this.state.currentUser} />
@@ -122,7 +115,7 @@ class App extends Component {
   } // end of render method
 
   Home = () => {
-    return <Jumbotron />;
+    return <HomePage />;
   };
 
   Feed = () => {
@@ -153,6 +146,7 @@ class App extends Component {
       <User
         currentUser={this.state.currentUser}
         getCurrentUser={this.getCurrentUser}
+
       />
     );
   };
