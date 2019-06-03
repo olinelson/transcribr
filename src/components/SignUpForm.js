@@ -5,6 +5,8 @@ import API_URL from "../config";
 
 import { withRouter } from "react-router-dom";
 
+import { Form, Button, Container } from "semantic-ui-react"
+
 class SignUpForm extends Component {
   state = {
     email: "",
@@ -63,17 +65,20 @@ class SignUpForm extends Component {
 
   render() {
     return (
-      <div className="login-container">
+      <Container>
         <h1>Sign Up</h1>
-        <form className="sign-up-form" onSubmit={this.submitHandler}>
+        <Form  onSubmit={this.submitHandler}>
+          <Form.Field>
           <label>Username</label>
           <input
             name="username"
-            type="username"
+
             value={this.state.username}
             placeholder={"OlafThePowerful"}
             onChange={e => this.setState({ username: e.target.value })}
           />
+          </Form.Field>
+          <Form.Field>
 
           <label>Email</label>
           <input
@@ -85,6 +90,9 @@ class SignUpForm extends Component {
             }
             type="email"
           />
+          </Form.Field>
+
+          <Form.Field>
 
           <label>Password</label>
           <input
@@ -98,6 +106,9 @@ class SignUpForm extends Component {
             }
             type="password"
           />
+          </Form.Field>
+
+          <Form.Field>
           <label>Confirm Password</label>
           <input
             name="password_confirm"
@@ -110,15 +121,16 @@ class SignUpForm extends Component {
             }
             type="password"
           />
-          <button
+          </Form.Field>
+          <Button
             className="create-account-button"
             disabled={this.state.password_error}
           >
-            {" "}
-            Create Account{" "}
-          </button>
-        </form>
-      </div>
+          
+            Create Account
+          </Button>
+        </Form>
+      </Container>
     );
   }
 }
