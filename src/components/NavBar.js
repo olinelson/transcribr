@@ -35,7 +35,12 @@ const NavBar = props => {
 
   return (
     <Menu>
-      <NavLink to="/">
+      <NavLink
+        style={{
+          color: "#EDA43A"
+        }}
+        to="/"
+      >
         <h1>transcribr.</h1>
       </NavLink>
 

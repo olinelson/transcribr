@@ -51,7 +51,7 @@ class LoginForm extends Component {
           // console.log(r)
           this.props.setCurrentUser(r);
           this.props.getCurrentUser();
-          this.props.history.push(`/feed`);
+          this.props.history.push(`/`);
         }
       });
   };

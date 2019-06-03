@@ -9,6 +9,8 @@ import {
   withRouter
 } from "react-router-dom";
 
+import { Container } from "semantic-ui-react";
+
 // components
 import NavBar from "./components/NavBar";
 import Clip from "./hocs/Clip";
@@ -78,7 +80,12 @@ class App extends Component {
     return (
       <Fragment>
         <NavBar logout={this.logout} currentUser={this.state.currentUser} />
-        <div className="site-container">
+        <Container
+          fluid
+          // style={{
+          //   backgroundColor: "#C8C2C9",
+          // }}
+        >
           <Route exact path="/" component={this.Home} />
           <Route exact path="/feed" component={this.Feed} />
           <Route exact path="/clips" component={this.ClipsIndex} />
@@ -109,7 +116,7 @@ class App extends Component {
               />
             )}
           />
-        </div>
+        </Container>
       </Fragment>
     );
   } // end of render method
@@ -146,7 +153,6 @@ class App extends Component {
       <User
         currentUser={this.state.currentUser}
         getCurrentUser={this.getCurrentUser}
-
       />
     );
   };

@@ -10,7 +10,7 @@ import { BeatLoader, PacmanLoader } from "react-spinners";
 
 import { withRouter } from "react-router-dom";
 
-import { Container, Button, Grid, Image } from "semantic-ui-react";
+import { Container, Button, Grid, Image, Loader } from "semantic-ui-react";
 
 import ImageWireframe from "../ImageWireframe.png";
 
@@ -124,13 +124,11 @@ class Clip extends Component {
 
   // started working on default image if none uploaded by user
   showImage = () => {
-
     if (this.state.clip.gcloud_image_link === "") {
       return <Image src={ImageWireframe} />;
     } else {
       return (
         <Image
-
           style={{
             backgroundImage: `url(${this.state.clip.gcloud_image_link})`,
             height: "100%",
@@ -165,12 +163,9 @@ class Clip extends Component {
         {this.renderWords()}
 
         {this.state.processing === true ? (
-          <div className="pacman-loader">
-            <PacmanLoader />
-            <div className="clip-processing-message">
-              <p>Transcribing clip. We'll email you when its done!</p>
-            </div>
-          </div>
+          <Loader active>
+            Transcribing clip. We'll email you when its done!
+          </Loader>
         ) : null}
       </Container>
     ); //end of return
@@ -201,23 +196,12 @@ class Clip extends Component {
           </Grid.Row>
         </Grid>
 
-        {/* <ReactPlayer
-          ref={this.clip}
-          url={this.state.clip.gcloud_media_link}
-          width="100%"
-          height="3.5rem"
-          playing
-          controls
-        /> */}
         {this.renderWords()}
 
         {this.state.processing === true ? (
-          <div className="pacman-loader">
-            <PacmanLoader />
-            <div className="clip-processing-message">
-              <p>Transcribing clip. We'll email you when its done!</p>
-            </div>
-          </div>
+          <Loader active>
+            Transcribing clip. We'll email you when its done!
+          </Loader>
         ) : null}
       </Container>
     ); // end of return
@@ -230,60 +214,18 @@ class Clip extends Component {
     if (this.state.clip.media_type === "video") {
       return this.showVideoClip();
     }
-    return (
-      <div className="clip-show">
-        {this.showImage()}
-
-        <div className="clip-show-info">
-          <h1>{this.state.clip.name}</h1>
-          {this.props.currentUser === null ? null : this.showButtonIfSaved()}
-        </div>
-
-        {this.state.clip.media_type === "audio" ? (
-          <ReactPlayer
-            ref={this.audio}
-            url={this.state.clip.gcloud_media_link}
-            width="100%"
-            height="100%"
-            playing
-            controls
-          />
-        ) : null}
-
-        {this.state.clip.media_type === "video" ? (
-          <ReactPlayer
-            ref={this.video}
-            url={this.state.clip.gcloud_media_link}
-            width="100%"
-            height="100%"
-            playing
-            controls
-          />
-        ) : null}
-
-        {this.renderWords()}
-
-        {this.state.processing === true ? (
-          <div className="pacman-loader">
-            <PacmanLoader />
-            <div className="clip-processing-message">
-              <p>Transcribing clip. We'll email you when its done!</p>
-            </div>
-          </div>
-        ) : null}
-      </div>
-    ); //end of return
   }; // end of showClip
 
   render() {
+    console.log("hello", this.state.processing);
     return (
-      <div className="player-container">
+      <Container>
         {this.state.clip === null ? (
           <BeatLoader sizeUnit={"rem"} size={1} loading={true} />
         ) : (
           this.showVideoOrAudioClip()
         )}
-      </div>
+      </Container>
     );
   } // end of render
 } // end of Clip class
