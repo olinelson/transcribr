@@ -18,7 +18,12 @@ import API_URL from "../config";
 // let source = [];
 
 const resultRenderer = clip => (
-  <Link key={clip.id} className="item" color="black" to={`/clips/${clip.search_id}`}>
+  <Link
+    key={clip.id}
+    className="item"
+    color="black"
+    to={`/clips/${clip.search_id}`}
+  >
     <Item.Image size="tiny" src={clip.gcloud_image_link} />
 
     <Item.Content>
@@ -101,21 +106,23 @@ export default class SearchExampleStandard extends Component {
       <Container>
         <Card.Group>
           {this.state.clips.map(c => (
-            <Link className="ui card" to={`/clips/${c.id}`}>
-              <div
-                className="ui image medium"
-                style={{
-                  backgroundImage: `url(${c.gcloud_image_link})`,
-                  backgroundSize: "cover",
-                  height: "150px"
-                }}
-              />
+            <Card>
+              <Link to={`/clips/${c.id}`}>
+                <div
+                  className="ui image medium"
+                  style={{
+                    backgroundImage: `url(${c.gcloud_image_link})`,
+                    backgroundSize: "cover",
+                    height: "150px"
+                  }}
+                />
+              </Link>
               <Card.Content>
-                <Card.Header>
-                  {c.name}
-                </Card.Header>
+                <Card.Header>{c.name}</Card.Header>
                 <Card.Description>
-                    {c.transcript ? c.transcript.slice(0,75) : "no transcript yet"}
+                  {c.transcript
+                    ? c.transcript.slice(0, 75)
+                    : "no transcript yet"}
                 </Card.Description>
               </Card.Content>
 
@@ -138,7 +145,7 @@ export default class SearchExampleStandard extends Component {
                   </button>
                 )}
               </Card.Content>
-            </Link>
+            </Card>
           ))}
         </Card.Group>
       </Container>
