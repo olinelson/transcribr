@@ -10,7 +10,9 @@ import { BeatLoader, PacmanLoader } from "react-spinners";
 
 import { withRouter } from "react-router-dom";
 
-import { Container, Button } from "semantic-ui-react";
+import { Container, Button, Grid, Image } from "semantic-ui-react";
+
+import ImageWireframe from "../ImageWireframe.png";
 
 class Clip extends Component {
   constructor(props) {
@@ -24,9 +26,7 @@ class Clip extends Component {
   }
 
   setPlayerPosition = e => {
-
-      this.clip.current.seekTo(Math.floor(e.start_time), "seconds");
-
+    this.clip.current.seekTo(Math.floor(e.start_time), "seconds");
   };
 
   componentDidMount = () => {
@@ -124,21 +124,20 @@ class Clip extends Component {
 
   // started working on default image if none uploaded by user
   showImage = () => {
+
     if (this.state.clip.gcloud_image_link === "") {
-      return (
-        <div
-          className="clip-show-image-container"
-          style={{
-            backgroundImage: `url(https://storage.googleapis.com/bucket-of-doom/audioClipIcon.png)`
-          }}
-        />
-      );
+      return <Image src={ImageWireframe} />;
     } else {
       return (
-        <div
-          className="clip-show-image-container"
+        <Image
+
           style={{
-            backgroundImage: `url(${this.state.clip.gcloud_image_link})`
+            backgroundImage: `url(${this.state.clip.gcloud_image_link})`,
+            height: "100%",
+            width: "auto",
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center"
           }}
         />
       );
@@ -149,7 +148,6 @@ class Clip extends Component {
     return (
       <Container>
         <ReactPlayer
-          className="media-player"
           ref={this.clip}
           url={this.state.clip.gcloud_media_link}
           width="100%"
@@ -181,22 +179,36 @@ class Clip extends Component {
   showAudioClip = () => {
     return (
       <Container>
-        {/* {this.showImage()} */}
+        <Grid columns={2}>
+          <Grid.Row stretched>
+            <Grid.Column width={4}>{this.showImage()}</Grid.Column>
+            <Grid.Column width={12}>
+              <Container>
+                <h1>{this.state.clip.name}</h1>
+                {this.props.currentUser === null
+                  ? null
+                  : this.showButtonIfSaved()}
+                <ReactPlayer
+                  ref={this.clip}
+                  url={this.state.clip.gcloud_media_link}
+                  width="100%"
+                  height="3.5rem"
+                  playing
+                  controls
+                />
+              </Container>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
 
-        <Container>
-          <h1>{this.state.clip.name}</h1>
-          {this.props.currentUser === null ? null : this.showButtonIfSaved()}
-        </Container>
-
-        <ReactPlayer
-          className="media-player"
+        {/* <ReactPlayer
           ref={this.clip}
           url={this.state.clip.gcloud_media_link}
           width="100%"
-          height="100%"
+          height="3.5rem"
           playing
           controls
-        />
+        /> */}
         {this.renderWords()}
 
         {this.state.processing === true ? (
