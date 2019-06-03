@@ -163,9 +163,11 @@ class Clip extends Component {
         {this.renderWords()}
 
         {this.state.processing === true ? (
-          <Loader active>
-            Transcribing clip. We'll email you when its done!
-          </Loader>
+          <Container textAlign="center">
+            <Loader inline active>
+              Transcribing clip. We'll email you when its done!
+            </Loader>
+          </Container>
         ) : null}
       </Container>
     ); //end of return
