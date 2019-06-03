@@ -66,6 +66,58 @@ export default class SearchExampleStandard extends Component {
     this.getUsersClips();
   };
 
+  unSaveClip = clip => {
+    let token = localStorage.getItem("token");
+    let id = clip.id;
+
+    fetch(`${API_URL}/user_clips/unsave`, {
+      method: "POST",
+      body: JSON.stringify({
+        clip_id: id
+      }),
+      headers: {
+        Authorization: token,
+        "Content-Type": "application/json"
+      }
+    })
+      .then(() => this.props.getCurrentUser())
+      .then(() => this.getUsersClips());
+  }; // end of unSaveClip
+
+  unSaveClipHandler = c => {
+    let clips = this.state.clips;
+    let result = clips.filter(clip => clip.id !== c.id);
+
+    this.setState({
+      clips: result,
+    });
+
+    this.unSaveClip(c);
+  }; // end of unSaveClipHandler
+
+  deleteClipHandler = c => {
+    let clips = this.state.clips;
+    let result = clips.filter(clip => clip.id !== c.id);
+
+    this.setState({
+      clips: result,
+
+    });
+
+    this.deleteClip(c);
+  };
+
+  deleteClip = clip => {
+    let token = localStorage.getItem("token");
+
+    fetch(`${API_URL}/clips/${clip.id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: token
+      }
+    });
+  }; // end of deleteClip
+
   getUsersClips = () => {
     fetch(`${API_URL}/users/${this.props.currentUser.id}`)
       .then(r => r.json())
