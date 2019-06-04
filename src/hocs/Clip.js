@@ -10,7 +10,15 @@ import { BeatLoader, PacmanLoader } from "react-spinners";
 
 import { withRouter } from "react-router-dom";
 
-import { Container, Button, Grid, Image, Loader, Icon } from "semantic-ui-react";
+import {
+  Container,
+  Button,
+  Divider,
+  Grid,
+  Image,
+  Loader,
+  Icon
+} from "semantic-ui-react";
 
 import ImageWireframe from "../ImageWireframe.png";
 
@@ -97,9 +105,12 @@ class Clip extends Component {
     // shows process audio button if the clip isn't processing and there are no words
     if (this.state.processing === false) {
       return (
-        <Button className="process-audio-button" onClick={this.processAudio}>
-          process audio
-        </Button>
+        <Container textAlign="center">
+          <Divider hidden />
+          <Button className="process-audio-button" onClick={this.processAudio}>
+            process audio
+          </Button>
+        </Container>
       );
     }
   }; // end of render words
@@ -125,7 +136,7 @@ class Clip extends Component {
   // started working on default image if none uploaded by user
   showImage = () => {
     if (this.state.clip.gcloud_image_link === "") {
-      return <Icon name="file audio"/>;
+      return <Icon name="file audio" />;
     } else {
       return (
         <Image
@@ -146,6 +157,7 @@ class Clip extends Component {
     return (
       <Container>
         <ReactPlayer
+
           ref={this.clip}
           url={this.state.clip.gcloud_media_link}
           width="100%"
@@ -176,10 +188,10 @@ class Clip extends Component {
   showAudioClip = () => {
     return (
       <Container>
-        <Grid >
-          <Grid.Row >
+        <Grid>
+          <Grid.Row>
             {/* <Grid.Column width={4}>{this.showImage()}</Grid.Column> */}
-            <Grid.Column >
+            <Grid.Column>
               <Container>
                 <h1>{this.state.clip.name}</h1>
                 {this.props.currentUser === null
