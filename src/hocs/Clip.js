@@ -10,7 +10,7 @@ import { BeatLoader, PacmanLoader } from "react-spinners";
 
 import { withRouter } from "react-router-dom";
 
-import { Container, Button, Grid, Image, Loader } from "semantic-ui-react";
+import { Container, Button, Grid, Image, Loader, Icon } from "semantic-ui-react";
 
 import ImageWireframe from "../ImageWireframe.png";
 
@@ -125,7 +125,7 @@ class Clip extends Component {
   // started working on default image if none uploaded by user
   showImage = () => {
     if (this.state.clip.gcloud_image_link === "") {
-      return <Image src={ImageWireframe} />;
+      return <Icon name="file audio"/>;
     } else {
       return (
         <Image
@@ -176,10 +176,10 @@ class Clip extends Component {
   showAudioClip = () => {
     return (
       <Container>
-        <Grid columns={2}>
-          <Grid.Row stretched>
-            <Grid.Column width={4}>{this.showImage()}</Grid.Column>
-            <Grid.Column width={12}>
+        <Grid >
+          <Grid.Row >
+            {/* <Grid.Column width={4}>{this.showImage()}</Grid.Column> */}
+            <Grid.Column >
               <Container>
                 <h1>{this.state.clip.name}</h1>
                 {this.props.currentUser === null

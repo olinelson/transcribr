@@ -11,7 +11,12 @@ import {
   Loader
 } from "semantic-ui-react";
 
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  withRouter
+} from "react-router-dom";
 
 import API_URL from "../config";
 
@@ -41,11 +46,6 @@ resultRenderer.propTypes = {
   // key: PropTypes.number
 };
 
-const dummyImages = _.times(5, () => ({
-  name: "loading",
-  gcloud_image_link: "https://react.semantic-ui.com/images/wireframe/image.png"
-}));
-
 // const initialState = {
 //   isLoading: false,
 //   results: [],
@@ -53,13 +53,17 @@ const dummyImages = _.times(5, () => ({
 //   clips: dummyImages
 // };
 
-export default class SearchExampleStandard extends Component {
+class UserClipsContainer extends Component {
   state = {
     isLoading: false,
     results: [],
     value: "",
     clips: [],
     pageLoad: true
+  };
+
+  handleCardClick = id => {
+    this.props.history.push(`/clips/${id}`);
   };
 
   componentDidMount = () => {
@@ -89,7 +93,7 @@ export default class SearchExampleStandard extends Component {
     let result = clips.filter(clip => clip.id !== c.id);
 
     this.setState({
-      clips: result,
+      clips: result
     });
 
     this.unSaveClip(c);
@@ -100,8 +104,7 @@ export default class SearchExampleStandard extends Component {
     let result = clips.filter(clip => clip.id !== c.id);
 
     this.setState({
-      clips: result,
-
+      clips: result
     });
 
     this.deleteClip(c);
@@ -158,9 +161,14 @@ export default class SearchExampleStandard extends Component {
       <Container>
         <Card.Group>
           {this.state.clips.map(c => (
-            <Card>
-              <Link to={`/clips/${c.id}`}>
+            <Card
+              style={{
+                cursor: "pointer"
+              }}
+            >
+              {c.gcloud_image_link !== "" || c.gcloud_image_link !== null ? (
                 <div
+                  onClick={() => this.handleCardClick(c.id)}
                   className="ui image medium"
                   style={{
                     backgroundImage: `url(${c.gcloud_image_link})`,
@@ -168,8 +176,9 @@ export default class SearchExampleStandard extends Component {
                     height: "150px"
                   }}
                 />
-              </Link>
-              <Card.Content>
+              ) : null}
+
+              <Card.Content onClick={() => this.handleCardClick(c.id)}>
                 <Card.Header>{c.name}</Card.Header>
                 <Card.Description>
                   {c.transcript
@@ -184,8 +193,7 @@ export default class SearchExampleStandard extends Component {
                     className="ui secondary button"
                     onClick={e => this.deleteClipHandler(c)}
                   >
-                    {" "}
-                    Delete{" "}
+                    Delete
                   </button>
                 ) : (
                   <button
@@ -207,7 +215,12 @@ export default class SearchExampleStandard extends Component {
   render() {
     return (
       <Fragment>
-        <Container>
+        <Container
+          style={{
+            display: "flex",
+            justifyContent: "center"
+          }}
+        >
           <Search
             loading={this.state.isLoading}
             onResultSelect={this.handleResultSelect}
@@ -230,3 +243,5 @@ export default class SearchExampleStandard extends Component {
     );
   }
 }
+
+export default withRouter(UserClipsContainer);

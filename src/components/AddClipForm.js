@@ -19,7 +19,7 @@ class AddClipForm extends Component {
     let formData = new FormData();
 
     formData.append("audio_file", e.target.audioFileInput.files[0]);
-    formData.append("image", e.target.imageInput.files[0]);
+    // formData.append("image", e.target.imageInput.files[0]);
     formData.append("name", e.target.name.value);
 
     let token = localStorage.getItem("token");
@@ -68,7 +68,7 @@ class AddClipForm extends Component {
               type="file"
             />
           </Form.Field>
-          <Form.Field>
+          {/* <Form.Field>
             <label className="add-clip-image-label">Image</label>
             <input
               required
@@ -76,7 +76,7 @@ class AddClipForm extends Component {
               name="imageInput"
               type="file"
             />
-          </Form.Field>
+          </Form.Field> */}
 
           {/* disabled upload button while uploading */}
           {this.state.uploadComplete === false ? (
