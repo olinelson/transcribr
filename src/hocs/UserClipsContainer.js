@@ -157,8 +157,10 @@ class UserClipsContainer extends Component {
 
   pageLoadedView = () => {
     return (
-      <Container>
-        <Card.Group>
+      <Container 
+       
+      >
+        <Card.Group centered>
           {this.state.clips.map(c => (
             <Card
               columns={2}

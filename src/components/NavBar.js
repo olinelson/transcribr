@@ -51,6 +51,10 @@ const NavBar = props => {
         <Icon name="add" />
         New Clip
       </NavLink>
+      <NavLink className="item" activeClassName="active" to="/clips/64">
+        Demo
+      </NavLink>
+
       <Menu.Menu position="right">
         {props.currentUser === null ? (
           <NavLink className="item" activeClassName="active" to="/login">

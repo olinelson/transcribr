@@ -8,13 +8,10 @@ import {
   withRouter
 } from "react-router-dom";
 
-import {Container} from "semantic-ui-react"
-
+import { Container, Feed, Image, Icon, Label } from "semantic-ui-react";
 
 // beat loader from react spinners
 import { BeatLoader } from "react-spinners";
-
-
 
 // api URL
 import API_URL from "../config";
@@ -59,9 +56,7 @@ class ClipsContainer extends Component {
           filteredClips: r.data,
           loading: false
         })
-      )
-
-   
+      );
   }; // end of getAllClips
 
   showClips = () => {
@@ -72,30 +67,47 @@ class ClipsContainer extends Component {
       ) {
         return (
           <Fragment>
-            <p className="no-results-message">
-             no results...
-            </p>
+            <p className="no-results-message">no results...</p>
           </Fragment>
         );
       } //end of no results if statements
 
       return this.state.filteredClips.map(c => (
-        <div key={uuidv1()} className="clip-card">
-          <div className="clip-image-container">
-            <img
-              alt="clip-thumbnail"
-              className="clip-image"
-              src={c.attributes.gcloud_image_link}
-            />
-          </div>
+        <Feed.Event key={uuidv1()}>
+          {/* {console.log(c.attributes)} */}
+          <Feed.Label>
+            {c.attributes.media_type === "video" ? (
+              <Image src={c.attributes.gcloud_image_link} />
+            ) : (
+              <Icon name="audio file" />
+            )}
+          </Feed.Label>
 
-          <Link className="clip-card-title" key={uuidv1()} to={`clips/${c.attributes.id}`}>
-            {" "}
-            {c.attributes.name}
-          </Link>
+          <Feed.Content>
+            <Feed.Summary>
+              <Link
+                className="clip-card-title"
+                key={uuidv1()}
+                to={`clips/${c.attributes.id}`}
+              >
+                {" "}
+                {c.attributes.name}
+              </Link>
 
-          <small className="author-tag">{c.attributes.author.user_name} </small>
-        </div>
+              {c.attributes.transcript !== null ? (
+                <Feed.Extra text>
+                  {c.attributes.transcript.slice(0, 50)}...
+                </Feed.Extra>
+              ) : null}
+            </Feed.Summary>
+          </Feed.Content>
+
+          <Feed.Meta text>
+            <Label basic>
+              <Icon name="user" /> {c.attributes.author.user_name}
+            </Label>
+          </Feed.Meta>
+        </Feed.Event>
       ));
     } // end of if statement to wait for props
   }; //end of show clip
@@ -114,10 +126,10 @@ class ClipsContainer extends Component {
           /> */}
         </div>
 
-        <div className="clips-grid">
+        <Feed>
           {this.state.loading === true ? <BeatLoader /> : null}
           {this.showClips()}
-        </div>
+        </Feed>
       </Container> //end of clips container div
     ); // end of return
   } // end of render

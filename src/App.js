@@ -24,7 +24,7 @@ import NewClipChooser from "./components/NewClipChooser";
 import AddUrlForm from "./components/AddUrlForm";
 
 //  hocs
-import Feed from "./hocs/Feed";
+import FeedContainer from "./hocs/FeedContainer";
 
 // api URL
 import API_URL from "./config";
@@ -127,7 +127,7 @@ class App extends Component {
 
   Feed = () => {
     return (
-      <Feed
+      <FeedContainer
         filterClips={this.filterClips}
         getAllClips={this.getAllClips}
         filteredClips={this.state.filteredClips}

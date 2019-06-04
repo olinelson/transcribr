@@ -235,7 +235,7 @@ class Clip extends Component {
     return (
       <Container>
         {this.state.clip === null ? (
-          <BeatLoader sizeUnit={"rem"} size={1} loading={true} />
+          <Loader active/>
         ) : (
           this.showVideoOrAudioClip()
         )}
