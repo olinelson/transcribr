@@ -8,7 +8,8 @@ import {
   Card,
   Divider,
   Item,
-  Loader
+  Loader,
+  Icon
 } from "semantic-ui-react";
 
 import {
@@ -19,8 +20,6 @@ import {
 } from "react-router-dom";
 
 import API_URL from "../config";
-
-// let source = [];
 
 const resultRenderer = clip => (
   <Link
@@ -162,21 +161,36 @@ class UserClipsContainer extends Component {
         <Card.Group>
           {this.state.clips.map(c => (
             <Card
+              columns={2}
               style={{
                 cursor: "pointer"
               }}
             >
-              {c.gcloud_image_link !== "" || c.gcloud_image_link !== null ? (
+              {c.gcloud_image_link !== null ? (
                 <div
-                  onClick={() => this.handleCardClick(c.id)}
-                  className="ui image medium"
                   style={{
                     backgroundImage: `url(${c.gcloud_image_link})`,
+                    height: "10rem",
+                    width: "auto",
+                    backgroundPosition: "center",
                     backgroundSize: "cover",
-                    height: "150px"
+                    backgroundRepeat: "no-repeat"
                   }}
+                  onClick={() => this.handleCardClick(c.id)}
                 />
-              ) : null}
+              ) : (
+                <div
+                  style={{
+                    backgroundImage: `url(https://storage.googleapis.com/bucket-of-doom/tape.jpeg)`,
+                    height: "10rem",
+                    width: "auto",
+                    backgroundPosition: "center",
+                    backgroundSize: "cover",
+                    backgroundRepeat: "no-repeat"
+                  }}
+                  onClick={() => this.handleCardClick(c.id)}
+                />
+              )}
 
               <Card.Content onClick={() => this.handleCardClick(c.id)}>
                 <Card.Header>{c.name}</Card.Header>
