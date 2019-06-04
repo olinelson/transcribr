@@ -189,7 +189,7 @@ class Clip extends Component {
                   ref={this.clip}
                   url={this.state.clip.gcloud_media_link}
                   width="100%"
-                  height="3.5rem"
+                  height="5rem"
                   playing
                   controls
                 />
