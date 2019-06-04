@@ -122,7 +122,7 @@ class Words extends Component {
       <Fragment>
         <Container textAlign="center">
           <Divider />
-          <Divider hidden/>
+          <Divider hidden />
           {this.showSearchBarIfThereAreWords()}
           <Divider hidden />
         </Container>
@@ -139,12 +139,21 @@ class Words extends Component {
             />
           )}
         </div>
-        <Container textAlign="center">
+        <Divider hidden></Divider>
+        <Container
+          style={{
+            position: "fixed",
+            bottom: "1rem",
+            display: "flex",
+            justifyContent: "center"
+          }}
+        >
           <Pagination
             onPageChange={this.handlePaginationChange}
             defaultActivePage={this.state.activePage}
             totalPages={this.state.pages.length}
             disabled={this.state.searchInput.length > 0 ? true : false}
+           
           />
         </Container>
       </Fragment>
